@@ -1,0 +1,17 @@
+<div id = "title">
+	<%= question.get('title') %>
+</div></br>
+<div style = 'width: 200px; position: relative; margin: 0 0 0 50px'>
+	<div style = 'border-top: 1px solid; width: 100%; position: absolute; top: 0; left: 0'></div>
+	<div id = 'block' class = 'off' style = 'position: absolute; top: -10px; left: 0'></div>
+</div></br>
+<div>
+	<%= values.min %>
+</div>
+<div>
+	<%= values.max %>
+</div>
+<form id = 'answer'>
+	<input type = 'text' id = 'number' value = '0' />
+	<input type = 'submit' value = 'Submit' />
+</form>
