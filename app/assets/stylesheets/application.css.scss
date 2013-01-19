@@ -1,0 +1,16 @@
+@import "compass";
+@import "mixins";
+@import "challenges";
+
+.off {
+	background: #f00;
+	cursor: pointer;
+	width: 20px;
+	height: 20px;
+}
+
+.on {
+	background: #f0f;
+	width: 20px;
+	height: 20px;
+}
