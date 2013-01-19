@@ -17,10 +17,16 @@
 	cursor: pointer;
 	width: 20px;
 	height: 20px;
+	opacity: 0.5;
 }
 
 .on {
 	background: #f0f;
 	width: 20px;
 	height: 20px;
+	opacity: 0.5;
+}
+
+.hide {
+	display: none;
 }

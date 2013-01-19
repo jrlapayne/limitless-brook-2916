@@ -17,7 +17,7 @@ window.QuizPop = {
 			issues: this.issues,
 			questions: this.questions,
 			challenges: this.challenges,
-			tasks: this.challenges
+			tasks: this.tasks
 		});
 		
 		Backbone.history.start();
