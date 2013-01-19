@@ -1,17 +1,18 @@
 <div id = "title">
 	<%= question.get('title') %>
 </div></br>
-<div style = 'width: 200px; position: relative; margin: 0 0 0 50px'>
-	<div style = 'border-top: 1px solid; width: 100%; position: absolute; top: 0; left: 0'></div>
-	<div id = 'block' class = 'off' style = 'position: absolute; top: -10px; left: 0'></div>
+<div style = 'width: 200px; position: relative'>
+	<div id = 'slider' style = 'height: 4px; background: #000; width: 100%; position: absolute; top: 0; left: 0'></div>
+	<div id = 'block' class = 'off' style = 'position: absolute; top: -8px; left: -10px'></div>
+	<div id = 'correct' class = 'hide' style = 'position: absolute; top: -8px; left: -10px; height: 20px; width: 20px; opacity: 0.5; background: #ff0'></div>
 </div></br>
-<div class = "">
+<div id = 'mins'>
 	<%= values.min %>
 </div>
 <div>
 	<%= values.max %>
 </div>
 <form id = 'answer'>
-	<input type = 'text' id = 'number' value = '0' />
+	<input type = 'text' id = 'number' value = '<%= values.min %>' />
 	<input type = 'submit' value = 'Submit' />
 </form>
