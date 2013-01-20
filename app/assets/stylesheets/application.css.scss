@@ -4,6 +4,8 @@
 @import "layouts";
 @import "challenges";
 @import "issues";
+@import "users";
+@import "questions";
 
 .off {
 	background: #f00;
@@ -17,6 +19,7 @@
 	width: 20px;
 	height: 20px;
 }
+
 .header {
 	height: 25px;
 	text-align: center;

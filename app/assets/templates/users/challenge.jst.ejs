@@ -1,6 +1,20 @@
-<div>
-	<img src="https://graph.facebook.com/<%= user.get('uid') %>/picture"/>
-</div>
-<div>
-	<%= user.get('name') %>
+<div class = "challenge_container">
+	<div class = "user_picture_container">
+		<img src="https://graph.facebook.com/<%= user.get('uid') %>/picture"/ height="100%">
+	</div>
+	<div class = "user_name">
+		<% if (user.get('name').split(' ').length > 1) { %>
+		    <%= user.get('name').split(' ')[0] +  " " + user.get('name').split(' ')[user.get('name').split(' ').length - 1].charAt(0) %>.
+		<% } else { %>
+		    <%= user.get('name').split(' ')[0] %>.
+		<% } %>
+	</div>
+	<div class = "user_issue_container">
+		<div class = "user_issue_image">
+			<img src = 'assets/issues/finland.png' height = "100%" />
+		</div>
+		<div class = "user_issue_title">
+			Marijuana Legalization
+		</div>
+	</div>
 </div>
