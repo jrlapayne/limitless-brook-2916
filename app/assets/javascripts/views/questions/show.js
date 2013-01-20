@@ -32,6 +32,7 @@ QuizPop.Views.QuestionsShow = Backbone.View.extend({
 		this.draggable = false;
 		this.slider_disabled = false;
 		this.exponential = this.question.get('is_exponential');
+		this.slider_pos = 0;
 		this.values = {
 			max: this.question.get('max'),
 			min: this.question.get('min'),
@@ -81,39 +82,15 @@ QuizPop.Views.QuestionsShow = Backbone.View.extend({
 	},
 	
 	getScore: function(answer) {
-		if (this.question.get('is_exponential')) {
-			if (this.values.min !== 0) {
-				return Math.round(((Math.log(answer / this.values.min) / Math.log(this.values.coef)) - this.values.offset) / 2);
-			} else {
-				return Math.round(((Math.log(answer) / Math.log(this.values.coef)) - this.values.offset) / 2);
-			}
-		} else {
-			return Math.round(((answer / this.values.step) - this.values.offset) / 2);
-		}
+		var score = 100 * ((this.getInputPosition(answer, this.exponential) - this.getInputPosition(this.question.get('correct'), this.exponential)) / this.values.length);
+		return Math.round(Math.abs(score));
 	},
 	
 	moveSlider: function(event, expo) {
-		var slider_pos
-		if (expo) {
-			if (this.values.min === 0) {
-				slider_pos = Math.pow(Math.pow(this.values.max, (1 / 3)), (3 * ((event.pageX - (0.5 * this.values.width)) / this.values.length)));
-				if (this.checkSliderRange(slider_pos)) {
-					this.adjustSliderPosition(event);
-					this.setInput(slider_pos);
-				}
-			} else {
-				slider_pos = this.values.min * Math.pow(Math.pow((this.values.max / this.values.min), (1 / 3)), (3 * ((event.pageX - (0.5 * this.values.width)) / this.values.length)));
-				if (this.checkSliderRange(slider_pos)) {
-					this.adjustSliderPosition(event);
-					this.setInput(slider_pos);
-				}
-			}
-		} else {
-			slider_pos = ((event.pageX - (0.5 * this.values.width)) * ((this.values.max - this.values.min) / this.values.length)) + this.values.min;
-			if (this.checkSliderRange(slider_pos)) {
-				this.adjustSliderPosition(event);
-				this.setInput(slider_pos);
-			}
+		var slider_pos = this.getDraggedPosition(event, expo);
+		if (this.checkSliderRange(slider_pos)) {
+			this.adjustSliderPosition(event);
+			this.setInput(slider_pos);
 		}
 	},
 	
@@ -130,7 +107,7 @@ QuizPop.Views.QuestionsShow = Backbone.View.extend({
 	},
 	
 	setInput: function(slider_pos) {
-		$('#number').val(Math.round(slider_pos));
+		$('#number').val(this.addCommas(Math.round(slider_pos)));
 	},
 	
 	unbindMouseMove: function(event) {
@@ -168,7 +145,10 @@ QuizPop.Views.QuestionsShow = Backbone.View.extend({
 		var self = this;
 		if (!this.slider_disabled) {
 			$(document).on('keyup', function(e) {
-				var input = parseInt($('#number').val());
+				if (parseInt(self.removeCommas($('#number').val())) > 999) {
+					$('#number').val(self.addCommas(self.removeCommas($('#number').val())));
+				}
+				var input = self.removeCommas($('#number').val());
 				if (!isNaN(input) && self.checkSliderRange(input)) {
 					self.setSliderFromInput(input, self.exponential);
 				}
@@ -176,7 +156,21 @@ QuizPop.Views.QuestionsShow = Backbone.View.extend({
 		}
 	},
 	
-	setSliderFromInput: function(input, expo) {
+	getDraggedPosition: function(event, expo) {
+		var slider_pos
+		if (expo) {
+			if (this.values.min === 0) {
+				slider_pos = Math.pow(Math.pow(this.values.max, (1 / 3)), (3 * ((event.pageX - (0.5 * this.values.width)) / this.values.length)));
+			} else {
+				slider_pos = this.values.min * Math.pow(Math.pow((this.values.max / this.values.min), (1 / 3)), (3 * ((event.pageX - (0.5 * this.values.width)) / this.values.length)));
+			}
+		} else {
+			slider_pos = ((event.pageX - (0.5 * this.values.width)) * ((this.values.max - this.values.min) / this.values.length)) + this.values.min;
+		}
+		return slider_pos;
+	},
+	
+	getInputPosition: function(input, expo) {
 		var slider_pos;
 		if (expo) {
 			if (this.values.min === 0) {
@@ -187,7 +181,11 @@ QuizPop.Views.QuestionsShow = Backbone.View.extend({
 		} else {
 			slider_pos = (input / ((this.values.max - this.values.min) / this.values.length)) - (0.5 * this.values.width);
 		}
-		$('#block').css('left', Math.round(slider_pos));
+		return slider_pos;
+	},
+	
+	setSliderFromInput: function(input, expo) {
+		$('#block').css('left', Math.round(this.getInputPosition(input, expo)));
 	},
 	
 	unbindKeyPress: function() {
@@ -231,15 +229,17 @@ QuizPop.Views.QuestionsShow = Backbone.View.extend({
 	
 	revealCorrectAnswer: function() {
 		$('#correct').removeClass('hide');
-		var correct = this.question.get('correct');
-		if (this.question.get('is_exponential')) {
-			if (this.values.min !== 0) {
-				$('#correct').css('left', Math.round(Math.log(correct / this.values.min) / Math.log(this.values.coef)) - this.values.offset);
-			} else {
-				$('#correct').css('left', Math.round(Math.log(correct) / Math.log(this.values.coef)) - this.values.offset);
-			}
-		} else {
-			$('#correct').css('left', (correct / this.values.step) - this.values.offset + 'px');
+		$('#correct').css('left', Math.round(this.getInputPosition(this.question.get('correct'), this.exponential)));
+	},
+	
+	addCommas: function(val){
+		while (/(\d+)(\d{3})/.test(val.toString())){
+			val = val.toString().replace(/(\d+)(\d{3})/, '$1'+','+'$2');
 		}
+		return val;
+	},
+	
+	removeCommas: function(val) {
+		return parseInt(val.replace(/\,/g,''));
 	}
 });
