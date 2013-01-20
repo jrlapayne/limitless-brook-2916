@@ -23,7 +23,8 @@ QuizPop.Views.QuestionsShow = Backbone.View.extend({
 	render: function() {
 		$(this.el).html(this.template({
 			question: this.question,
-			values: this.values
+			max: this.addCommas(this.question.get('max')),
+			min: this.addCommas(this.question.get('min'))
 		}));
 		return this;
 	},
@@ -71,19 +72,45 @@ QuizPop.Views.QuestionsShow = Backbone.View.extend({
 	},
 	
 	createTask: function() {
+		var answer, score;
+		if (!isNaN(this.removeCommas($('#number').val())) || this.removeCommas($('#number').val()) < this.values.min) {
+			score = this.getScoreFromInput(this.removeCommas($('#number').val()));
+			answer = this.removeCommas($('#number').val());
+		} else {
+			score = this.getScoreFromPosition();
+			answer = this.getAnswerFromPosition(parseInt($('#block').css('left').split('px')[0]), this.exponential);
+		}
 		this.attr.tasks.create({
 			challenge_id: this.challenge.get('id'),
 			user_id: this.current_user.get('id'),
 			issue_id: this.question.get('issue_id'),
 			question_id: this.question.get('id'),
-			answer: parseInt($('#number').val()),
-			score: this.getScore(parseInt($('#number').val()))
+			answer: answer,
+			score: score
 		});
 	},
 	
-	getScore: function(answer) {
+	getScoreFromInput: function(answer) {
 		var score = 100 * ((this.getInputPosition(answer, this.exponential) - this.getInputPosition(this.question.get('correct'), this.exponential)) / this.values.length);
 		return Math.round(Math.abs(score));
+	},
+	
+	getScoreFromPosition: function() {
+		return Math.round(Math.abs(100 * ((parseInt($('#block').css('left').split('px')[0]) - parseInt($('#correct').css('left').split('px')[0])) / this.values.length)));
+	},
+	
+	getAnswerFromPosition: function(slider_pos, expo) {
+		var answer
+		if (expo) {
+			if (this.values.min === 0) {
+				answer = Math.pow(Math.pow(this.values.max, (1 / 3)), (3 * ((slider_pos + (0.5 * this.values.width)) / this.values.length)));
+			} else {
+				answer = this.values.min * Math.pow(Math.pow((this.values.max / this.values.min), (1 / 3)), (3 * ((slider_pos + (0.5 * this.values.width)) / this.values.length)));
+			}
+		} else {
+			answer = ((slider_pos + (0.5 * this.values.width)) * ((this.values.max - this.values.min) / this.values.length)) + this.values.min;
+		}
+		return answer;
 	},
 	
 	moveSlider: function(event, expo) {
@@ -117,7 +144,7 @@ QuizPop.Views.QuestionsShow = Backbone.View.extend({
 	bindMouseMove: function() {
 	var self = this;
 		$(document).on('mousemove', function(event) {
-			self.moveSlider(event, this.exponential);
+			self.moveSlider(event, self.exponential);
 		}); 
 	},
 	
@@ -147,6 +174,10 @@ QuizPop.Views.QuestionsShow = Backbone.View.extend({
 			$(document).on('keyup', function(e) {
 				if (parseInt(self.removeCommas($('#number').val())) > 999) {
 					$('#number').val(self.addCommas(self.removeCommas($('#number').val())));
+				} else {
+					if (!isNaN(parseInt(self.removeCommas($('#number').val())))) {
+						$('#number').val(self.removeCommas($('#number').val()));
+					}
 				}
 				var input = self.removeCommas($('#number').val());
 				if (!isNaN(input) && self.checkSliderRange(input)) {
