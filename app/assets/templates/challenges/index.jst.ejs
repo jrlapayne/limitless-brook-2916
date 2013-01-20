@@ -1,14 +1,13 @@
-<div class = 'header'>
-	<img src = 'assets/logos/black.png' height = "100%" />
-</div>
-<div id = 'available_challenges'>
+<div id = 'available_challenges' class = "create_challenge_text">
 	<% if (challenges.length > 0) { %>
 		<div>Your Challenges: </div>
 	<% } else { %>
 		<div>Try creating a challenge</div>
 	<% } %>
 </div>
-<div id = 'create'>Create Challenge</div>
-<div id = 'unanswered_challenges'>
+<div id = 'create' class = "create_challenge_button">
+	Create Challenge!
+</div>
+<div id = 'unanswered_challenges' class = "sent_challenge_container">
 	<div>Sent Challenges</div>
 </div>
