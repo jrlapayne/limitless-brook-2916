@@ -1,3 +1,26 @@
 // Place all the styles related to the issues controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+.container {
+	border: 1px solid #bbbbbb;
+	height: 35px;
+	margin-bottom: 8px;
+	@include border-radius(9px);
+	@include linear-gradient(lighten($bluegreen,30%), lighten($bluegreen,20%));
+}
+
+.issue_title {
+	font-weight: bold;
+	padding: 10px 0 0 10px;
+	font-size: 90%;
+	float: left;
+}
+
+.issue_image {
+	position: absolute;
+	right: 9px;
+	@include border-right-radius(7px);
+	overflow: hidden;
+	height: 35px;
+}
