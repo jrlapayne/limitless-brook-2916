@@ -3,7 +3,61 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
 .question_title {
-	border: 1px solid;
 	font-size: 14px;
 	line-height: 18px;
+	color: darken($bluegreen, 15%);
+	font-weight: bold;
+}
+
+.slider_container {
+	margin: 10px 0 10px 0;
+	width: 350px; 
+	position: relative;
+
+	.user_slider {
+		height: 4px; 
+		@include border-radius(3px);
+		background: #dddddd; 
+		width: 100%; 
+		position: absolute; 
+		top: 3px; 
+		left: 0;
+	}
+}
+.boundary {
+	font-size: 11px;
+	color: #888888;
+}
+.minimum {
+	float: left;
+	min-width: 50px;
+}
+
+.maximum {
+	float: right;
+	min-width: 50px;
+}
+
+.answer_form {
+	margin-top: 10px;
+}
+
+.question_result_container {
+	border-bottom: 1px solid;
+	margin: 3px;
+	padding-bottom: 3px;
+	overflow: auto;
+}
+
+.question_result_title {
+	font-size: 12px;
+	margin-left: 2px;
+	float: left;
+	width: 80%;
+}
+
+.question_score {
+	font-size: 13px;
+	float: right;
+	margin-right: 2px;
 }

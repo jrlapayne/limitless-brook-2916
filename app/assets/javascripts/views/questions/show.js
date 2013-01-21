@@ -39,8 +39,8 @@ QuizPop.Views.QuestionsShow = Backbone.View.extend({
 		this.values = {
 			max: this.question.get('max'),
 			min: this.question.get('min'),
-			length: 200, //length of slider bar
-			width: 20 //width of slider button
+			length: 350, //length of slider bar
+			width: 25 //width of slider button
 		};
 	},
 	
