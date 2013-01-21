@@ -7,13 +7,16 @@
 	<div id = 'correct' class = 'hide' style = 'position: absolute; top: -8px; left: -10px; height: 20px; width: 20px; opacity: 0.5; background: #ff0'></div>
 </div></br>
 
-<div id = 'mins'>
-	<%= min %>
+<div id = 'mins' class = "minimum boundary">
+	<%= values.min %>
 </div>
-<div>
-	<%= max %>
+<div class = "maximum boundary">
+	<%= values.max %>
 </div>
-<form id = 'answer'>
-	<input type = 'text' id = 'number' value = '<%= min %>' />
-	<input type = 'submit' value = 'Submit' />
-</form>
+</br>
+<div class = "answer_form">
+	<form id = 'answer'>
+		<input type = 'text' id = 'number' value = '<%= values.min %>' />
+		<input type = 'submit' value = 'Submit' />
+	</form>
+</div>
