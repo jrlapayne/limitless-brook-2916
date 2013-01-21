@@ -52,4 +52,26 @@
 		}
 	}
 }
+.friend_challenge_container {
+	overflow: auto;
+	padding: 0 0 5px 5px;
+	border-bottom: 1px solid lighten($bluegreen,22%);
+	margin: 5px 0 5px 0;
+	
+	.friend_picture {
+		height: 35px;
+		width: 35px;
+		overflow: hidden;
+		@include border-radius(5px);
+		float: left;
+	}
 
+	.friend_name {
+		width: 200px;
+		font-weight: bold;
+		font-size: 12px;
+		float: left;
+		margin: 10px 0 0 5px;
+		color: darken($bluegreen,15%);
+	}
+}

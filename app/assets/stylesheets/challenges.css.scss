@@ -33,9 +33,30 @@
 .create_challenge_text {
 	float: left;
 	border: 1px solid;
+	display: none;
 }
 
 .sent_challenge_container {
 	float: left;
 	width: 100%;
+	.sent_challenges_text {
+		font-weight: bold;
+		font-size: 12px;
+		margin: 15px 0 5px 3px;
+	}
+}
+
+.finished_text {
+	margin: 15px 0 10px 0;
+	padding-bottom: 8px;
+	border-bottom: 1px solid;
+	text-align: center;
+	font-weight: bold;
+	color: darken($bluegreen, 30%);
+	font-size: 13px;
+}
+
+.results_container {
+	padding-bottom: 8px;
+	border-bottom: 2px solid #555555;
 }
