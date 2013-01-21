@@ -33,6 +33,8 @@ QuizPop.Views.QuestionsShow = Backbone.View.extend({
 		this.draggable = false;
 		this.slider_disabled = false;
 		this.exponential = this.question.get('is_exponential');
+		this.decimal = this.question.get('is_decimal');
+		this.correct = this.question.get('correct');
 		this.slider_pos = 0;
 		this.values = {
 			max: this.question.get('max'),
@@ -88,6 +90,20 @@ QuizPop.Views.QuestionsShow = Backbone.View.extend({
 			answer: answer,
 			score: score
 		});
+		this.setChallengeScore(score);
+	},
+	
+	setChallengeScore: function(score) {
+		if (this.current_user.get('id') === this.challenge.get('challenger_id')) {
+			this.challenge.set({
+				challenger_score: this.challenge.get('challenger_score') + score
+			});
+		} else {
+			this.challenge.set({
+				user_score: this.challenge.get('user_score') + score
+			});
+		}
+		this.challenge.save();
 	},
 	
 	getScoreFromInput: function(answer) {
@@ -134,7 +150,7 @@ QuizPop.Views.QuestionsShow = Backbone.View.extend({
 	},
 	
 	setInput: function(slider_pos) {
-		$('#number').val(this.addCommas(Math.round(slider_pos)));
+		$('#number').val(this.roundIntOrDecimal(slider_pos));
 	},
 	
 	unbindMouseMove: function(event) {
@@ -170,18 +186,26 @@ QuizPop.Views.QuestionsShow = Backbone.View.extend({
 	
 	bindKeyPress: function() {
 		var self = this;
+		var input;
 		if (!this.slider_disabled) {
 			$(document).on('keyup', function(e) {
-				if (parseInt(self.removeCommas($('#number').val())) > 999) {
-					$('#number').val(self.addCommas(self.removeCommas($('#number').val())));
-				} else {
-					if (!isNaN(parseInt(self.removeCommas($('#number').val())))) {
-						$('#number').val(self.removeCommas($('#number').val()));
+				if (self.decimal) {
+					input = parseFloat($('#number').val());
+					if (!isNaN(input) && self.checkSliderRange(input)) {
+						self.setSliderFromInput(input, self.exponential);
 					}
-				}
-				var input = self.removeCommas($('#number').val());
-				if (!isNaN(input) && self.checkSliderRange(input)) {
-					self.setSliderFromInput(input, self.exponential);
+				} else {
+					if (parseInt(self.removeCommas($('#number').val())) > 999) {
+						$('#number').val(self.addCommas(self.removeCommas($('#number').val())));
+					} else {
+						if (!isNaN(parseInt(self.removeCommas($('#number').val())))) {
+							$('#number').val(self.removeCommas($('#number').val()));
+						}
+					}
+					input = self.removeCommas($('#number').val());
+					if (!isNaN(input) && self.checkSliderRange(input)) {
+						self.setSliderFromInput(input, self.exponential);
+					}
 				}
 			});
 		}
@@ -223,18 +247,6 @@ QuizPop.Views.QuestionsShow = Backbone.View.extend({
 		$(document).off('keyup');
 	},
 	
-	setSliderPosition: function(loc) {
-		$('#block').css('left', (loc / this.values.step) - this.values.offset + 'px');
-	},
-	
-	setSliderPositionExp: function(loc) {
-		if (this.values.min !== 0) {
-			$('#block').css('left', Math.round(Math.log(loc / this.values.min) / Math.log(this.values.coef)) - this.values.offset);
-		} else {
-			$('#block').css('left', Math.round(Math.log(loc) / Math.log(this.values.coef)) - this.values.offset);
-		}
-	},
-	
 	moveSliderOnClick: function(event) {
 		var loc;
 		if (!this.slider_disabled) {
@@ -261,6 +273,19 @@ QuizPop.Views.QuestionsShow = Backbone.View.extend({
 	revealCorrectAnswer: function() {
 		$('#correct').removeClass('hide');
 		$('#correct').css('left', Math.round(this.getInputPosition(this.question.get('correct'), this.exponential)));
+	},
+	
+	roundIntOrDecimal: function(val) {
+		if (this.decimal) {
+			if (((this.correct % 1) * 10) % 1 === 0) {
+				return Math.floor(val * 10) / 10;
+			} else {
+				return Math.floor(val * 100) / 100;
+			}
+			return 
+		} else {
+			return this.addCommas(Math.round(val));
+		}
 	},
 	
 	addCommas: function(val){

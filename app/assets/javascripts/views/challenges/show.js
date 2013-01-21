@@ -16,6 +16,8 @@ QuizPop.Views.ChallengesShow = Backbone.View.extend({
 	
 	render: function() {
 		var self = this;
+		$(this.el).attr('id', this.challenge.get('id'));
+		$(this.el).addClass('active challenge');
 		$(this.el).html(this.template({
 			
 		}));

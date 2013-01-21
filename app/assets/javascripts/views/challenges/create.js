@@ -66,7 +66,9 @@ QuizPop.Views.ChallengesCreate = Backbone.View.extend({
 			challenger_id: this.current_user.get('id'),
 			user_id: user.get('id'),
 			is_finished: false,
-			is_sent: false
+			is_sent: false,
+			challenger_score: 0,
+			user_score: 0
 		}, {
 			success: function(challenge, response) {
 				//stop loading

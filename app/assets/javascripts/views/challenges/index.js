@@ -3,7 +3,7 @@ QuizPop.Views.ChallengesIndex = Backbone.View.extend({
 	template: JST['challenges/index'],
 	
 	events: {
-		'click .challenge' : 'acceptChallenge',
+		'click .active.challenge' : 'acceptChallenge',
 		'click #create' : 'createChallenge'
 	},
 	

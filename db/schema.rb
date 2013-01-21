@@ -11,20 +11,20 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130116173025) do
+ActiveRecord::Schema.define(:version => 20130121201450) do
 
   create_table "challenges", :force => true do |t|
     t.integer  "issue_id"
     t.string   "question_ids"
     t.integer  "challenger_id"
     t.integer  "user_id"
-    t.integer  "challenger_score"
-    t.integer  "user_score"
+    t.integer  "challenger_score", :default => 0
+    t.integer  "user_score",       :default => 0
     t.integer  "winner_id"
-    t.boolean  "is_finished"
-    t.boolean  "is_sent"
-    t.datetime "created_at",       :null => false
-    t.datetime "updated_at",       :null => false
+    t.boolean  "is_finished",      :default => false
+    t.boolean  "is_sent",          :default => false
+    t.datetime "created_at",                          :null => false
+    t.datetime "updated_at",                          :null => false
   end
 
   create_table "issues", :force => true do |t|
@@ -39,13 +39,14 @@ ActiveRecord::Schema.define(:version => 20130116173025) do
     t.integer  "issue_id"
     t.string   "title"
     t.boolean  "is_exponential"
-    t.integer  "min"
-    t.integer  "max"
-    t.integer  "correct"
+    t.float    "min"
+    t.float    "max"
+    t.float    "correct"
     t.string   "units"
     t.text     "url"
     t.datetime "created_at",     :null => false
     t.datetime "updated_at",     :null => false
+    t.boolean  "is_decimal"
   end
 
   create_table "tasks", :force => true do |t|
@@ -54,7 +55,7 @@ ActiveRecord::Schema.define(:version => 20130116173025) do
     t.integer  "issue_id"
     t.integer  "question_id"
     t.float    "time"
-    t.integer  "answer"
+    t.float    "answer"
     t.integer  "score"
     t.datetime "created_at",   :null => false
     t.datetime "updated_at",   :null => false
