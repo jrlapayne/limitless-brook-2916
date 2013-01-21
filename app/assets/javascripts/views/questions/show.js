@@ -30,6 +30,13 @@ QuizPop.Views.QuestionsShow = Backbone.View.extend({
 	},
 	
 	setSliderEqVals: function() {
+		if (this.current_user.get('id') === this.challenge.get('challenger')) {
+			this.is_user_challenger = true;
+			this.challenger_task = null;
+		} else {
+			this.is_user_challenger = false;
+			this.challenger_task this.tasks.where({user_id: this.challenge.get('challenger_id'), challenge_id: this.challenge.get('id'), question_id: this.question.get('id')})[0];
+		}
 		this.draggable = false;
 		this.slider_disabled = false;
 		this.exponential = this.question.get('is_exponential');
@@ -51,8 +58,13 @@ QuizPop.Views.QuestionsShow = Backbone.View.extend({
 		var question_ids = this.challenge.get('question_ids').split('/');
 		var next_question = null;
 		
-		this.createTask();
+		var answer = this.createTask();
 		this.revealCorrectAnswer();
+		if (!this.is_user_challenger) {
+			this.showChallengerAnswer();
+			this.showRageComic(answer);
+		}
+		
 		switch(question_ids.indexOf(String(this.question.get('id')))) {
 			case 0:
 				next_question = this.attr.questions.where({id: parseInt(question_ids[1])})[0];
@@ -61,9 +73,16 @@ QuizPop.Views.QuestionsShow = Backbone.View.extend({
 				next_question = this.attr.questions.where({id: parseInt(question_ids[2])})[0];
 				break;
 			case 2:
+				if (this.current_user.get('id') === this.challenge.get('challenger_id')) {
+					this.challenge.set({is_sent: true});
+				} else {
+					this.challenge.set({is_finished: true});
+				}
+				this.challenge.save();
 				next_question = null;
 				break;
 		};
+		
 		setTimeout(function() {
 			if (next_question) {
 				Backbone.history.navigate('challenge' + self.challenge.get('id') + '/question' + next_question.get('id'), true);
@@ -91,6 +110,8 @@ QuizPop.Views.QuestionsShow = Backbone.View.extend({
 			score: score
 		});
 		this.setChallengeScore(score);
+		
+		return answer;
 	},
 	
 	setChallengeScore: function(score) {
@@ -273,6 +294,24 @@ QuizPop.Views.QuestionsShow = Backbone.View.extend({
 	revealCorrectAnswer: function() {
 		$('#correct').removeClass('hide');
 		$('#correct').css('left', Math.round(this.getInputPosition(this.question.get('correct'), this.exponential)));
+	},
+	
+	showChallengerAnswer: function() {
+		$('#challenger_answer').removeClass('hide');
+		$('#challenger_answer').css('left', Math.round(this.getInputPosition(this.challenger_task.get('answer'), this.exponential)));
+	},
+	
+	showRageComic: function(user_answer) {
+		var rage_int, is_win;
+		if (Math.abs(user_answer - this.correct) > Math.abs(this.challenger_task.get('answer') - this.correct)) {
+			is_win = true;
+		} else {
+			is_win = false;
+		}
+		var view = new QuizPop.Views.QuestionsRage({
+			is_win: is_win
+		});
+		$('#rage_comic').html(view.render().el);
 	},
 	
 	roundIntOrDecimal: function(val) {

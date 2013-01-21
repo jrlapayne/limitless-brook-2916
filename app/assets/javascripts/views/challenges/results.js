@@ -35,9 +35,6 @@ QuizPop.Views.ChallengesResults = Backbone.View.extend({
 	},
 	
 	sendChallenge: function(event) {
-		this.challenge.set({is_sent: true});
-		this.challenge.save();
-		
 		Backbone.history.navigate('', true);
 	}
 });
