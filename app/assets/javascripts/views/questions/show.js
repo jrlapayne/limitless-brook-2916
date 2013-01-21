@@ -59,6 +59,7 @@ QuizPop.Views.QuestionsShow = Backbone.View.extend({
 		var next_question = null;
 		
 		var answer = this.createTask();
+		$('url').removeClass('hide');
 		this.revealCorrectAnswer();
 		if (!this.is_user_challenger) {
 			this.showChallengerAnswer();
