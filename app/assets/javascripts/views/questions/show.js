@@ -246,6 +246,7 @@ QuizPop.Views.QuestionsShow = Backbone.View.extend({
 	},
 	
 	mouseDown: function(event) {
+		alert('you clicked');
 		if (!this.slider_disabled) {
 			if (!this.draggable) {
 				event.preventDefault();
@@ -258,6 +259,7 @@ QuizPop.Views.QuestionsShow = Backbone.View.extend({
 	},
 	
 	mouseUp: function() {
+		alert('you unclicked');
 		if (this.draggable) {
 			this.draggable = false;
 			$('#block').removeClass('on');
