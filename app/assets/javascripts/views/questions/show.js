@@ -403,7 +403,7 @@ QuizPop.Views.QuestionsShow = Backbone.View.extend({
 	},
 	
 	touchEventHandler: function(event) {
-		var touches = event.changedTouches,
+		var touches = event.touches,
 	        first = touches[0],
 	        type = "";
 		$('#number').val(event.type);
