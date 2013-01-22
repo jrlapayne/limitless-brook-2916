@@ -403,7 +403,6 @@ QuizPop.Views.QuestionsShow = Backbone.View.extend({
 	},
 	
 	touchEventHandler: function(event) {
-		event.preventDefault();
 		var touches = event.changedTouches,
 	        first = touches[0],
 	        type = "";
@@ -426,5 +425,6 @@ QuizPop.Views.QuestionsShow = Backbone.View.extend({
 	                              false, false, false, 0/*left*/, event.target);
 
 		first.target.dispatchEvent(simulatedEvent);
+		event.preventDefault();
 	}
 });
