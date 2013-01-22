@@ -8,20 +8,17 @@
 				1px 1px 2px rgba(darken($bluegreen,40%), 0.99) inset;
 	@include border-radius(13px);
 	@include linear-gradient(darken($bluegreen,5%), darken($bluegreen,25%));
-	@include fonts;
-	float: left;
+
 	height: 26px;
-	padding-top: 11px;
-	width: 60%;
-	margin-left: 20%;
+	padding: 11px 0 0 0;
 	
-	margin-top: 12px;
+	margin: 12px 20% 0px 20%;
+
 	color: #ffffff;
-	font-size: 90%;
-	border: none;
+	font-size: 14px;
 	text-align: center;
 
-	@include text-shadow(0, 1px, 0, rgba(darken($bluegreen,50%),0.99));	
+	@include text-shadow(0 1px 0 rgba(darken($bluegreen,40%),0.99));	
 	font-weight: bold;
 	&:hover {
 		@include linear-gradient(darken($bluegreen,3%), darken($bluegreen,15%));
@@ -31,8 +28,14 @@
 }
 
 .create_challenge_text {
-	float: left;
-	border: 1px solid;
+ 	width: 180px;
+	@include border-radius(13px);
+}
+
+.create_challenge_text_joanie {
+	border: 2px solid;
+	border-color: rgb(16,13,191);
+	font-weight: bold;
 }
 
 .sent_challenge_container {

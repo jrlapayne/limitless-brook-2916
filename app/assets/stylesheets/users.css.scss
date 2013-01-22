@@ -7,9 +7,8 @@
 	padding: 6px 0 6px 0;
 	border-top: 1px solid;
 	border-color: #cccccc;
-	min-height: 30px;
-	overflow: hidden;
-	
+	overflow: auto;
+
 	.user_picture_container {
 		width: 30px;
 		height: 30px;
@@ -17,10 +16,11 @@
 		margin-left: 3px;
 		@include border-radius(5px);
 		float: left;
+
 	}
 
 	.user_name {
-		font-size: 10px;
+		font-size: 11px;
 		float: left;
 		margin: 9px 0 0 5px;
 		font-weight: bold;
@@ -34,18 +34,21 @@
 		float: right;
 		padding-left: 6px;
 		margin-right: 3px;
-		
+		width: 180px;
+
 		.user_issue_title {
 			font-size: 11px;
 			margin: 9px 5px 0 0;
 			font-weight: bold;
-			float: right;
+			width: 160px;
 			color: #333333;
+			text-align: center;
+			@include text-shadow(0 1px 0 rgba(lighten($bluegreen,10%),0.99));
 		}
 	
 		.user_issue_image {
-			width: 30px;
-			height: 30px;
+			width: 35px;
+			height: 35px;
 			overflow: hidden;
 			@include border-radius(5px);
 			float: right;
@@ -58,6 +61,7 @@
 	border-bottom: 1px solid lighten($bluegreen,22%);
 	margin: 5px 0 5px 0;
 	
+	
 	.friend_picture {
 		height: 35px;
 		width: 35px;
@@ -69,7 +73,7 @@
 	.friend_name {
 		width: 200px;
 		font-weight: bold;
-		font-size: 12px;
+		font-size: 11px;
 		float: left;
 		margin: 10px 0 0 5px;
 		color: darken($bluegreen,15%);
