@@ -1,0 +1,22 @@
+.container {
+	height: 35px;
+	margin-bottom: 8px;
+	@include border-radius(9px);
+	@include linear-gradient(lighten($bluegreen,25%), lighten($bluegreen,15%));
+}
+
+.issue_title {
+	font-weight: bold;
+	padding: 10px 0 0 10px;
+	font-size: 80%;
+	float: left;
+	color: #333333;
+}
+
+.issue_image {
+	position: absolute;
+	right: 9px;
+	@include border-radius(7px);
+	overflow: hidden;
+	height: 35px;
+}
