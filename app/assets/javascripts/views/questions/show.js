@@ -23,8 +23,9 @@ QuizPop.Views.QuestionsShow = Backbone.View.extend({
 	render: function() {
 		$(this.el).html(this.template({
 			question: this.question,
-			max: this.addCommas(this.question.get('max')),
-			min: this.addCommas(this.question.get('min'))
+			max: this.addUnits(this.addCommas(this.question.get('max'))),
+			min: this.addUnits(this.addCommas(this.question.get('min'))),
+			input_min: this.addCommas(this.question.get('min'))
 		}));
 		return this;
 	},
@@ -344,5 +345,15 @@ QuizPop.Views.QuestionsShow = Backbone.View.extend({
 	
 	removeCommas: function(val) {
 		return parseInt(val.replace(/\,/g,''));
+	},
+	
+	addUnits: function(val) {
+		var units = this.question.get('units');
+		var index = units.indexOf('/');
+		if (index === 0) {
+			return val.toString() + units.substring(index + 1);
+		} else {
+			return units.substring(0, index) + val.toString();
+		}
 	}
 });

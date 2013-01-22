@@ -17,8 +17,15 @@
 </br>
 <div class = "answer_form">
 	<form id = 'answer'>
-		<input type = 'text' id = 'number' value = '<%= min %>' />
-		<input type = 'submit' value = 'Submit' />
+		<% if (question.get('units').indexOf('/') === 0) { %>
+			<input type = 'text' id = 'number' value = '<%= input_min %>' />
+			<%= question.get('units').substring(1) %>
+			<input type = 'submit' value = 'Submit' />
+		<% } else { %>
+			<%= question.get('units').substring(0, question.get('units').indexOf('/')) %>
+			<input type = 'text' id = 'number' value = '<%= input_min %>' />
+			<input type = 'submit' value = 'Submit' />
+		<% } %>
 	</form>
 </div>
 <div id = 'url' class = 'hide'>
