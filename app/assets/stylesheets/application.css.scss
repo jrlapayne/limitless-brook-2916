@@ -1,11 +1,11 @@
 @import "compass";
-@import "vars";
-@import "mixins";
-@import "layouts";
-@import "challenges";
-@import "issues";
-@import "users";
-@import "questions";
+@import "oh_sheet/vars";
+@import "oh_sheet/mixins";
+@import "oh_sheet/layouts";
+@import "oh_sheet/challenges";
+@import "oh_sheet/issues";
+@import "oh_sheet/users";
+@import "oh_sheet/questions";
 
 .on {
 	width: 25px;

@@ -10,7 +10,7 @@ QuizPop.Views.ChallengesCreate = Backbone.View.extend({
 	initialize: function(options) {
 		this.attr = options.attr;
 		this.current_user = this.attr.users.where({id: this.attr.current_user.get('id')})[0];
-		this.friends = options.friends;
+		this.friends = this.filterAndAlphabetize(options.friends);
 		this.subviews = [];
 	},
 	
@@ -25,6 +25,33 @@ QuizPop.Views.ChallengesCreate = Backbone.View.extend({
 			}
 		}, 0);
 		return this;
+	},
+	
+	filterAndAlphabetize: function(array) {
+		var self = this;
+		var friends = [], user;
+		_.each(array, function(f) {
+			user = self.attr.users.where({uid: f['id']})[0]; 
+			if (!(user && 
+				(self.attr.challenges.where({user_id: user.get('id'), challenger_id: self.current_user.get('id'), is_finished: false})[0] || 
+				self.attr.challenges.where({challenger_id: user.get('id'), user_id: self.current_user.get('id'), is_finished: false})[0]))) 
+			{
+				friends.push(f);
+			}
+		});
+		friends.sort(function(a,b) {
+			var nameA = a['name'].split(' ')[a['name'].split(' ').length - 1].toLowerCase();
+			var nameB = b['name'].split(' ')[b['name'].split(' ').length - 1].toLowerCase();
+			if (nameA < nameB) {
+				return -1;
+			}
+			if (nameB < nameA) {
+				return 1;
+			}
+			return 0;
+		});
+		
+		return friends;
 	},
 	
 	renderFriend: function(friend) {
