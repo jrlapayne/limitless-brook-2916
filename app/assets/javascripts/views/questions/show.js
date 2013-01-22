@@ -17,17 +17,39 @@ QuizPop.Views.QuestionsShow = Backbone.View.extend({
 		this.question = options.question;
 		this.current_user = this.attr.users.where({id: this.attr.current_user.get('id')})[0];
 		
-		this.setSliderEqVals();
+		this.displayNums = this.formatNumbersForDisplay();
 	},
 	
 	render: function() {
+		var self = this;
 		$(this.el).html(this.template({
 			question: this.question,
-			max: this.addUnits(this.addCommas(this.question.get('max'))),
-			min: this.addUnits(this.addCommas(this.question.get('min'))),
-			input_min: this.addCommas(this.question.get('min'))
+			max: this.displayNums.max,
+			min: this.displayNums.min,
+			correct: this.displayNums.correct
 		}));
+		setTimeout(function() {
+			self.setSliderEqVals();
+		}, 0);
 		return this;
+	},
+	
+	formatNumbersForDisplay: function() {
+		var nums;
+		if (this.question.get('is_decimal')) {
+			nums = {
+				max: this.addUnits(String(this.question.get('max'))),
+				min: this.addUnits(String(this.question.get('min'))),
+				correct: this.addUnits(String(this.question.get('correct')) 
+			}
+		} else {
+			nums = {
+				max: this.addUnits(this.addCommas(this.question.get('max'))),
+				min: this.addUnits(this.addCommas(this.question.get('min'))),
+				correct: this.addUnits(this.addCommas(this.question.get('correct'))
+			}
+		}
+		return nums;
 	},
 	
 	setSliderEqVals: function() {
@@ -45,7 +67,7 @@ QuizPop.Views.QuestionsShow = Backbone.View.extend({
 		this.values = {
 			max: this.question.get('max'),
 			min: this.question.get('min'),
-			length: 350, //length of slider bar
+			length: parseInt($('#slider').css('width')), //length of slider bar
 			width: 25 //width of slider button
 		};
 	},
@@ -57,7 +79,7 @@ QuizPop.Views.QuestionsShow = Backbone.View.extend({
 		var question_ids = this.challenge.get('question_ids').split('/');
 		var next_question = null;
 		
-		$('url').removeClass('hide');
+		$('#url').removeClass('hide');
 		this.revealCorrectAnswer();
 		this.createTask();
 		
@@ -99,7 +121,7 @@ QuizPop.Views.QuestionsShow = Backbone.View.extend({
 			} else {
 				Backbone.history.navigate('challenge' + self.challenge.get('id'), true);
 			}
-		}, 5000);
+		}, 2667);
 	},
 	
 	createTask: function() {
@@ -193,9 +215,10 @@ QuizPop.Views.QuestionsShow = Backbone.View.extend({
 		}); 
 	},
 	
-	mouseDown: function() {
+	mouseDown: function(event) {
 		if (!this.slider_disabled) {
 			if (!this.draggable) {
+				event.preventDefault();
 				this.draggable = true;
 				$('#block').removeClass('off');
 				$('#block').addClass('on');
