@@ -7,17 +7,7 @@
 @import "users";
 @import "questions";
 
-.off {
-	background: $bluegreen;
-	cursor: pointer;
-	width: 25px;
-	height: 25px;
-	@include border-radius(13px);
-	@include linear-gradient(lighten($bluegreen,6%), darken($bluegreen,10%));
-}
-
 .on {
-	background: #f0f;
 	width: 25px;
 	height: 25px;
 	@include border-radius(13px);
