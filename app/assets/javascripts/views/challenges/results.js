@@ -10,12 +10,15 @@ QuizPop.Views.ChallengesResults = Backbone.View.extend({
 		this.attr = options.attr;
 		this.challenge = options.challenge;
 		this.current_user = this.attr.users.where({id: this.attr.current_user.get('id')})[0];
+		this.winner = this.attr.users.where({id: this.challenge.get('winner_id')})[0];
 	},
 	
 	render: function() {
 		var self = this;
 		$(this.el).html(this.template({
-			
+			challenge: this.challenge,
+			user: this.current_user,
+			winner: this.winner
 		}));
 		setTimeout(function() {
 			for (i = 0; i < 3; i++) {
@@ -35,6 +38,10 @@ QuizPop.Views.ChallengesResults = Backbone.View.extend({
 	},
 	
 	sendChallenge: function(event) {
-		Backbone.history.navigate('', true);
+		if (this.challenge.get('is_finished')) {
+			Backbone.history.navigate('new', true);
+		} else {
+			Backbone.history.navigate('', true);
+		}
 	}
 });

@@ -11,10 +11,10 @@
 	</div>
 	<div class = "user_issue_container">
 		<div class = "user_issue_image">
-			<img src = 'assets/issues/finland.png' height = "100%" />
+			<img src = 'assets/issues/<%= issue.get('thumbnail') %>.png' height = "100%" />
 		</div>
 		<div class = "user_issue_title">
-			Marijuana Legalization
+			<%= issue.get('title') %>
 		</div>
 	</div>
 </div>

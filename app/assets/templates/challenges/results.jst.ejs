@@ -1,5 +1,19 @@
-<div class = "finished_text">Finished!</div>
+<div>
+	<% if (winner) { %>
+		<% if (user.get('id') === winner.get('id')) { %>
+			<div class = "finished_text">Way to go champ!</div>
+		<% } else { %>
+			<div class = "finished_text">You really screwed that one up...</div>
+		<% } %>
+	<% } else { %>
+		<div class = "finished_text">Finished!</div>
+	<% } %>
+</div>
 <div class = "results_container" id = 'results'></div>
 <div id = 'send_challenge' class = "create_challenge_button">
-	Send Challenge!
+	<% if (challenge.get('is_finished')) { %>
+		Create New Challenge
+	<% } else { %>
+		Send Challenge!
+	<% } %>
 </div>

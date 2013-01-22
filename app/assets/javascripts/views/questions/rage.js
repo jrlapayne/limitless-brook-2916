@@ -1,4 +1,4 @@
-QuizPop.Views.QuestionsRage = new Backbone.View.extend({
+QuizPop.Views.QuestionsRage = Backbone.View.extend({
 	
 	template: JST['questions/rage'],
 	

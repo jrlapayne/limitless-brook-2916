@@ -16,24 +16,62 @@ QuizPop.Views.QuestionsResult = Backbone.View.extend({
 	},
 	
 	render: function() {
+		var self = this;
 		$(this.el).html(this.template({
 			question: this.question,
-			task: this.attr.tasks.where({
-				user_id: this.current_user.get('id'), 
-				challenge_id: this.challenge.get('id'), 
-				question_id: this.question.get('id')
-			})[0]
+			winner: this.winner
 		}));
+		setTimeout(function() {
+			if (self.is_complete) {
+				self.renderUser(self.user, false);
+				self.renderUser(self.challenger, true);
+			} else {
+				self.renderUser(self.challenger, false);
+			}
+		}, 0);
 		return this;
+	},
+	
+	renderUser: function(user, is_challenger) {
+		var view = new QuizPop.Views.UsersResult({
+			attr: this.attr,
+			task: this.getTask(user),
+			user: user
+		});
+		if (is_challenger) {
+			$(this.el).find('#challenger_info').html(view.render().el);
+		} else {
+			$(this.el).find('#user_info').html(view.render().el);
+		}
 	},
 	
 	setChallengerUser: function() {
 		if (this.challenge.get('challenger_id') === this.current_user.get('id')) {
 			this.challenger = this.current_user;
 			this.user = this.attr.users.where({id: this.challenge.get('user_id')})[0];
+			this.is_complete = false;
 		} else {
 			this.challenger = this.attr.users.where({id: this.challenge.get('challenger_id')})[0];
 			this.user = this.current_user;
+			this.is_complete = true;
 		}
+		
+		if (this.is_complete) {
+			if (this.challenge.get('challenger_score') < this.challenge.get('user_score')) {
+				this.winner = this.challenger;
+			} else {
+				this.winner = this.user;
+			}
+		} else {
+			this.winner = null;
+		}
+	},
+	
+	getTask: function(user) {
+		 return this.attr.tasks.where({
+			user_id: user.get('id'), 
+			challenge_id: this.challenge.get('id'), 
+			question_id: this.question.get('id')
+		})[0];
 	}
 });
