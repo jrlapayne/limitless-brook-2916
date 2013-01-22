@@ -2,12 +2,13 @@
 	<%= question.get('title') %>
 </div></br>
 <div class = "slider_container">
-
-	<div id = 'slider' class = "user_slider"></div>
-	<div id = 'block' class = 'off' style = 'position: absolute; top: -8px; left: -10px'></div>
-	<div id = 'correct' class = 'hide' style = 'position: absolute; top: -8px; left: -10px; height: 20px; width: 20px; opacity: 0.5; background: #ff0'></div>
+	<div id = 'slider' class = "user_slider_bar"></div>
+	<div id = 'block' class = 'off user_slider' style = 'position: absolute; top: -8px; left: -10px'></div>
+	<div id = 'correct' class = 'hide' style = 'position: absolute; top: -8px; left: -10px;'>
+		<div class = 'correct_slider'>&#10004;</div>
+	</div>
 	<div id = 'challenger_answer' class = 'hide' style = 'position: absolute; top: -8px; left: -10px; height: 20px; width: 20px; opacity: 0.5; background: #0ff'></div>
->>>>>>> origin/master
+
 </div></br>
 
 <div id = 'mins' class = "minimum boundary">
@@ -20,13 +21,13 @@
 <div class = "answer_form">
 	<form id = 'answer'>
 		<% if (question.get('units').indexOf('/') === 0) { %>
-			<input type = 'text' id = 'number' value = '<%= input_min %>' />
+			<input type = 'text' id = 'number' value = '<%= input_min %>' class = "typeable"/>
 			<%= question.get('units').substring(1) %>
-			<input type = 'submit' value = 'Submit' />
+			<input type = 'submit' value = 'Submit' class = "submit_button"/>
 		<% } else { %>
 			<%= question.get('units').substring(0, question.get('units').indexOf('/')) %>
-			<input type = 'text' id = 'number' value = '<%= input_min %>' />
-			<input type = 'submit' value = 'Submit' />
+			<input type = 'text' id = 'number' value = '<%= input_min %>' class = "typeable"/>
+			<input type = 'submit' value = 'Submit' class = "submit_button"/>
 		<% } %>
 	</form>
 </div>
