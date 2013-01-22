@@ -9,9 +9,8 @@ QuizPop.Views.QuestionsShow = Backbone.View.extend({
 		'focus #number' : 'bindKeyPress',
 		'blur #number' : 'unbindKeyPress',
 		'click #slider' : 'moveSliderOnClick',
-		'touchstart' : 'touchEventHandler',
-		'touchend' : 'touchEventHandler',
-		'touchmove' : 'touchEventHandler'
+		'touchstart #block' : 'mouseDown',
+		'touchend' : 'mouseUp',
 	},
 	
 	initialize: function(options) {
@@ -19,7 +18,6 @@ QuizPop.Views.QuestionsShow = Backbone.View.extend({
 		this.challenge = options.challenge;
 		this.question = options.question;
 		this.current_user = this.attr.users.where({id: this.attr.current_user.get('id')})[0];
-		
 		this.displayNums = this.formatNumbersForDisplay();
 	},
 	
@@ -230,26 +228,25 @@ QuizPop.Views.QuestionsShow = Backbone.View.extend({
 	},
 	
 	unbindMouseMove: function(event) {
-		$(document).off('mousemove');
-		//$(document).off('touchmove');
+		//$(document).off('mousemove');
+		$(document).off('touchmove');
 	},
 	
 	bindMouseMove: function() {
 	var self = this;
-		$(document).on('mousemove', function(event) {
+		/* $(document).on('mousemove', function(event) {
+			self.moveSlider(event, self.exponential);
+		}); */
+		$(document).on('touchmove', function(event) {
 			self.moveSlider(event, self.exponential);
 		});
-		//$(document).on('touchmove', function(event) {
-			//self.moveSlider(event, self.exponential);
-		//});
 		//(typeof Touch == "object");
 	},
 	
 	mouseDown: function(event) {
-		alert('you clicked');
 		if (!this.slider_disabled) {
 			if (!this.draggable) {
-				event.preventDefault();
+				//event.preventDefault();
 				this.draggable = true;
 				$('#block').removeClass('off');
 				$('#block').addClass('on');
@@ -259,7 +256,6 @@ QuizPop.Views.QuestionsShow = Backbone.View.extend({
 	},
 	
 	mouseUp: function() {
-		alert('you unclicked');
 		if (this.draggable) {
 			this.draggable = false;
 			$('#block').removeClass('on');
