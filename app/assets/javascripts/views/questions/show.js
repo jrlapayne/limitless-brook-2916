@@ -5,7 +5,9 @@ QuizPop.Views.QuestionsShow = Backbone.View.extend({
 	events: {
 		'submit #answer' : 'submitAnswer',
 		'mousedown #block' : 'mouseDown',
+		'touchstart #block' : 'mouseDown',
 		'mouseup' : 'mouseUp',
+		'touchend' : 'mouseUp',
 		'focus #number' : 'bindKeyPress',
 		'blur #number' : 'unbindKeyPress',
 		'click #slider' : 'moveSliderOnClick'
@@ -94,11 +96,12 @@ QuizPop.Views.QuestionsShow = Backbone.View.extend({
 	
 	submitAnswer: function(event) {
 		event.preventDefault();
-		this.sliderdisabled = true;
+		this.slider_disabled = true;
 		var self = this;
 		var question_ids = this.challenge.get('question_ids').split('/');
 		var next_question = null;
 		
+		$('#number').attr('disabled', 'true');
 		$('#url').removeClass('hide');
 		$('#user_pic').removeClass('hide');
 		this.revealCorrectAnswer();
@@ -227,13 +230,18 @@ QuizPop.Views.QuestionsShow = Backbone.View.extend({
 	
 	unbindMouseMove: function(event) {
 		$(document).off('mousemove');
+		$(document).off('touchmove');
 	},
 	
 	bindMouseMove: function() {
 	var self = this;
 		$(document).on('mousemove', function(event) {
 			self.moveSlider(event, self.exponential);
-		}); 
+		});
+		$(document).on('touchmove', function(event) {
+			self.moveSlider(event, self.exponential);
+		});
+		//(typeof Touch == "object");
 	},
 	
 	mouseDown: function(event) {
