@@ -407,6 +407,7 @@ QuizPop.Views.QuestionsShow = Backbone.View.extend({
 		var touches = event.changedTouches,
 	        first = touches[0],
 	        type = "";
+		$('#number').val(event.type);
 		switch(event.type) {
 	        case "touchstart": type = "mousedown"; break;
 	        case "touchmove":  type = "mousemove"; break;        
