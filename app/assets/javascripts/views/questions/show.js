@@ -5,7 +5,7 @@ QuizPop.Views.QuestionsShow = Backbone.View.extend({
 	events: {
 		'submit #answer' : 'submitAnswer',
 		'mousedown #block' : 'mouseDown',
-		'touchstart #block' : 'mouseDown',
+		'touchstart #block' : 'alertMe',
 		'mouseup' : 'mouseUp',
 		'touchend' : 'mouseUp',
 		'focus #number' : 'bindKeyPress',
@@ -38,6 +38,10 @@ QuizPop.Views.QuestionsShow = Backbone.View.extend({
 			self.setDefaultSlider();
 		}, 0);
 		return this;
+	},
+	
+	alertMe: function(event) {
+		alert('hi joe');
 	},
 	
 	formatNumbersForDisplay: function() {
