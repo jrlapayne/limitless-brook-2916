@@ -3,7 +3,7 @@ QuizPop.Views.ChallengesIndex = Backbone.View.extend({
 	template: JST['challenges/index'],
 	
 	events: {
-		'click .challenge' : 'acceptChallenge',
+		'click .active.challenge' : 'acceptChallenge',
 		'click #create' : 'createChallenge'
 	},
 	
@@ -25,14 +25,15 @@ QuizPop.Views.ChallengesIndex = Backbone.View.extend({
 			_.each(self.attr.challenges.where({challenger_id: self.current_user.get('id'), is_sent: true, is_finished: false}), function(c) {
 				self.renderChallenged(c);
 			});
-		}, 0)
+		}, 0);
 		return this;
 	},
 	
 	renderChallenge: function(challenge) {
 		var view = new QuizPop.Views.ChallengesShow({
 			attr: this.attr,
-			challenge: challenge
+			challenge: challenge,
+			is_user_challenger: false
 		});
 		this.subviews.push(view);
 		$('#available_challenges').append(view.render().el);
@@ -41,7 +42,8 @@ QuizPop.Views.ChallengesIndex = Backbone.View.extend({
 	renderChallenged: function(challenge) {
 		var view = new QuizPop.Views.ChallengesShow({
 			attr: this.attr,
-			challenge: challenge
+			challenge: challenge,
+			is_user_challenger: true
 		});
 		this.subviews.push(view);
 		$('#unanswered_challenges').append(view.render().el);

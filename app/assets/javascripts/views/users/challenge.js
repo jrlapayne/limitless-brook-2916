@@ -9,6 +9,8 @@ QuizPop.Views.UsersChallenge = Backbone.View.extend({
 	initialize: function(options) {
 		this.attr = options.attr;
 		this.user = options.user;
+		this.challenge = options.challenge;
+		this.issue = this.attr.issues.where({id: this.challenge.get('issue_id')})[0];
 		this.subviews = [];
 		
 		this.attr.users.on('add', this.render, this);
@@ -16,7 +18,8 @@ QuizPop.Views.UsersChallenge = Backbone.View.extend({
 	
 	render: function() {
 		$(this.el).html(this.template({
-			user: this.user
+			user: this.user,
+			issue: this.issue
 		}));
 		return this;
 	},
