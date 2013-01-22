@@ -231,7 +231,7 @@ QuizPop.Views.QuestionsShow = Backbone.View.extend({
 	
 	unbindMouseMove: function(event) {
 		$(document).off('mousemove');
-		$(document).off('touchmove');
+		//$(document).off('touchmove');
 	},
 	
 	bindMouseMove: function() {
@@ -239,9 +239,9 @@ QuizPop.Views.QuestionsShow = Backbone.View.extend({
 		$(document).on('mousemove', function(event) {
 			self.moveSlider(event, self.exponential);
 		});
-		$(document).on('touchmove', function(event) {
-			self.moveSlider(event, self.exponential);
-		});
+		//$(document).on('touchmove', function(event) {
+			//self.moveSlider(event, self.exponential);
+		//});
 		//(typeof Touch == "object");
 	},
 	
