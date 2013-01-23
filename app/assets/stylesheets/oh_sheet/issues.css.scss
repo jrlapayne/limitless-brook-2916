@@ -1,23 +1,24 @@
-.container {
-	border:1px solid #E6F6EC;
+.issue_index_container {
 	height: 35px;
-	margin-bottom: 8px;
+	margin: 0 0 8px 5%;
+	width: 90%;
 	@include border-radius(9px);
-	@include linear-gradient(lighten($bluegreen,25%), lighten($bluegreen,15%));
-}
+	@include single-box-shadow(rgba(#000, 0.35), 1px, 1px, 1px, 0);
+	@include linear-gradient(lighten($bluegreen,20%), lighten($bluegreen,10%));
 
-.issue_title {
-	font-weight: bold;
-	padding: 10px 0 0 10px;
-	font-size: 80%;
-	float: left;
-	color: #333333;
-}
+	.issue_title {
+		font-weight: bold;
+		padding: 12px 0 0 8px;
+		font-size: 12px;
+		float: left;
+		color: #111111;
+	}
 
-.issue_image {
-	position: absolute;
-	right: 9px;
-	@include border-radius(7px);
-	overflow: hidden;
-	height: 35px;
+	.issue_image {
+		float: right;
+		@include border-radius(7px);
+		overflow: hidden;
+		height: 35px;
+		width: 35px;
+	}
 }

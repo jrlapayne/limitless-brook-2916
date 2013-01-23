@@ -14,19 +14,21 @@
 	.user_slider_bar {
 		height: 4px; 
 		@include border-radius(3px);
-		background: #dddddd; 
+		background: lighten($orange, 15%); 
 		width: 100%; 
 		position: absolute; 
 		top: 3px; 
 		left: 0;
+		box-shadow: -1px 0px 1px rgba(lighten($orange,20%), 0.99),
+					1px 0px 1px rgba(lighten($orange,20%), 0.99);
 	}
 	
 	.user_slider {
 		background: $bluegreen;
 		cursor: pointer;
 		width: 25px;
-		height: 17px;
-		padding: 8px 0 0 0px;
+		height: 18px;
+		padding: 7px 0 0 0px;
 		text-align: center;
 		color: darken($bluegreen,35%);
 		font-size: 9px;

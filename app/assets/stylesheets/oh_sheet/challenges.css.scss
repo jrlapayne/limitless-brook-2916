@@ -1,23 +1,24 @@
 .create_challenge_button {
 	cursor: pointer;
-	box-shadow: -1px -1px 2px rgba(darken($bluegreen,40%), 0.99) inset,
+	/*box-shadow: -1px -1px 2px rgba(darken($bluegreen,40%), 0.99) inset,
 				1px 1px 2px rgba(darken($bluegreen,40%), 0.99) inset;
-	@include border-radius(13px);
-	@include linear-gradient(darken($bluegreen,5%), darken($bluegreen,25%));
+				*/
+	@include border-radius(10px);
+	@include linear-gradient(desaturate(darken($bluegreen,5%),5%), desaturate(darken($bluegreen,22%),5%));
 	@include fonts;
 	float: left;
 	height: 26px;
 	padding-top: 11px;
-	width: 50%;
-	margin-left: 35%;
+	width: 46%;
+	margin: 10px 0 0 27%;
 	
-	margin-top: 12px;
 	color: #ffffff;
-	font-size: 90%;
+	font-size: 13px;
 	border: none;
 	text-align: center;
-
-	@include text-shadow(0, 1px, 0, rgba(darken($bluegreen,50%),0.99));	
+	
+	@include single-box-shadow(rgba(#000, 0.35), 0px, 1px, 1px, 0);
+	@include text-shadow(0px 1px 0 rgba(darken($bluegreen,40%),0.99));	
 	font-weight: bold;
 	&:hover {
 		@include linear-gradient(darken($bluegreen,3%), darken($bluegreen,15%));
@@ -31,8 +32,10 @@
 	width:100%;
 	font-weight: bold;
 	font-size: 12px;
+	margin: 2px 0 0 0;
+	color: darken($bluegreen, 55%);
 	.your_challenges_text{
-		margin: 0 0 5px 3px;
+		margin: 0 0 3px 3px;
 	}
 }
 
@@ -40,11 +43,12 @@
 .sent_challenge_container {
 	float: left;
 	width: 100%;
-	margin: 1px 0 0 0;
+	margin: 20px 0 0 0;
+	color: darken($bluegreen, 55%);
 	.sent_challenges_text {
 		font-weight: bold;
 		font-size: 12px;
-		margin: 15px 0 5px 3px;
+		margin: 0px 0 3px 3px;
 	}
 }
 

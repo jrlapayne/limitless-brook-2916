@@ -16,6 +16,7 @@ QuizPop.Views.IssuesIndex = Backbone.View.extend({
 	
 	render: function() {
 		var self = this;
+		$(this.el).addClass('main-issues-index-container');
 		$(this.el).html(this.template({
 			
 		}));

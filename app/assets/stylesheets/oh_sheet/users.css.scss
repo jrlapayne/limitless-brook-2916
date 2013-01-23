@@ -5,12 +5,13 @@
 	margin-left: 3px;
 	@include border-radius(5px);
 	float: left;
+	@include single-box-shadow(rgba(#000, 0.35), 1px, 1px, 1px, 0);
 }
 
 .challenge_container {
 	padding: 6px 0 6px 0;
 	border-top: 1px solid;
-	border-color: #cccccc;
+	border-color: rgba($bluegreen,0.4);
 	min-height: 30px;
 	overflow: hidden;
 
@@ -20,24 +21,25 @@
 		margin: 9px 0 0 5px;
 		font-weight: bold;
 		color: #555555;
+		@include text-shadow(0px 1px 0 rgba(lighten($bluegreen,25%),0.99));
 	}
 	
 	.user_issue_container {
-		@include linear-gradient(lighten($bluegreen,25%), lighten($bluegreen,15%));
+		@include linear-gradient(lighten($bluegreen,20%), lighten($bluegreen,10%));
 		overflow: auto;
 		@include border-radius(5px);
-		border:1px solid #E6F6EC;
 		float: right;
 		width:200px;
 		padding-left: 6px;
 		margin-right: 3px;
+		@include single-box-shadow(rgba(#000, 0.35), 1px, 1px, 1px, 0);
 		
 		.user_issue_title {
 			font-size: 11px;
 			margin: 9px 5px 0 0;
 			font-weight: bold;
 			text-align: center;
-			color: #333333;
+			color: #222222;
 		}
 	
 		.user_issue_image {
@@ -61,14 +63,15 @@
 		overflow: hidden;
 		@include border-radius(5px);
 		float: left;
+		@include single-box-shadow(rgba(#000, 0.35), 1px, 1px, 1px, 0);
 	}
 
 	.friend_name {
 		width: 200px;
 		font-weight: bold;
-		font-size: 12px;
+		font-size: 11px;
 		float: left;
-		margin: 10px 0 0 5px;
-		color: darken($bluegreen,15%);
+		margin: 11px 0 0 5px;
+		color: darken($bluegreen,20%);
 	}
 }
