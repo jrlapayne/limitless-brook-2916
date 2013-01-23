@@ -1,18 +1,18 @@
+.user_picture_container {
+	width: 30px;
+	height: 30px;
+	overflow: hidden;
+	margin-left: 3px;
+	@include border-radius(5px);
+	float: left;
+}
+
 .challenge_container {
 	padding: 6px 0 6px 0;
 	border-top: 1px solid;
 	border-color: #cccccc;
 	min-height: 30px;
 	overflow: hidden;
-	
-	.user_picture_container {
-		width: 30px;
-		height: 30px;
-		overflow: hidden;
-		margin-left: 3px;
-		@include border-radius(5px);
-		float: left;
-	}
 
 	.user_name {
 		font-size: 10px;
@@ -26,7 +26,9 @@
 		@include linear-gradient(lighten($bluegreen,25%), lighten($bluegreen,15%));
 		overflow: auto;
 		@include border-radius(5px);
+		border:1px solid #E6F6EC;
 		float: right;
+		width:170px;
 		padding-left: 6px;
 		margin-right: 3px;
 		
@@ -34,7 +36,7 @@
 			font-size: 11px;
 			margin: 9px 5px 0 0;
 			font-weight: bold;
-			float: right;
+			text-align: center;
 			color: #333333;
 		}
 	
