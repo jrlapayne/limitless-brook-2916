@@ -16,6 +16,7 @@ QuizPop.Views.QuestionsRage = Backbone.View.extend({
 	},
 	
 	render: function() {
+		$(this.el).addClass('rage-container');
 		$(this.el).html(this.template({
 			num: this.img_num,
 			is_win: this.is_win
