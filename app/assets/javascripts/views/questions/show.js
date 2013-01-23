@@ -40,10 +40,20 @@ QuizPop.Views.QuestionsShow = Backbone.View.extend({
 		return this;
 	},
 	
+	touchEveryone: function() {
+		var self = this;
+		document.ontouchmove = function(event) {
+			event.preventDefault(); 
+			if (self.test_bool) {
+				$('#number').html(event.pageX +', '+ event.pageY);
+			}	
+		};
+	},
+	
 	touchMe: function(event) {
 		if (!this.test_bool) {
 			this.test_bool = true;
-			$('#number').val(event.pageX + ' ' + event.pageX);
+			this.touchEveryone();
 		}
 	},
 	
