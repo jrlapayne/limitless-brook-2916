@@ -9,8 +9,8 @@ QuizPop.Views.QuestionsShow = Backbone.View.extend({
 		'focus #number' : 'bindKeyPress',
 		'blur #number' : 'unbindKeyPress',
 		'click #slider' : 'moveSliderOnClick',
-		'touchstart #block' : 'mouseDown',
-		'touchend' : 'mouseUp',
+		'touchstart #block' : 'touchMe',
+		'touchend' : 'touchYourself',
 	},
 	
 	initialize: function(options) {
@@ -19,6 +19,7 @@ QuizPop.Views.QuestionsShow = Backbone.View.extend({
 		this.question = options.question;
 		this.current_user = this.attr.users.where({id: this.attr.current_user.get('id')})[0];
 		this.displayNums = this.formatNumbersForDisplay();
+		this.test_bool = false;
 	},
 	
 	render: function() {
@@ -37,6 +38,19 @@ QuizPop.Views.QuestionsShow = Backbone.View.extend({
 			self.setDefaultSlider();
 		}, 0);
 		return this;
+	},
+	
+	touchMe: function(event) {
+		if (!this.test_bool) {
+			this.test_bool = true;
+			$('#number').val(event.pageX + ' ' + event.pageX);
+		}
+	},
+	
+	touchYourself: function(event) {
+		if (this.test_bool) {
+			this.test_bool = false;
+		}
 	},
 	
 	formatNumbersForDisplay: function() {
