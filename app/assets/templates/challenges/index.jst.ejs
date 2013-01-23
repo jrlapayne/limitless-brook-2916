@@ -1,17 +1,22 @@
-<div id = 'available_challenges' class = "create_challenge_text">
+
+<div id = 'available_challenges' class = "your_challenges_container">
 	<% if (challenges > 0) { %>
-		<div>Your Challenges: </div>
+		<div class= "your_challenges_text">
+			Your Challenges
+		</div>
 	<% } else { %>
 		<div>Try creating a challenge</div>
 	<% } %>
 </div>
 
-<div id = 'create' class = "create_challenge_button">
-	Create a Challenge!
-</div>
+
 
 <div id = 'unanswered_challenges' class = "sent_challenge_container">
 	<div class = "sent_challenges_text">
 		Sent Challenges
 	</div>
+</div>
+
+<div id = 'create' class = "create_challenge_button">
+	Create a Challenge!
 </div>

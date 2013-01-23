@@ -37,7 +37,7 @@
 </div>
 </br>
 <div class = "answer_form">
-	<form id = 'answer'>
+	<form id = 'answer' class = "answer_units">
 		<% if (question.get('units').indexOf('/') === 0) { %>
 			<input type = 'text' id = 'number' class = "typeable"/>
 			<%= question.get('units').substring(1) %>
@@ -49,7 +49,7 @@
 		<% } %>
 	</form>
 </div>
-<div id = 'url' class = 'hide'>
-	<a href = "<%= question.get('url') %>" target = '_blank'>source</a>
+<div id = 'url' class = 'hide source_url'>
+	<a href = "<%= question.get('url') %>" target = '_blank'>Source</a>
 </div>
 <div id = 'rage_comic'></div>

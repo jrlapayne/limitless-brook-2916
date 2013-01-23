@@ -6,9 +6,10 @@
 }
 
 .slider_container {
-	margin: 10px 0 10px 0;
-	width: 350px; 
+	margin: 12px 1.5% 10px 1.5%;
+	width: 97%; 
 	position: relative;
+
 
 	.user_slider_bar {
 		height: 4px; 
@@ -24,30 +25,38 @@
 		background: $bluegreen;
 		cursor: pointer;
 		width: 25px;
-		height: 25px;
+		height: 21px;
+		padding: 5px 0 0 1px;
+		text-align: center;
+		color: darken($bluegreen,35%);
 		@include border-radius(13px);
 		@include linear-gradient(lighten($bluegreen,6%), darken($bluegreen,10%));
+		&:active {
+			@include linear-gradient(darken($bluegreen,10%), lighten($bluegreen,6%));
+		}
 	}
 	
 	.correct_slider {
 		position: relative;
 		width: 15px;
 		height: 19px;
-		@include border-radius(18px);
-		@include linear-gradient(#aaaaaa, #333333);
+		@include border-radius(16px);
+		@include linear-gradient(#aaaaaa, #555555);
 		text-align: center;
-		color: #ffffff;
+		color: lighten($bluegreen, 10%);
 		padding: 6px 0 0 1px;
-		font-size: 10px;
+		font-size: 12px;
 		margin: auto;
 	}
 	
 	.correct_slider_text {
 		position: absolute;
-		top: 19px;
-		left: 15px;
-		width: 31px;
-		text-align: center;
+		top: -14px;
+		left: 1px;
+		font-size: 11px;
+		text-align: left;
+		width: 100px;
+		color: darken($bluegreen, 25%);
 	}
 	
 	.challenger_after_submission {
@@ -73,9 +82,9 @@
 }
 
 .question_result_container {
-	border-bottom: 1px solid;
-	margin: 3px;
-	padding-bottom: 3px;
+	border-bottom: 1px solid desaturate(darken($bluegreen,3%),25%);
+	margin: 6px 3px 6px 3px;
+	padding-bottom: 6px;
 	overflow: auto;
 }
 
@@ -84,6 +93,8 @@
 	margin-left: 2px;
 	float: left;
 	width: 80%;
+	color: darken($bluegreen, 33%);
+	line-height: 15px;
 }
 
 .question_score {
@@ -106,18 +117,23 @@
 		width: 100px;
 		text-align: center;
 	}
+	
+	.answer_units {
+		color: darken($bluegreen,10%);
+		font-size: 12px;
+	}
 
 	.submit_button {
 		cursor: pointer;
-		box-shadow: -1px -1px 2px rgba(darken($bluegreen,40%), 0.99) inset,
-					1px 1px 2px rgba(darken($bluegreen,40%), 0.99) inset;
+		box-shadow: -1px -1px 2px rgba(darken($bluegreen,30%), 0.99) inset,
+					1px 1px 2px rgba(darken($bluegreen,30%), 0.99) inset;
 		@include border-radius(11px);
 		@include linear-gradient(darken($bluegreen,5%), darken($bluegreen,25%));
 		@include fonts;
 		text-align: center;
 		height: 20px;
 		width: 60px;
-		margin-left: 5px;
+		margin-left: 7px;
 	
 		color: #ffffff;
 		font-size: 90%;
@@ -131,5 +147,18 @@
 			box-shadow: -1px -1px 2px rgba(darken($bluegreen,30%), 0.99) inset,
 						1px 1px 2px rgba(darken($bluegreen,30%), 0.99) inset;
 		}
+	}
+}
+
+.source_url {
+	@include fonts;
+	color: darken($bluegreen, 20%);
+	font-weight: bold;
+	font-size: 11px;
+	a:link {
+		color: darken($bluegreen, 15%);
+	}
+	a:visited {
+		color: darken($bluegreen, 15%);
 	}
 }
