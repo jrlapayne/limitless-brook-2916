@@ -1,6 +1,10 @@
 QuizPop.Views.PagesLoading = Backbone.View.extend({
 	template: JST['pages/loading'],
 	
+	initialize: function() {
+		this.time = 2000;
+	},
+	
 	render: function() {
 		var self = this;
 		$(this.el).html(this.template());
@@ -11,90 +15,98 @@ QuizPop.Views.PagesLoading = Backbone.View.extend({
 	},
 	
 	loading: function() {
-		$('#ball1').animate({
-			opacity: "0"
-		}, 1000);
+		var time = this.time,
+			self = this;
+			
+		setTimeout(function() {
+			$('#ball1').animate({
+				opacity: "0"
+			}, time);
+		}, 0);
 		setTimeout(function() {
 			$('#ball2').animate({
 				opacity: "0"
-			}, 1000);
-		}, 125);
+			}, time);
+		}, parseInt(Math.round(time / 8)));
 		setTimeout(function() {
 			$('#ball3').animate({
 				opacity: "0"
-			}, 1000);
-		}, 250);
+			}, time);
+		}, parseInt(Math.round((time / 8) * 2)));
 		setTimeout(function() {
 			$('#ball4').animate({
 				opacity: "0"
-			}, 1000);
-		}, 375);
+			}, time);
+		}, parseInt(Math.round((time / 8) * 3)));
 		setTimeout(function() {
 			$('#ball5').animate({
 				opacity: "0"
-			}, 1000);
-		}, 500);
+			}, time);
+		}, parseInt(Math.round((time / 8) * 4)));
 		setTimeout(function() {
 			$('#ball6').animate({
 				opacity: "0"
-			}, 1000);
-		}, 625);
+			}, time);
+		}, parseInt(Math.round((time / 8) * 5)));
 		setTimeout(function() {
 			$('#ball7').animate({
 				opacity: "0"
-			}, 1000);
-		}, 750);
+			}, time);
+		}, parseInt(Math.round((time / 8) * 6)));
 		setTimeout(function() {
 			$('#ball8').animate({
 				opacity: "0"
-			}, 1000);
-		}, 875);
-		
-		var self = this;
+			}, time);
+		}, parseInt(Math.round((time / 8) * 7)));
+
 		setTimeout(function() {
 			self.resetLoading();
-		}, 1001);
+		}, time);
 	},
 	
 	resetLoading: function() {
-		$('#ball1').animate({
-			opacity: "1"
+		var time = this.time;
+		
+		setTimeout(function() {
+			$('#ball1').animate({
+				opacity: "1"
+			}, 0);
 		}, 0);
 		setTimeout(function() {
 			$('#ball2').animate({
 				opacity: "1"
 			}, 0);
-		}, 125);
+		}, parseInt(Math.round(time / 8)));
 		setTimeout(function() {
 			$('#ball3').animate({
 				opacity: "1"
 			}, 0);
-		}, 250);
+		}, parseInt(Math.round((time / 8) * 2)));
 		setTimeout(function() {
 			$('#ball4').animate({
 				opacity: "1"
 			}, 0);
-		}, 375);
+		}, parseInt(Math.round((time / 8) * 3)));
 		setTimeout(function() {
 			$('#ball5').animate({
 				opacity: "1"
 			}, 0);
-		}, 500);
+		}, parseInt(Math.round((time / 8) * 4)));
 		setTimeout(function() {
 			$('#ball6').animate({
 				opacity: "1"
 			}, 0);
-		}, 625);
+		}, parseInt(Math.round((time / 8) * 5)));
 		setTimeout(function() {
 			$('#ball7').animate({
 				opacity: "1"
 			}, 0);
-		}, 750);
+		}, parseInt(Math.round((time / 8) * 6)));
 		setTimeout(function() {
 			$('#ball8').animate({
 				opacity: "1"
 			}, 0);
-		}, 875);
+		}, parseInt(Math.round((time / 8) * 7)));
 		
 		this.loading();
 	}
