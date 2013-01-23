@@ -349,7 +349,7 @@ QuizPop.Views.QuestionsShow = Backbone.View.extend({
 	},
 	
 	showRageComic: function(user_answer) {
-		var rage_int, is_win;
+		var is_win;
 
 		if (Math.abs(user_answer - this.correct) < Math.abs(this.challenger_task.get('answer') - this.correct)) {
 			is_win = true;

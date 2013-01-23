@@ -12,7 +12,13 @@
 	if (window.location.hash == '#_=_') {
 		window.location.hash = '';
 	}
-
+	
+	document.addEventListener('load', function() {
+		setTimeout(function() {
+			window.scrollTo(0, 1);
+		}, 1000);
+	}, false);
+	
 	window.fbAsyncInit = function() {
 		FB.init({appId: '336449143129017', channelUrl: 'http://limitless-brook-2916.herokuapp.com', status: true, xfbml: true});
 	};
