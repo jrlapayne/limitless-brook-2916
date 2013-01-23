@@ -27,6 +27,9 @@ QuizPop.Views.IssuesIndex = Backbone.View.extend({
 		setTimeout(function() {
 			self.endLoading();
 		}, 500);
+		setTimeout(function() {
+			window.scrollTo(0, 1);
+		}, 1000);
 		return this;
 	},
 	
