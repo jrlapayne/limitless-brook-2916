@@ -38,10 +38,20 @@ QuizPop.Views.ChallengesResults = Backbone.View.extend({
 	},
 	
 	sendChallenge: function(event) {
-		if (this.challenge.get('is_finished')) {
-			Backbone.history.navigate('new', true);
-		} else {
-			Backbone.history.navigate('', true);
-		}
+		this.startLoading();
+		Backbone.history.navigate('', true);
+	},
+	
+	startLoading: function() {
+		var view = new QuizPop.Views.PagesLoading();
+		$('#loading').removeClass('inactive');
+		$('#loading').addClass('active');
+		$('#loading').html(view.render().el);
+	},
+	
+	 endLoading: function() {
+		$('#loading').removeClass('active');
+		$('#loading').addClass('inactive');
+		$('#loading').children().remove();
 	}
 });

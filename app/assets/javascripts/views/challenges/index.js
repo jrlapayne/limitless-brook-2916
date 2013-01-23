@@ -55,7 +55,21 @@ QuizPop.Views.ChallengesIndex = Backbone.View.extend({
 	},
 	
 	createChallenge: function() {
+		this.startLoading();
 		Backbone.history.navigate('new', true);
+	},
+	
+	startLoading: function() {
+		var view = new QuizPop.Views.PagesLoading();
+		$('#loading').removeClass('inactive');
+		$('#loading').addClass('active');
+		$('#loading').html(view.render().el);
+	},
+	
+	 endLoading: function() {
+		$('#loading').removeClass('active');
+		$('#loading').addClass('inactive');
+		$('#loading').children().remove();
 	},
 	
 	onClose: function() {

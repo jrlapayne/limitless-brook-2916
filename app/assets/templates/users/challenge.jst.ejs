@@ -1,6 +1,6 @@
 <div class = "challenge_container">
 	<div class = "user_picture_container">
-		<img src="https://graph.facebook.com/<%= user.get('uid') %>/picture"/ height="100%">
+		<img src="https://graph.facebook.com/<%= user.get('uid') %>/picture?type=large"/ height="100%">
 	</div>
 	<div class = "user_name">
 		<% if (user.get('name').split(' ').length > 1) { %>

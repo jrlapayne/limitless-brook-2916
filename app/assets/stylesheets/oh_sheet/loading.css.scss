@@ -1,0 +1,87 @@
+.loading_container {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	background: rgba(0,0,0,0.5);
+	z-index: 1000;
+		
+		&.active {
+			height: 100%;
+			display: block;
+		}
+		
+		&.inactive {
+			height: 0;
+			display: none;
+		}
+}
+
+.animation-wrapper {
+	position: relative;
+	margin: 30% auto 0 auto;
+	width: 100px;
+	height: 100px;
+	z-index: 1000;
+	background: rgba(#000, 0.5);
+	@include border-radius(50px);
+	
+	.logo-wrapper {
+		position: absolute;
+		top: 30px;
+		left: 30px;
+		width: 40px;
+		height: 40px;
+	}
+	
+	.ball {
+		position: absolute;
+		background: #fff;
+		width: 10px;
+		height: 10px;
+		border: 1px solid darken(#fff, 10%);
+		@include border-radius(5px);
+		@include gradient(#fff);
+		
+		&.one {
+			top: 10px;
+			right: 45px;
+			@include opacity(0);
+		}
+		&.two {
+			top: 20px;
+			right: 20px;
+			@include opacity(0);
+		}
+		&.three {
+			top: 45px;
+			right: 10px;
+			@include opacity(0);
+		}
+		&.four {
+			top: 70px;
+			right: 20px;
+			@include opacity(0);
+		}
+		&.five {
+			bottom: 10px;
+			left: 45px;
+			@include opacity(0);
+		}
+		&.six {
+			bottom: 20px;
+			left: 20px;
+			@include opacity(0);
+		}
+		&.seven {
+			bottom: 45px;
+			left: 10px;
+			@include opacity(0);
+		}
+		&.eight {
+			bottom: 70px;
+			left: 20px;
+			@include opacity(0);
+		}
+	}
+}

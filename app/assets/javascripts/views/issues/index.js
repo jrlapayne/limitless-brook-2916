@@ -24,6 +24,9 @@ QuizPop.Views.IssuesIndex = Backbone.View.extend({
 				self.renderIssue(i);
 			});
 		}, 0);
+		setTimeout(function() {
+			self.endLoading();
+		}, 500);
 		return this;
 	},
 	
@@ -52,6 +55,19 @@ QuizPop.Views.IssuesIndex = Backbone.View.extend({
 		var questions = this.attr.questions.where({issue_id: issue.get('id')});
 		questions = _.shuffle(questions);
 		return questions[0].get('id') + '/' + questions[1].get('id') + '/' + questions[2].get('id');
+	},
+	
+	startLoading: function() {
+		var view = new QuizPop.Views.PagesLoading();
+		$('#loading').removeClass('inactive');
+		$('#loading').addClass('active');
+		$('#loading').html(view.render().el);
+	},
+	
+	 endLoading: function() {
+		$('#loading').removeClass('active');
+		$('#loading').addClass('inactive');
+		$('#loading').children().remove();
 	},
 	
 	onClose: function() {

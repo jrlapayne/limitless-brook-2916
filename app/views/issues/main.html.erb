@@ -2,6 +2,7 @@
 	<%= link_to("Sign In With Facebook", "/auth/facebook", "type" => "button", "class" => "dark button radius large", "style" => "width: 50%") %>
 	<div>Don't worry, we are going to spam the shit out of you!</div>
 <% else %>
+	<div class = "loading_container inactive" id = "loading"></div>
 	<div class = 'header'>
 		<img src = 'assets/logos/black.png' height = "100%" />
 	</div>
