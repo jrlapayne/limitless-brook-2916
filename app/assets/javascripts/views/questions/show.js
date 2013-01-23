@@ -9,9 +9,9 @@ QuizPop.Views.QuestionsShow = Backbone.View.extend({
 		'focus #number' : 'bindKeyPress',
 		'blur #number' : 'unbindKeyPress',
 		'click #slider' : 'moveSliderOnClick',
-		'touchstart' : 'touchEventHandler',
-		'touchend' : 'touchEventHandler',
-		'touchmove' : 'touchEventHandler'
+		
+		'touchstart #block' : 'touchDown',
+		'touchend' : 'touchUp'
 	},
 	
 	initialize: function(options) {
@@ -254,25 +254,20 @@ QuizPop.Views.QuestionsShow = Backbone.View.extend({
 	},
 	
 	unbindMouseMove: function(event) {
-		//$(document).off('mousemove');
-		$(document).off('touchmove');
+		$(document).off('mousemove');
 	},
 	
 	bindMouseMove: function() {
 	var self = this;
-		/* $(document).on('mousemove', function(event) {
-			self.moveSlider(event, self.exponential);
-		}); */
-		$(document).on('touchmove', function(event) {
+		$(document).on('mousemove', function(event) {
 			self.moveSlider(event, self.exponential);
 		});
-		//(typeof Touch == "object");
 	},
 	
 	mouseDown: function(event) {
 		if (!this.slider_disabled) {
 			if (!this.draggable) {
-				//event.preventDefault();
+				event.preventDefault();
 				this.draggable = true;
 				$('#block').removeClass('off');
 				$('#block').addClass('on');
@@ -448,5 +443,45 @@ QuizPop.Views.QuestionsShow = Backbone.View.extend({
 
 		first.target.dispatchEvent(simulatedEvent);
 		event.preventDefault();
+	},
+	
+	bindTouchMove: function() {
+	var self = this;
+		$(document).on('touchmove', function(event) {
+			self.moveSliderFromTouch(event, self.exponential);
+		});
+	},
+	
+	touchDown: function(event) {
+		if (!this.slider_disabled) {
+			if (!this.draggable) {
+				event.preventDefault();
+				this.draggable = true;
+				$('#block').removeClass('off');
+				$('#block').addClass('on');
+				this.bindTouchMove();
+			}
+		}
+	},
+	
+	touchUp: function() {
+		if (this.draggable) {
+			this.draggable = false;
+			$('#block').removeClass('on');
+			$('#block').addClass('off');
+			this.unbindTouchMove();
+		}
+	},
+	
+	unbindTouchMove: function(event) {
+		$(document).off('touchmove');
+	},
+	
+	moveSliderFromTouch: function(event, expo) {
+		var slider_pos = this.getDraggedPosition(event.originalEvent.touches[0], expo);
+		if (this.checkSliderRange(slider_pos)) {
+			this.adjustSliderPosition(event);
+			this.setInput(slider_pos);
+		}
 	}
 });
