@@ -9,8 +9,9 @@ QuizPop.Views.QuestionsShow = Backbone.View.extend({
 		'focus #number' : 'bindKeyPress',
 		'blur #number' : 'unbindKeyPress',
 		'click #slider' : 'moveSliderOnClick',
-		'touchstart #block' : 'touchMe',
-		'touchend' : 'touchYourself',
+		'touchstart' : 'touchEventHandler',
+		'touchend' : 'touchEventHandler',
+		'touchmove' : 'touchEventHandler'
 	},
 	
 	initialize: function(options) {
@@ -51,6 +52,7 @@ QuizPop.Views.QuestionsShow = Backbone.View.extend({
 	},
 	
 	touchMe: function(event) {
+		event.preventDefault();
 		if (!this.test_bool) {
 			this.test_bool = true;
 			this.touchEveryone();
@@ -423,7 +425,7 @@ QuizPop.Views.QuestionsShow = Backbone.View.extend({
 	},
 	
 	touchEventHandler: function(event) {
-		var touches = event.touches,
+		var touches = event.originalEvent.touches,
 	        first = touches[0],
 	        type = "";
 		$('#number').val(event.type);

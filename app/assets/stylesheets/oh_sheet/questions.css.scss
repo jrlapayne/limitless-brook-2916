@@ -23,8 +23,8 @@
 	.user_slider {
 		background: $bluegreen;
 		cursor: pointer;
-		width: 25px;
-		height: 25px;
+		width: 100px;
+		height: 100px;
 		@include border-radius(13px);
 		@include linear-gradient(lighten($bluegreen,6%), darken($bluegreen,10%));
 	}
