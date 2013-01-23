@@ -10,6 +10,7 @@ QuizPop.Views.QuestionsShow = Backbone.View.extend({
 		'blur #number' : 'unbindKeyPress',
 		'click #slider' : 'moveSliderOnClick',
 		
+		'touchstart #slider' : 'moveSliderOnTouch',
 		'touchstart #block' : 'touchDown',
 		'touchend' : 'touchUp'
 	},
@@ -432,6 +433,18 @@ QuizPop.Views.QuestionsShow = Backbone.View.extend({
 		if (this.checkSliderRange(slider_pos)) {
 			this.adjustSliderPosition(event.originalEvent.touches[0]);
 			this.setInput(slider_pos);
+		}
+	},
+	
+	moveSliderOnTouch: function(event) {
+		if (!this.slider_disabled) {
+			if (!this.draggable) {
+				var slider_pos = this.getDraggedPosition(event.originalEvent.touches[0], this.exponential);
+				if (this.checkSliderRange(slider_pos)) {
+					this.adjustSliderPosition(event.originalEvent.touches[0]);
+					this.setInput(slider_pos);
+				}
+			}
 		}
 	}
 });
