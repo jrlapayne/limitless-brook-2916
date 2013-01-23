@@ -14,11 +14,13 @@
 	.user_slider_bar {
 		height: 4px; 
 		@include border-radius(3px);
-		background: #dddddd; 
+		background: lighten($orange, 15%); 
 		width: 100%; 
 		position: absolute; 
 		top: 3px; 
 		left: 0;
+		box-shadow: -1px 0px 1px rgba(lighten($orange,20%), 0.99),
+					1px 0px 1px rgba(lighten($orange,20%), 0.99);
 	}
 	
 	.user_slider {
