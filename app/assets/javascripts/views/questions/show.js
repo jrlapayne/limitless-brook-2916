@@ -41,30 +41,6 @@ QuizPop.Views.QuestionsShow = Backbone.View.extend({
 		return this;
 	},
 	
-	touchEveryone: function() {
-		var self = this;
-		document.ontouchmove = function(event) {
-			event.preventDefault(); 
-			if (self.test_bool) {
-				$('#number').html(event.pageX +', '+ event.pageY);
-			}	
-		};
-	},
-	
-	touchMe: function(event) {
-		event.preventDefault();
-		if (!this.test_bool) {
-			this.test_bool = true;
-			this.touchEveryone();
-		}
-	},
-	
-	touchYourself: function(event) {
-		if (this.test_bool) {
-			this.test_bool = false;
-		}
-	},
-	
 	formatNumbersForDisplay: function() {
 		var nums;
 		if (this.question.get('is_decimal')) {
@@ -419,32 +395,6 @@ QuizPop.Views.QuestionsShow = Backbone.View.extend({
 		}
 	},
 	
-	touchEventHandler: function(event) {
-		var touches = event.originalEvent.touches,
-	        first = touches[0],
-	        type = "";
-		$('#number').val(event.type);
-		switch(event.type) {
-	        case "touchstart": type = "mousedown"; break;
-	        case "touchmove":  type = "mousemove"; break;        
-	        case "touchend":   type = "mouseup"; break;
-	        default: return;
-	    }
-
-	             //initMouseEvent(type, canBubble, cancelable, view, clickCount, 
-	    //           screenX, screenY, clientX, clientY, ctrlKey, 
-	    //           altKey, shiftKey, metaKey, button, relatedTarget);
-
-	    var simulatedEvent = document.createEvent("MouseEvent");
-	    simulatedEvent.initMouseEvent(type, true, true, window, 1, 
-	                              first.screenX, first.screenY, 
-	                              first.clientX, first.clientY, false, 
-	                              false, false, false, 0/*left*/, event.target);
-
-		first.target.dispatchEvent(simulatedEvent);
-		event.preventDefault();
-	},
-	
 	bindTouchMove: function() {
 	var self = this;
 		$(document).on('touchmove', function(event) {
@@ -480,7 +430,7 @@ QuizPop.Views.QuestionsShow = Backbone.View.extend({
 	moveSliderFromTouch: function(event, expo) {
 		var slider_pos = this.getDraggedPosition(event.originalEvent.touches[0], expo);
 		if (this.checkSliderRange(slider_pos)) {
-			this.adjustSliderPosition(event);
+			this.adjustSliderPosition(event.originalEvent.touches[0]);
 			this.setInput(slider_pos);
 		}
 	}
