@@ -25,10 +25,11 @@
 		background: $bluegreen;
 		cursor: pointer;
 		width: 25px;
-		height: 21px;
-		padding: 5px 0 0 1px;
+		height: 17px;
+		padding: 8px 0 0 0px;
 		text-align: center;
 		color: darken($bluegreen,35%);
+		font-size: 9px;
 		@include border-radius(13px);
 		@include linear-gradient(lighten($bluegreen,6%), darken($bluegreen,10%));
 		&:active {
