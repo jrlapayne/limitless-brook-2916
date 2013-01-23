@@ -33,8 +33,8 @@ QuizPop.Views.ChallengesCreate = Backbone.View.extend({
 		_.each(array, function(f) {
 			user = self.attr.users.where({uid: f['id']})[0]; 
 			if (!(user && 
-				(self.attr.challenges.where({user_id: user.get('id'), challenger_id: self.current_user.get('id'), is_finished: false})[0] || 
-				self.attr.challenges.where({challenger_id: user.get('id'), user_id: self.current_user.get('id'), is_finished: false})[0]))) 
+				(self.attr.challenges.where({user_id: user.get('id'), challenger_id: self.current_user.get('id'), is_finished: false, is_sent: true})[0] || 
+				self.attr.challenges.where({challenger_id: user.get('id'), user_id: self.current_user.get('id'), is_finished: false, is_sent: true})[0]))) 
 			{
 				friends.push(f);
 			}

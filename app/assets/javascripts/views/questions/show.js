@@ -5,12 +5,14 @@ QuizPop.Views.QuestionsShow = Backbone.View.extend({
 	events: {
 		'submit #answer' : 'submitAnswer',
 		'mousedown #block' : 'mouseDown',
-		'touchstart #block' : 'mouseDown',
 		'mouseup' : 'mouseUp',
-		'touchend' : 'mouseUp',
 		'focus #number' : 'bindKeyPress',
 		'blur #number' : 'unbindKeyPress',
-		'click #slider' : 'moveSliderOnClick'
+		'click #slider' : 'moveSliderOnClick',
+		
+		'touchstart #slider' : 'moveSliderOnTouch',
+		'touchstart #block' : 'touchDown',
+		'touchend' : 'touchUp'
 	},
 	
 	initialize: function(options) {
@@ -18,8 +20,8 @@ QuizPop.Views.QuestionsShow = Backbone.View.extend({
 		this.challenge = options.challenge;
 		this.question = options.question;
 		this.current_user = this.attr.users.where({id: this.attr.current_user.get('id')})[0];
-		
 		this.displayNums = this.formatNumbersForDisplay();
+		this.test_bool = false;
 	},
 	
 	render: function() {
@@ -230,7 +232,6 @@ QuizPop.Views.QuestionsShow = Backbone.View.extend({
 	
 	unbindMouseMove: function(event) {
 		$(document).off('mousemove');
-		$(document).off('touchmove');
 	},
 	
 	bindMouseMove: function() {
@@ -238,10 +239,6 @@ QuizPop.Views.QuestionsShow = Backbone.View.extend({
 		$(document).on('mousemove', function(event) {
 			self.moveSlider(event, self.exponential);
 		});
-		$(document).on('touchmove', function(event) {
-			self.moveSlider(event, self.exponential);
-		});
-		//(typeof Touch == "object");
 	},
 	
 	mouseDown: function(event) {
@@ -396,6 +393,58 @@ QuizPop.Views.QuestionsShow = Backbone.View.extend({
 			return val.toString() + units.substring(index + 1);
 		} else {
 			return units.substring(0, index) + val.toString();
+		}
+	},
+	
+	bindTouchMove: function() {
+	var self = this;
+		$(document).on('touchmove', function(event) {
+			self.moveSliderFromTouch(event, self.exponential);
+		});
+	},
+	
+	touchDown: function(event) {
+		if (!this.slider_disabled) {
+			if (!this.draggable) {
+				event.preventDefault();
+				this.draggable = true;
+				$('#block').removeClass('off');
+				$('#block').addClass('on');
+				this.bindTouchMove();
+			}
+		}
+	},
+	
+	touchUp: function() {
+		if (this.draggable) {
+			this.draggable = false;
+			$('#block').removeClass('on');
+			$('#block').addClass('off');
+			this.unbindTouchMove();
+		}
+	},
+	
+	unbindTouchMove: function(event) {
+		$(document).off('touchmove');
+	},
+	
+	moveSliderFromTouch: function(event, expo) {
+		var slider_pos = this.getDraggedPosition(event.originalEvent.touches[0], expo);
+		if (this.checkSliderRange(slider_pos)) {
+			this.adjustSliderPosition(event.originalEvent.touches[0]);
+			this.setInput(slider_pos);
+		}
+	},
+	
+	moveSliderOnTouch: function(event) {
+		if (!this.slider_disabled) {
+			if (!this.draggable) {
+				var slider_pos = this.getDraggedPosition(event.originalEvent.touches[0], this.exponential);
+				if (this.checkSliderRange(slider_pos)) {
+					this.adjustSliderPosition(event.originalEvent.touches[0]);
+					this.setInput(slider_pos);
+				}
+			}
 		}
 	}
 });
