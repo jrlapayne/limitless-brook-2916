@@ -41,8 +41,26 @@ QuizPop.Views.ChallengesResults = Backbone.View.extend({
 	},
 	
 	sendChallenge: function(event) {
-		this.startLoading();
-		Backbone.history.navigate('', true);
+		if (this.current_user.get('id') === this.challenge.get('user_id')) {
+			this.createChallenge(this.attr.users.where({id: this.challenge.get('challenger_id')})[0]);
+		} else {
+			Backbone.history.navigate('', true);
+		}
+	},
+	
+	createChallenge: function(user) {
+		var self = this;
+		this.attr.challenges.create({
+			challenger_id: this.current_user.get('id'),
+			user_id: user.get('id')
+		}, {
+			success: function(challenge, response) {
+				Backbone.history.navigate('issue' + challenge.get('id'), true);
+			},
+			error: function(challenge, response) {
+
+			}
+		});
 	},
 	
 	startLoading: function() {

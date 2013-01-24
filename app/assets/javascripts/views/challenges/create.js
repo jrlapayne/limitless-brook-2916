@@ -74,7 +74,6 @@ QuizPop.Views.ChallengesCreate = Backbone.View.extend({
 	checkUser: function(event) {
 		var self = this;
 		var friend = this.friends[parseInt($(event.target).closest('.friend').attr('id'))];
-		this.startLoading();
 		if (this.attr.users.where({uid: friend['id']})[0]) {
 			this.createChallenge(this.attr.users.where({uid: friend['id']})[0]);
 		} else {
@@ -87,7 +86,7 @@ QuizPop.Views.ChallengesCreate = Backbone.View.extend({
 					self.createChallenge(user);
 				},
 				error: function(user, response) {
-					self.endLoading();
+
 				}
 			});
 		}
@@ -97,17 +96,13 @@ QuizPop.Views.ChallengesCreate = Backbone.View.extend({
 		var self = this;
 		this.attr.challenges.create({
 			challenger_id: this.current_user.get('id'),
-			user_id: user.get('id'),
-			is_finished: false,
-			is_sent: false,
-			challenger_score: 0,
-			user_score: 0
+			user_id: user.get('id')
 		}, {
 			success: function(challenge, response) {
 				Backbone.history.navigate('issue' + challenge.get('id'), true);
 			},
 			error: function(challenge, response) {
-				self.endLoading();
+
 			}
 		});
 	},
