@@ -81,15 +81,27 @@
 }
 
 .alphabet {
+	cursor: pointer;
 	position: fixed;
 	top: 0;
 	right: 0;
-	width: 20px;
+	width: 40px;
 	
 	div {
+		border: 1px solid darken(desaturate($bluegreen, 20%), 20%);
+		@include border-left-radius(4px);
+		background: rgba(#000, 0.5);
+		color: $bluegreen;
+		text-align: center;
 		width: 100%;
-		font-size: 16px;
-		height: 18px;
-		line-height: 18px;
+		font-size: 13px;
+		height: 15px;
+		line-height: 15px;
+		
+		&.active {
+			color: #fff;
+			font-weight: bold;
+			background: rgba(#000, 0.75);
+		}
 	}
 }

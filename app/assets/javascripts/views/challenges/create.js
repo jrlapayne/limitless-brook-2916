@@ -111,15 +111,19 @@ QuizPop.Views.ChallengesCreate = Backbone.View.extend({
 	goToLetter: function(event) {
 		var letter = $(event.target).closest('.letter').attr('id'),
 			loc;
-		
+		$('.alphabet').children().removeClass('active');
+		$(event.target).closest('.letter').addClass('active');
 		for (i = 0; i < this.friends.length; i++) {
-			if (letter === toLowerCase(this.friends[i]['name'].split(' ')[this.friends[i]['name'].split(' ').length - 1].substring(0, 1))) {
+			if (letter === this.friends[i]['name'].split(' ')[this.friends[i]['name'].split(' ').length - 1].substring(0, 1).toLowerCase()) {
 				loc = i;
 				break;
 			}
 		}
-		
-		window.scrollTo(0, (i + 1) * 35);
+		if (letter === 'a') {
+			window.scrollTo(0, 1);
+		} else {
+			window.scrollTo(0, ((loc + 1) * 46));
+		}
 	},
 	
 	startLoading: function() {
