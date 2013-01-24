@@ -26,6 +26,49 @@
 		height: 25px;
 	}
 }
+
+.mission_image {
+	margin: 20px 0 0 7%;
+	overflow: hidden;
+	width: 86%;
+	height: 140px;
+	@include border-radius(10px);
+}
+
+.signin_container {
+	margin: 15px 0 0 0;
+	
+	.signin_facebook_button {
+		@include border-radius(8px);
+		@include linear-gradient(lighten($facebookblue,5%), darken($facebookblue,5%));
+		@include single-box-shadow(rgba(#000, 0.45), 0px, 1px, 1px, 0);
+		@include fonts;
+		font-size: 13px;
+		font-weight: bold;
+		height: 26px;
+		padding-top: 11px;
+		width: 42%;
+		margin: 12px 0 8px 29%;
+		text-decoration: none;
+		text-align: center;
+		color: #ffffff;
+		a:link {
+			text-decoration: none;
+			color: #ffffff;
+		}
+		a:visited {
+			text-decoration: none;
+			color: #ffffff;
+		}
+	}
+
+	.signin_text {
+		font-size: 13px;
+		color: #888888;
+		text-align: center;
+	}
+}
+
 .hide {
 	display: none;
 }
