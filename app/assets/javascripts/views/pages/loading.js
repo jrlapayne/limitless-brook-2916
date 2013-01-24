@@ -99,6 +99,6 @@ QuizPop.Views.PagesLoading = Backbone.View.extend({
 		}, time);
 		setTimeout(function() {
 			self.checkMultipliers();
-		}, time + 100)
+		}, time);
 	}
 });
