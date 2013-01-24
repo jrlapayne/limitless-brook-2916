@@ -1,78 +1,81 @@
-<div id = "title" class = "question_title">
-	<%= question.get('title') %>
-</div></br>
-
-<div class = "answer_form_input">
-	<form id = 'answer' class = "answer_units">
-		<% if (question.get('units').indexOf('/') === 0) { %>
-			<input type = 'text' id = 'number' class = "typeable"/>
-			<%= question.get('units').substring(1) %>
-		<% } else { %>
-			<%= question.get('units').substring(0, question.get('units').indexOf('/')) %>
-			<input type = 'text' id = 'number' class = "typeable"/>
-		<% } %>
-	</form>
-</div>
-
-<div class = "slider_container">
-	<% if (current_user.get('id') !== challenger.get('id')) { %>
-		<div id = 'slider' class = "user_slider_bar">
-			<div id = 'user_pic' class = 'hide user_after_submission'>
-				<img src="https://graph.facebook.com/<%= user.get('uid') %>/picture?type=large"/ height="100%">
-			</div>
-		</div>
-		<div id = 'block' class = 'off user_slider' style = 'position: absolute; top: -8px; left: -10px'>
-			<div class = "slider_icon">
-				<img src = 'assets/logos/white.png' height = "100%" />
-			</div>
-		</div>
-		<div id = 'correct' class = 'hide' style = 'position: absolute; top: -8px; left: -10px; width: 25px'>
-			<div class = 'correct_slider'>&#10004;</div>
-			<div class = 'correct_slider_text'><%= correct %></div>
-		</div>
-		<div id = 'challenger_answer' class = 'hide' style = 'position: absolute; top: -8px; left: -10px; height: 20px; width: 20px; opacity: 0.5; background: #0ff'>
-			<div id = 'challenger_pic' class = 'challenger_after_submission'>
-				<img src="https://graph.facebook.com/<%= challenger.get('uid') %>/picture?type=large" height="100%" />
-			</div>
-		</div>
-	<% } else { %>
-		<div id = 'slider' class = "user_slider_bar"></div>
-		<div id = 'block' class = 'off user_slider' style = 'position: absolute; top: -8px; left: -10px'>
-			<div class = "slider_icon">
-				<img src = 'assets/logos/white.png' height = "100%" />
-			</div>
-		</div>
-		<div id = 'correct' class = 'hide' style = 'position: absolute; top: -8px; left: -10px; width: 25px'>
-			<div class = 'correct_slider'>&#10004;</div>
-			<div class = 'correct_slider_text'><%= correct %></div>
-		</div>
-		<div id = 'challenger_answer' class = 'hide' style = 'position: absolute; top: -8px; left: -10px; height: 20px; width: 20px; opacity: 0.5; background: #0ff'></div>
-	<% } %>
-</div></br>
-
-<div class = "triangles_container">
-	<div class = "slider_triangle left"></div>
-	<div class = "slider_triangle right"></div>
-</div>
-<div class = "labels_container">
-	<div class = "minimum boundary">
-		<%= min %>
+<div class = "interaction_container">
+	<div id = "title" class = "question_title">
+		<%= question.get('title') %>
 	</div>
-	<div class = "maximum boundary">
-		<%= max %>
+	
+	<div class = "answer_form_input">
+		<form id = 'answer' class = "answer_units">
+			<% if (question.get('units').indexOf('/') === 0) { %>
+				<input type = 'text' id = 'number' class = "typeable"/>
+				<%= question.get('units').substring(1) %>
+			<% } else { %>
+				<%= question.get('units').substring(0, question.get('units').indexOf('/')) %>
+				<input type = 'text' id = 'number' class = "typeable"/>
+			<% } %>
+		</form>
+	</div>
+
+	<div class = "slider_container">
+		<% if (current_user.get('id') !== challenger.get('id')) { %>
+			<div id = 'slider' class = "user_slider_bar">
+				<div id = 'user_pic' class = 'hide user_after_submission'>
+					<img src="https://graph.facebook.com/<%= user.get('uid') %>/picture?type=large"/ width="100%">
+				</div>
+			</div>
+			<div id = 'block' class = 'off user_slider' style = 'position: absolute; top: -8px; left: -10px'>
+				<div class = "slider_icon">
+					<img src = 'assets/logos/white.png' height = "100%" />
+				</div>
+			</div>
+			<div id = 'correct' class = 'hide' style = 'position: absolute; top: -8px; left: -10px; width: 25px'>
+				<div class = 'correct_slider'>&#10004;</div>
+				<div class = 'correct_slider_text'><%= correct %></div>
+			</div>
+			<div id = 'challenger_answer' class = 'hide' style = 'position: absolute; top: -8px; left: -10px; height: 20px; width: 20px; opacity: 0.5; background: #0ff'>
+				<div id = 'challenger_pic' class = 'challenger_after_submission'>
+					<img src="https://graph.facebook.com/<%= challenger.get('uid') %>/picture?type=large" height="100%" />
+				</div>
+			</div>
+		<% } else { %>
+			<div id = 'slider' class = "user_slider_bar"></div>
+			<div id = 'block' class = 'off user_slider' style = 'position: absolute; top: -8px; left: -10px'>
+				<div class = "slider_icon">
+					<img src = 'assets/logos/white.png' height = "100%" />
+				</div>
+			</div>
+			<div id = 'correct' class = 'hide' style = 'position: absolute; top: -8px; left: -10px; width: 25px'>
+				<div class = 'correct_slider'>&#10004;</div>
+				<div class = 'correct_slider_text'><%= correct %></div>
+			</div>
+			<div id = 'challenger_answer' class = 'hide' style = 'position: absolute; top: -8px; left: -10px; height: 20px; width: 20px; opacity: 0.5; background: #0ff'></div>
+		<% } %>
+	</div></br>
+
+	<div class = "triangles_container">
+		<div class = "slider_triangle left"></div>
+		<div class = "slider_triangle right"></div>
+	</div>
+	<div class = "labels_container">
+		<div class = "minimum boundary">
+			<%= min %>
+		</div>
+		<div class = "maximum boundary">
+			<%= max %>
+		</div>
+	</div>
+	</br>
+
+	<div class = "answer_form_submit">
+		<form id = 'answer' class = "answer_units">
+			<% if (question.get('units').indexOf('/') === 0) { %>
+				<input type = 'submit' value = 'Submit!' class = "submit_button"/>
+			<% } else { %>
+				<input type = 'submit' value = 'Submit!' class = "submit_button"/>
+			<% } %>
+		</form>
 	</div>
 </div>
-</br>
 
-<div class = "answer_form_submit">
-	<form id = 'answer' class = "answer_units">
-		<% if (question.get('units').indexOf('/') === 0) { %>
-			<input type = 'submit' value = 'Submit!' class = "submit_button"/>
-		<% } else { %>
-			<input type = 'submit' value = 'Submit!' class = "submit_button"/>
-		<% } %>
-	</form>
-</div>
 <div id = 'url' class = 'hide source_url'>
 	<a href = "<%= question.get('url') %>" target = '_blank'>Source</a>
 </div>
