@@ -29,6 +29,7 @@ QuizPop.Views.ChallengesIndex = Backbone.View.extend({
 		setTimeout(function() {
 			window.scrollTo(0, 1);
 		}, 1000);
+		this.startLoading();
 		return this;
 	},
 	
