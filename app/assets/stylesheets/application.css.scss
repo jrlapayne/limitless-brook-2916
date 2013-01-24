@@ -16,9 +16,15 @@
 }
 
 .header {
-	height: 25px;
+	height: 35px;
 	text-align: center;
-	margin-bottom: 10px;
+	margin: 0 -5px 10px -5px;
+	@include linear-gradient(lighten($bluegreen,1%), darken($bluegreen,16%));
+	@include single-box-shadow(rgba(#000, 0.25), 0px, 1px, 1px, 0);
+	.logo_container {
+		padding-top: 5px;
+		height: 25px;
+	}
 }
 .hide {
 	display: none;
