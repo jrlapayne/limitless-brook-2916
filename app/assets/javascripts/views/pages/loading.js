@@ -2,9 +2,9 @@ QuizPop.Views.PagesLoading = Backbone.View.extend({
 	template: JST['pages/loading'],
 	
 	initialize: function() {
-		this.speed = 0.25;
+		this.speed = 0.4;
 		this.width = parseInt($(window).width()) - 100;
-		this.height = parseInt($(window).height()) - 99;
+		this.height = parseInt($(window).height()) - 99 +60;
 	},
 	
 	render: function() {
