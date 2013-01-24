@@ -58,7 +58,6 @@ QuizPop.Views.ChallengesIndex = Backbone.View.extend({
 	},
 	
 	createChallenge: function() {
-		this.startLoading();
 		Backbone.history.navigate('new', true);
 	},
 	

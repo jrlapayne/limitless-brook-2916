@@ -22,12 +22,11 @@ QuizPop.Views.IssuesIndex = Backbone.View.extend({
 		}));
 		setTimeout(function() {
 			self.attr.issues.each(function(i) {
-				self.renderIssue(i);
+				if (self.attr.questions.where({issue_id: i.get('id')}).length > 2) {
+					self.renderIssue(i);
+				}
 			});
 		}, 0);
-		setTimeout(function() {
-			self.endLoading();
-		}, 500);
 		setTimeout(function() {
 			window.scrollTo(0, 1);
 		}, 1000);

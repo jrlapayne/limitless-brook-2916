@@ -10,15 +10,15 @@
   background-image:      -o-linear-gradient(top, $from, $to);
 }
 
-@mixin gradient($color) {
-	background-image: -webkit-gradient(linear, left top, left bottom, from( lighten($color, 10%) /*{start}*/), to( darken($color, 10%) /*{end}*/)); /* Saf4+, Chrome */
-	background-image: -webkit-linear-gradient( lighten($color, 10%) /*{start}*/, darken($color, 10%) /*{end}*/); /* Chrome 10+, Saf5.1+ */
-	background-image:    -moz-linear-gradient( lighten($color, 10%) /*{start}*/, darken($color, 10%) /*{end}*/); /* FF3.6 */
-	background-image:     -ms-linear-gradient( lighten($color, 10%) /*{start}*/, darken($color, 10%) /*{end}*/); /* IE10 */
-	background-image:      -o-linear-gradient( lighten($color, 10%) /*{start}*/, darken($color, 10%) /*{end}*/); /* Opera 11.10+ */
-	background-image:         linear-gradient( lighten($color, 10%) /*{start}*/, darken($color, 10%) /*{end}*/);
-	filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0, startColorstr=lighten($color, 10%), endColorstr=darken($color, 10%));
-	-ms-filter: "progid:DXImageTransform.Microsoft.gradient (GradientType=0, startColorstr=lighten($color, 10%), endColorstr=darken($color, 10%))";
+@mixin gradient($color, $percent) {
+	background-image: -webkit-gradient(linear, left top, left bottom, from( lighten($color, $percent) /*{start}*/), to( darken($color, $percent) /*{end}*/)); /* Saf4+, Chrome */
+	background-image: -webkit-linear-gradient( lighten($color, $percent) /*{start}*/, darken($color, $percent) /*{end}*/); /* Chrome 10+, Saf5.1+ */
+	background-image:    -moz-linear-gradient( lighten($color, $percent) /*{start}*/, darken($color, $percent) /*{end}*/); /* FF3.6 */
+	background-image:     -ms-linear-gradient( lighten($color, $percent) /*{start}*/, darken($color, $percent) /*{end}*/); /* IE10 */
+	background-image:      -o-linear-gradient( lighten($color, $percent) /*{start}*/, darken($color, $percent) /*{end}*/); /* Opera 11.10+ */
+	background-image:         linear-gradient( lighten($color, $percent) /*{start}*/, darken($color, $percent) /*{end}*/);
+	filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0, startColorstr=lighten($color, $percent), endColorstr=darken($color, $percent));
+	-ms-filter: "progid:DXImageTransform.Microsoft.gradient (GradientType=0, startColorstr=lighten($color, $percent), endColorstr=darken($color, $percent))";
 }
 
 @mixin reverse-gradient($color) {

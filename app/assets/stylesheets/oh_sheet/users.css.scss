@@ -75,3 +75,33 @@
 		color: darken($bluegreen,20%);
 	}
 }
+
+.friends-list {
+	position: relative;
+}
+
+.alphabet {
+	cursor: pointer;
+	position: fixed;
+	top: 0;
+	right: 0;
+	width: 40px;
+	
+	div {
+		border: 1px solid darken(desaturate($bluegreen, 20%), 20%);
+		@include border-left-radius(4px);
+		background: rgba(#000, 0.5);
+		color: $bluegreen;
+		text-align: center;
+		width: 100%;
+		font-size: 12px;
+		height: 14px;
+		line-height: 14px;
+		
+		&.active {
+			color: #fff;
+			font-weight: bold;
+			background: rgba(#000, 0.75);
+		}
+	}
+}
