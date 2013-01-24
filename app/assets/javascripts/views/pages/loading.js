@@ -11,9 +11,15 @@ QuizPop.Views.PagesLoading = Backbone.View.extend({
 		var self = this;
 		$(this.el).html(this.template());
 		setTimeout(function() {
-			self.checkMultipliers();
+			self.moveItDown();
 		}, 0);
 		return this;
+	},
+	
+	moveItDown: function() {
+		$('#logo_ball').animate({
+			marginTop: this.height + 'px'
+		}, 5000);
 	},
 	
 	getBallX: function() {

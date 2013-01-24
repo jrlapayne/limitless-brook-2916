@@ -112,6 +112,12 @@ QuizPop.Views.ChallengesCreate = Backbone.View.extend({
 		});
 	},
 	
+	goToLetter: function(event) {
+		var letter = $(event.target).closest('.letter').attr('id');
+		
+		
+	},
+	
 	startLoading: function() {
 		var view = new QuizPop.Views.PagesLoading();
 		$('#loading').removeClass('inactive');
