@@ -21,5 +21,24 @@ window.QuizPop = {
 		});
 		
 		Backbone.history.start();
+	},
+	
+	preLoad: function() {
+		$('<img />').attr('src', 'assets/logos/white.png');
+		$('<img />').attr('src', 'assets/logos/blue.png');
+		$('<img />').attr('src', 'assets/logos/black.png');
+		
+		this.issues.each(function(i) {
+			$('<img />').attr('src', 'assets/issues/' + i.get('thumbnail') + '.png');
+		});
+		
+		setTimeout(function() {
+			for (w = 0; w < 16; w++) {
+				$('<img />').attr('src', 'assets/rage/win/' + (w + 1) + '.png');
+			}
+			for (f = 0; f < 23; f++) {
+				$('<img />').attr('src', 'assets/rage/fail/' + (f + 1) + '.png');
+			}
+		}, 0);
 	}
 };

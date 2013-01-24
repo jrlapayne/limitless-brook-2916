@@ -79,7 +79,7 @@ QuizPop.Views.QuestionsShow = Backbone.View.extend({
 			max: this.question.get('max'),
 			min: this.question.get('min'),
 			length: parseInt($('#slider').css('width')), //length of slider bar
-			width: 25 //width of slider button
+			width: 30 //width of slider button
 		};
 	},
 	
@@ -217,6 +217,10 @@ QuizPop.Views.QuestionsShow = Backbone.View.extend({
 		}
 	},
 	
+	fillWidth: function() {
+		$('#half_slider').css('width', parseInt($('#block').css('left').split('px')[0]) + this.values.width + 'px');
+	},
+	
 	checkSliderRange: function(slider_pos) {
 		if (slider_pos <= this.values.max && slider_pos >= this.values.min) {
 			return true;
@@ -227,6 +231,7 @@ QuizPop.Views.QuestionsShow = Backbone.View.extend({
 	
 	adjustSliderPosition: function(event) {
 		$('#block').css('left', (event.pageX - this.values.width) + 'px');
+		this.fillWidth();
 	},
 	
 	setInput: function(slider_pos) {

@@ -5,6 +5,8 @@ QuizPop.Views.ChallengesCreate = Backbone.View.extend({
 	events: {
 		'click .friend' : 'checkUser',
 		'click .letter' : 'goToLetter'
+		//'mousedown .alphabet' : 'mouseDown',
+		//'mouseUp' : 'mouseUp'
 	},
 	
 	initialize: function(options) {
@@ -12,6 +14,7 @@ QuizPop.Views.ChallengesCreate = Backbone.View.extend({
 		this.current_user = this.attr.users.where({id: this.attr.current_user.get('id')})[0];
 		this.friends = this.filterAndAlphabetize(options.friends);
 		this.subviews = [];
+		this.letter = 'a';
 	},
 	
 	render: function() {
@@ -32,6 +35,27 @@ QuizPop.Views.ChallengesCreate = Backbone.View.extend({
 			window.scrollTo(0, 1);
 		}, 1000);
 		return this;
+	},
+	
+	getLetterLocationObject: function() {
+		var alphabet = 'abcdefghijklmnopqrstuvwxyz',
+			obj = [],
+			letter;
+		
+		for (i = 0; i < 26; i++) {
+			letter = alphabet.substring(i, i + 1)
+			obj.push({letter: letter, location: this.getLetterLocation(letter)});
+		}
+		
+		return obj;
+	},
+	
+	getLetterLocation: function(letter) {
+		while (!this.isUserAtLoc(letter) && letter !== 'a') {
+			letter = this.nextLetter(letter);
+		};
+		
+		return this.getUserLoc(letter); 
 	},
 	
 	filterAndAlphabetize: function(array) {
@@ -108,24 +132,20 @@ QuizPop.Views.ChallengesCreate = Backbone.View.extend({
 		});
 	},
 	
-	goToLetter: function(event) {
-		var letter = $(event.target).closest('.letter').attr('id'),
+	goToLetter: function(letter) {
+		var	alphabet = 'abcdefghijklmnopqrstuvwxyz',
 			loc;
 		$('.alphabet').children().removeClass('active');
 		$(event.target).closest('.letter').addClass('active');
 		 
-		while (!this.isUserAtLoc(letter)) {
-			if (letter === 'a') {
+		for (i = 0; i < 26; i++) {
+			if (letter === alphabet.substring(i, i + 1)) {
+				loc = this.obj[i].location;
 				break;
 			}
-			letter = this.nextLetter(letter);
-		};
-		loc = this.getUserLoc(letter);
-		if (loc === 0) {
-			window.scrollTo(0, 1);
-		} else {
-			window.scrollTo(0, parseInt((loc + 1) * 46));
 		}
+		
+		window.scrollTo(0, parseInt(loc));
 	},
 	
 	getUserLoc: function(letter) {
@@ -166,6 +186,35 @@ QuizPop.Views.ChallengesCreate = Backbone.View.extend({
 		}
 		
 		return letter;
+	},
+	
+	mouseDown: function(event) {
+		this.bindMouseMove();
+	},
+	
+	mouseUp: function(event) {
+		event.preventDefault();
+		this.unbindMouseMove();
+	},
+	
+	bindMouseMove: function() {
+		var self = this;
+		$(document).on('mousemove', function(event) {
+			var letter = $(event.target).closest('.letter').attr('id');
+			if (self.letter !== letter) {
+				self.letter = letter;
+				self.goToLetter(letter);
+			}
+		});
+	},
+	
+	unbindMouseMove: function() {
+		$(document).off('mousemove');
+	},
+	
+	alphabetSlider: function(event) {
+		$('#test').html($(event.target).closest('.letter').attr('id'));
+		this.goToLetter($(event.target).closest('.letter').attr('id'));
 	},
 	
 	startLoading: function() {

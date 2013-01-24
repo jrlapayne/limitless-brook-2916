@@ -32,6 +32,17 @@
 		top: 0px; 
 		left: 0;
 		border: 1px solid darken(rgba($bluegreen, 0.3),30%);
+		
+		.fill-slider {
+			position: absolute;
+			top: 0;
+			left: 0;
+			background: lighten($orange, 18%);
+			@include linear-gradient(lighten($orange,24%), lighten($orange,12%));
+			width: 50%;
+			height: 12px; 
+			@include border-radius(6px);
+		}
 	}
 	
 	.user_slider {
