@@ -24,6 +24,12 @@ QuizPop.Views.ChallengesCreate = Backbone.View.extend({
 				self.renderFriend(self.friends[i]);
 			}
 		}, 0);
+		setTimeout(function() {
+			self.endLoading();
+		}, 500);
+		setTimeout(function() {
+			window.scrollTo(0, 1);
+		}, 1000);
 		return this;
 	},
 	
@@ -68,10 +74,10 @@ QuizPop.Views.ChallengesCreate = Backbone.View.extend({
 	checkUser: function(event) {
 		var self = this;
 		var friend = this.friends[parseInt($(event.target).closest('.friend').attr('id'))];
+		this.startLoading();
 		if (this.attr.users.where({uid: friend['id']})[0]) {
 			this.createChallenge(this.attr.users.where({uid: friend['id']})[0]);
 		} else {
-			//start loading
 			user = this.attr.users.create({
 				name: friend['name'],
 				uid: friend['id'],
@@ -81,14 +87,14 @@ QuizPop.Views.ChallengesCreate = Backbone.View.extend({
 					self.createChallenge(user);
 				},
 				error: function(user, response) {
-					alert('something went wrong!')
-					//stop loading
+					self.endLoading();
 				}
 			});
 		}
 	},
 	
 	createChallenge: function(user) {
+		var self = this;
 		this.attr.challenges.create({
 			challenger_id: this.current_user.get('id'),
 			user_id: user.get('id'),
@@ -98,14 +104,25 @@ QuizPop.Views.ChallengesCreate = Backbone.View.extend({
 			user_score: 0
 		}, {
 			success: function(challenge, response) {
-				//stop loading
 				Backbone.history.navigate('issue' + challenge.get('id'), true);
 			},
 			error: function(challenge, response) {
-				//stop loading
-				alert('shit son, that ain\'t right!');
+				self.endLoading();
 			}
 		});
+	},
+	
+	startLoading: function() {
+		var view = new QuizPop.Views.PagesLoading();
+		$('#loading').removeClass('inactive');
+		$('#loading').addClass('active');
+		$('#loading').html(view.render().el);
+	},
+	
+	 endLoading: function() {
+		$('#loading').removeClass('active');
+		$('#loading').addClass('inactive');
+		$('#loading').children().remove();
 	},
 	
 	onClose: function() {

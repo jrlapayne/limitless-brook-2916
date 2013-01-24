@@ -18,7 +18,7 @@
 	<% if (current_user.get('id') !== challenger.get('id')) { %>
 		<div id = 'slider' class = "user_slider_bar">
 			<div id = 'user_pic' class = 'hide user_after_submission'>
-				<img src="https://graph.facebook.com/<%= user.get('uid') %>/picture"/ height="100%">
+				<img src="https://graph.facebook.com/<%= user.get('uid') %>/picture?type=large"/ height="100%">
 			</div>
 		</div>
 		<div id = 'block' class = 'off user_slider' style = 'position: absolute; top: -8px; left: -10px'>
@@ -32,7 +32,7 @@
 		</div>
 		<div id = 'challenger_answer' class = 'hide' style = 'position: absolute; top: -8px; left: -10px; height: 20px; width: 20px; opacity: 0.5; background: #0ff'>
 			<div id = 'challenger_pic' class = 'challenger_after_submission'>
-				<img src="https://graph.facebook.com/<%= challenger.get('uid') %>/picture"/ height="100%">
+				<img src="https://graph.facebook.com/<%= challenger.get('uid') %>/picture?type=large" height="100%" />
 			</div>
 		</div>
 	<% } else { %>

@@ -39,6 +39,9 @@ QuizPop.Views.QuestionsShow = Backbone.View.extend({
 			self.setSliderEqVals();
 			self.setDefaultSlider();
 		}, 0);
+		setTimeout(function() {
+			window.scrollTo(0, 1);
+		}, 1000);
 		return this;
 	},
 	

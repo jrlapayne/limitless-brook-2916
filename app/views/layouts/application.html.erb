@@ -13,11 +13,9 @@
 		window.location.hash = '';
 	}
 	
-	document.addEventListener('load', function() {
-		setTimeout(function() {
-			window.scrollTo(0, 1);
-		}, 1000);
-	}, false);
+	setTimeout(function() {
+		window.scrollTo(0, 1);
+	}, 1000);
 	
 	window.fbAsyncInit = function() {
 		FB.init({appId: '282324831851627', channelUrl: 'http://localhost:3000', status: true, xfbml: true});
