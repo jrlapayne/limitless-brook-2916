@@ -110,10 +110,38 @@ QuizPop.Views.ChallengesCreate = Backbone.View.extend({
 	
 	goToLetter: function(event) {
 		var letter = $(event.target).closest('.letter').attr('id'),
-			loc = null,
-			alph = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'];
+			loc;
 		$('.alphabet').children().removeClass('active');
 		$(event.target).closest('.letter').addClass('active');
+		 
+		while (!this.isUserAtLoc(letter)) {
+			if (letter === 'a') {
+				break;
+			}
+			letter = this.nextLetter(letter);
+		};
+		loc = this.getUserLoc(letter);
+		if (loc === 0) {
+			window.scrollTo(0, 1);
+		} else {
+			window.scrollTo(0, parseInt((loc + 1) * 46));
+		}
+	},
+	
+	getUserLoc: function(letter) {
+		var loc = null;
+		for (i = 0; i < this.friends.length; i++) {
+			if (letter === this.friends[i]['name'].split(' ')[this.friends[i]['name'].split(' ').length - 1].substring(0, 1).toLowerCase()) {
+				loc = i;
+				break;
+			}
+		}
+		
+		return loc;
+	},
+	
+	isUserAtLoc: function(letter) {
+		var loc = null;
 		for (i = 0; i < this.friends.length; i++) {
 			if (letter === this.friends[i]['name'].split(' ')[this.friends[i]['name'].split(' ').length - 1].substring(0, 1).toLowerCase()) {
 				loc = i;
@@ -121,17 +149,23 @@ QuizPop.Views.ChallengesCreate = Backbone.View.extend({
 			}
 		}
 		if (!loc) {
-			for (i = 0; i < alph.length; i++) {
-				if (alph[i] === letter) {
-					loc = i + 0.5;
-				}
+			return false;
+		} else {
+			return true;
+		}
+	},
+	
+	nextLetter: function(letter) {
+		var alph = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'];
+		
+		for (i = 0; i < alph.length; i++) {
+			if (letter === alph[i]) {
+				letter = alph[i - 1];
+				break;
 			}
 		}
-		if (letter === 'a') {
-			window.scrollTo(0, 1);
-		} else {
-			window.scrollTo(0, ((loc + 1) * 46));
-		}
+		
+		return letter;
 	},
 	
 	startLoading: function() {
