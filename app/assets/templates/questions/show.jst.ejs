@@ -18,12 +18,12 @@
 	<% if (current_user.get('id') !== challenger.get('id')) { %>
 		<div id = 'slider' class = "user_slider_bar">
 			<div id = 'half_slider' class = 'fill-slider'></div>
-			<div id = 'user_pic' class = 'hide user_after_submission'>
-				<img src="https://graph.facebook.com/<%= user.get('uid') %>/picture" width="100%" />
-			</div>
 			<div id = 'block' class = 'off user_slider' style = 'position: absolute; top: -8px; left: -10px'>
 				<div class = "slider_icon">
-					<img src = 'assets/logos/white.png' height = "100%" />
+					<img id = 'slider_icon' src = 'assets/logos/white.png' height = "100%" />
+					<div id = 'user_pic' class = 'hide user_after_submission'>
+						<img src="https://graph.facebook.com/<%= user.get('uid') %>/picture" width="100%" />
+					</div>
 				</div>
 			</div>
 		</div>
@@ -31,7 +31,7 @@
 			<div class = 'correct_slider'>&#10004;</div>
 			<div class = 'correct_slider_text'><%= correct %></div>
 		</div>
-		<div id = 'challenger_answer' class = 'hide' style = 'position: absolute; top: -8px; left: -10px; height: 20px; width: 20px; opacity: 0.5; background: #0ff'>
+		<div id = 'challenger_answer' class = 'hide challenger_slider' style = 'position: absolute; top: -8px; left: -10px'>
 			<div id = 'challenger_pic' class = 'challenger_after_submission'>
 				<img src="https://graph.facebook.com/<%= challenger.get('uid') %>/picture" width="100%" />
 			</div>
@@ -41,7 +41,10 @@
 			<div id = 'half_slider' class = 'fill-slider'></div>
 			<div id = 'block' class = 'off user_slider' style = 'position: absolute; top: -8px; left: -10px'>
 				<div class = "slider_icon">
-					<img src = 'assets/logos/white.png' height = "100%" />
+					<img id = 'slider_icon' src = 'assets/logos/white.png' height = "100%" />
+					<div id = 'user_pic' class = 'hide user_after_submission'>
+						<img src="https://graph.facebook.com/<%= user.get('uid') %>/picture" width="100%" />
+					</div>
 				</div>
 			</div>
 		</div>

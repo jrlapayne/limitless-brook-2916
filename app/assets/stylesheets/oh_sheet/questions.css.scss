@@ -91,19 +91,38 @@
 		width: 15px;
 	}
 	
-	.challenger_after_submission {
-		height: 40px;
-		width: 40px;
-		overflow: hidden;
-		@include border-radius(8px);
-		float: right;
+	.challenger_slider {
+		background: $bluegreen;
+		cursor: pointer;
+		width: 30px;
+		height: 30px;
+		text-align: center;
+		color: darken($bluegreen,35%);
+		font-size: 9px;
+		@include border-radius(15px);
+		@include linear-gradient(lighten($bluegreen,18%), darken($bluegreen,6%));
+		box-shadow: -1px 0px 1px rgba(darken($bluegreen,10%), 0.5),
+					1px 0px 1px rgba(darken($bluegreen,10%), 0.5);
 	}
 	
-	.user_after_submission {
+	.challenger_after_submission {
+		position: absolute;
+		top: 5px;
+		left: 5px;
 		height: 20px;
 		width: 20px;
 		overflow: hidden;
-		@include border-radius(4px);
+		@include border-radius(10px);
+	}
+	
+	.user_after_submission {
+		position: absolute;
+		top: 5px;
+		left: 5px;
+		height: 20px;
+		width: 20px;
+		overflow: hidden;
+		@include border-radius(10px);
 	}
 }
 
