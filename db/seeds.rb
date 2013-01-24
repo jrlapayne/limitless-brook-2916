@@ -79,11 +79,6 @@ Issue.create(
 )
 
 Issue.create(
-  title: 'Marijuana legalization',
-  thumbnail: 'weed'
-)
-
-Issue.create(
   title: 'Citizens United',
   thumbnail: 'citizensunited'
 )
@@ -103,7 +98,6 @@ Question.create(
   units: '/%',
   is_decimal: false,
   url: 'http://blog.norml.org/2011/09/19/marijuana-arrests-driving-americas-so-called-drug-war-latest-fbi-data-shows/'
-  
 )
 
 Question.create(
@@ -264,7 +258,7 @@ Question.create(
 
 Question.create(
   issue_id: 17,
-  title: 'How much money was spent on the 2012 presidential election?',
+  title: 'How much money was spent per vote on the 2012 presidential election?',
   is_exponential: true,
   min: 0.1,
   max: 1000,
@@ -620,6 +614,18 @@ Question.create(
   units: '$/',
   is_decimal: false,
   url: 'http://farm.ewg.org/'
+)
+
+Question.create(
+  issue_id: 8,
+  title: 'From production/growing to consumption (the total process), how much more energy is required to make a gallon of corn ethanol than gasoline?',
+  is_exponential: true,
+  min: 0,
+  max: 1000,
+  correct: 300,
+  units: '/%',
+  is_decimal: false,
+  url: 'http://www.slate.com/articles/news_and_politics/hey_wait_a_minute/2005/07/corn_dog.html'
 )
 
 Question.create(
