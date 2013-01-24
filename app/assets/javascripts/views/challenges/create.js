@@ -1,10 +1,10 @@
 QuizPop.Views.ChallengesCreate = Backbone.View.extend({
 	
 	template: JST['challenges/create'],
-	id: 'friends',
 	
 	events: {
-		'click .friend' : 'checkUser'
+		'click .friend' : 'checkUser',
+		'click .letter' : 'goToLetter'
 	},
 	
 	initialize: function(options) {
@@ -16,6 +16,7 @@ QuizPop.Views.ChallengesCreate = Backbone.View.extend({
 	
 	render: function() {
 		var self = this;
+		$(this.el).addClass('friends-list');
 		$(this.el).html(this.template({
 			
 		}));
@@ -108,9 +109,17 @@ QuizPop.Views.ChallengesCreate = Backbone.View.extend({
 	},
 	
 	goToLetter: function(event) {
-		var letter = $(event.target).closest('.letter').attr('id');
+		var letter = $(event.target).closest('.letter').attr('id'),
+			loc;
 		
+		for (i = 0; i < this.friends.length; i++) {
+			if (letter === toLowerCase(this.friends[i]['name'].split(' ')[this.friends[i]['name'].split(' ').length - 1].substring(0, 1))) {
+				loc = i;
+				break;
+			}
+		}
 		
+		window.scrollTo(0, (i + 1) * 35);
 	},
 	
 	startLoading: function() {
