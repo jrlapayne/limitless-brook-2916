@@ -1,5 +1,9 @@
 body {
-	margin-top: 9px;
+	margin: 6px;
+	padding: 5px;
 	@include fonts;
-	height:100%;
+	box-shadow: -2px -1px 2px rgba(darken($bluegreen,10%), 0.3),
+				2px 1px 2px rgba(darken($bluegreen,10%), 0.3);
+	@include border-radius(6px);
+	min-height: 416px;
 }

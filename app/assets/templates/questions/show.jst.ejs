@@ -1,6 +1,19 @@
 <div id = "title" class = "question_title">
 	<%= question.get('title') %>
 </div></br>
+
+<div class = "answer_form_input">
+	<form id = 'answer' class = "answer_units">
+		<% if (question.get('units').indexOf('/') === 0) { %>
+			<input type = 'text' id = 'number' class = "typeable"/>
+			<%= question.get('units').substring(1) %>
+		<% } else { %>
+			<%= question.get('units').substring(0, question.get('units').indexOf('/')) %>
+			<input type = 'text' id = 'number' class = "typeable"/>
+		<% } %>
+	</form>
+</div>
+
 <div class = "slider_container">
 	<% if (current_user.get('id') !== challenger.get('id')) { %>
 		<div id = 'slider' class = "user_slider_bar">
@@ -8,7 +21,11 @@
 				<img src="https://graph.facebook.com/<%= user.get('uid') %>/picture"/ height="100%">
 			</div>
 		</div>
-		<div id = 'block' class = 'off user_slider' style = 'position: absolute; top: -8px; left: -10px'>&#8226;</div>
+		<div id = 'block' class = 'off user_slider' style = 'position: absolute; top: -8px; left: -10px'>
+			<div class = "slider_icon">
+				<img src = 'assets/logos/white.png' height = "100%" />
+			</div>
+		</div>
 		<div id = 'correct' class = 'hide' style = 'position: absolute; top: -8px; left: -10px; width: 25px'>
 			<div class = 'correct_slider'>&#10004;</div>
 			<div class = 'correct_slider_text'><%= correct %></div>
@@ -20,7 +37,11 @@
 		</div>
 	<% } else { %>
 		<div id = 'slider' class = "user_slider_bar"></div>
-		<div id = 'block' class = 'off user_slider' style = 'position: absolute; top: -8px; left: -10px'>&#8226;</div>
+		<div id = 'block' class = 'off user_slider' style = 'position: absolute; top: -8px; left: -10px'>
+			<div class = "slider_icon">
+				<img src = 'assets/logos/white.png' height = "100%" />
+			</div>
+		</div>
 		<div id = 'correct' class = 'hide' style = 'position: absolute; top: -8px; left: -10px; width: 25px'>
 			<div class = 'correct_slider'>&#10004;</div>
 			<div class = 'correct_slider_text'><%= correct %></div>
@@ -29,23 +50,26 @@
 	<% } %>
 </div></br>
 
-<div class = "minimum boundary">
-	<%= min %>
+<div class = "triangles_container">
+	<div class = "slider_triangle left"></div>
+	<div class = "slider_triangle right"></div>
 </div>
-<div class = "maximum boundary">
-	<%= max %>
+<div class = "labels_container">
+	<div class = "minimum boundary">
+		<%= min %>
+	</div>
+	<div class = "maximum boundary">
+		<%= max %>
+	</div>
 </div>
 </br>
-<div class = "answer_form">
+
+<div class = "answer_form_submit">
 	<form id = 'answer' class = "answer_units">
 		<% if (question.get('units').indexOf('/') === 0) { %>
-			<input type = 'text' id = 'number' class = "typeable"/>
-			<%= question.get('units').substring(1) %>
-			<input type = 'submit' value = 'Submit' class = "submit_button"/>
+			<input type = 'submit' value = 'Submit!' class = "submit_button"/>
 		<% } else { %>
-			<%= question.get('units').substring(0, question.get('units').indexOf('/')) %>
-			<input type = 'text' id = 'number' class = "typeable"/>
-			<input type = 'submit' value = 'Submit' class = "submit_button"/>
+			<input type = 'submit' value = 'Submit!' class = "submit_button"/>
 		<% } %>
 	</form>
 </div>
