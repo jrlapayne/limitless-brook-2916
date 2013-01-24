@@ -109,6 +109,7 @@ QuizPop.Views.QuestionsShow = Backbone.View.extend({
 		$('#number').attr('disabled', 'true');
 		$('#url').removeClass('hide');
 		$('#user_pic').removeClass('hide');
+		$('#slider_icon').addClass('hide');
 		this.revealCorrectAnswer();
 		this.createTask();
 		
