@@ -28,7 +28,8 @@
 			</div>
 		</div>
 		<div id = 'correct' class = 'hide' style = 'position: absolute; top: -8px; left: -10px; width: 25px'>
-			<div class = 'correct_slider'>&#x2713;</div>
+			<div class = 'correct_slider'>
+				<div class = "correct_checkmark">&#x2713;</div>
 			<div class = 'correct_slider_text'><%= correct %></div>
 		</div>
 		<div id = 'challenger_answer' class = 'hide challenger_slider' style = 'position: absolute; top: -8px; left: -10px'>
@@ -49,7 +50,9 @@
 			</div>
 		</div>
 		<div id = 'correct' class = 'hide' style = 'position: absolute; top: -8px; left: -10px; width: 25px'>
-			<div class = 'correct_slider'>&#x2713;</div>
+			<div class = 'correct_slider'>
+				<div class = "correct_checkmark">&#x2713;</div>
+			</div>
 			<div class = 'correct_slider_text'><%= correct %></div>
 		</div>
 		<div id = 'challenger_answer' class = 'hide' style = 'position: absolute; top: -8px; left: -10px; height: 20px; width: 20px; opacity: 0.5; background: #0ff'></div>
@@ -83,8 +86,15 @@
 	
 </div>
 
-<div id = 'url' class = 'hide source_url'>
-	<a href = "<%= question.get('url') %>" target = '_blank'>View Source</a>
-	<div id = 'next'>Next</div>
+<div id = 'url' class = 'hide source_next_container'>
+	<div id = 'source_url' class = "source_button">
+		View Source
+	</div>
+	<div id = 'next' class = "next_button">
+		Next
+	</div>
 </div>
+
+
+
 <div id = 'rage_comic'></div>

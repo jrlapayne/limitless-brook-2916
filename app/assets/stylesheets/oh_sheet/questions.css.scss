@@ -63,26 +63,33 @@
 	}
 	
 	.correct_slider {
-		position: relative;
-		width: 29px;
-		height: 23px;
-		@include border-radius(16px);
-		@include linear-gradient(#aaaaaa, #555555);
-		text-align: center;
-		color: lighten($bluegreen, 10%);
-		padding: 7px 0 0 1px;
-		font-size: 14px;
-		margin: auto;
+		margin-top: 22px;
+		content: "";
+		display: block; 
+		border-width: 0px 13px 20px 13px;
+		border-style: solid;
+		border-color: rgba(darken($bluegreen,85%), 0) rgba(darken($bluegreen,85%), 0) rgba(darken($bluegreen,85%), 1) rgba(darken($bluegreen,85%), 0);
+		width: 0;
+		height: 0;
+		@include single-box-shadow(rgba($orange, 0.12), 0px, 1px, 1px, 0);
+		font-size: 11px;
+		.correct_checkmark {
+			font-size: 14px;
+			color: rgb(98,230,0);
+			padding-top: 4px;
+			margin: 0 0 0 -6px;
+			width: 30px;
+		}
 	}
 	
 	.correct_slider_text {
 		position: absolute;
 		font-weight: bold;
-		top: -12px;
+		top: 42px;
 		left: 1px;
 		font-size: 11px;
 		text-align: center;
-		color: darken($bluegreen, 35%);
+		color: darken($bluegreen, 85%);
 	}
 	
 	.slider_icon {
@@ -244,18 +251,67 @@
 	}
 }
 
-.source_url {
-	@include fonts;
-	color: darken($bluegreen, 25%);
-	font-weight: bold;
-	font-size: 14px;
-	margin: 8px 0 0 0;
-	text-align: center;
-	a:link {
-		color: darken($bluegreen, 25%);
+.source_next_container {
+	width: 96%;
+	margin: 10px 0 0 2%;
+
+	.source_button {
+		cursor: pointer;
+		/*box-shadow: -1px -1px 2px rgba(darken($bluegreen,40%), 0.99) inset,
+					1px 1px 2px rgba(darken($bluegreen,40%), 0.99) inset;
+					*/
+		@include border-radius(11px);
+		@include linear-gradient(lighten($bluegreen,1%), darken($bluegreen,16%));
+		@include fonts;
+		float: left;
+		height: 21px;
+		padding-top: 9px;
+		width: 25%;
+		float: left;
+		color: #ffffff;
+
+		font-size: 12px;
+		border: none;
+		text-align: center;
+	
+		@include single-box-shadow(rgba(#000, 0.35), 0px, 1px, 1px, 0);
+		@include text-shadow(0px 1px 0 rgba(darken($bluegreen,30%),0.99));	
+		font-weight: bold;
+		&:hover {
+			@include linear-gradient(darken($bluegreen,3%), darken($bluegreen,15%));
+			box-shadow: -1px -1px 2px rgba(darken($bluegreen,30%), 0.99) inset,
+						1px 1px 2px rgba(darken($bluegreen,30%), 0.99) inset;
+		}
 	}
-	a:visited {
-		color: darken($bluegreen, 25%);
+
+	.next_button {
+		cursor: pointer;
+		/*box-shadow: -1px -1px 2px rgba(darken($bluegreen,40%), 0.99) inset,
+					1px 1px 2px rgba(darken($bluegreen,40%), 0.99) inset;
+					*/
+		@include fonts;
+		float: left;
+		height: 21px;
+		padding-top: 9px;
+		width: 25%;
+		float: right;
+		color: #ffffff;
+
+		font-size: 12px;
+		border: none;
+		text-align: center;
+	
+		@include text-shadow(0px 1px 0 rgba(darken($bluegreen,40%),0.3));
+		@include border-radius(11px);
+		@include linear-gradient(lighten($orange,18%), darken($orange,6%));
+		box-shadow: -1px 0px 1px rgba(darken($orange,20%), 0.8),
+					1px 0px 1px rgba(darken($orange,20%), 0.8);
+		font-weight: bold;
+		&:hover {
+			@include linear-gradient(darken($bluegreen,3%), darken($bluegreen,15%));
+			box-shadow: -1px -1px 2px rgba(darken($bluegreen,30%), 0.99) inset,
+						1px 1px 2px rgba(darken($bluegreen,30%), 0.99) inset;
+		}
 	}
 }
 
