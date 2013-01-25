@@ -148,6 +148,7 @@ QuizPop.Views.QuestionsShow = Backbone.View.extend({
 		};
 		
 		$('#url').removeClass('hide');
+		$('.submit_button').addClass('hide');
 	},
 	
 	nextQuestion: function() {

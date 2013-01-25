@@ -14,52 +14,51 @@
 			<% } %>
 		</form>
 	</div>
-<div class = "slider_container">
-	<% if (current_user.get('id') !== challenger.get('id')) { %>
-		<div id = 'slider' class = "user_slider_bar">
-			<div id = 'half_slider' class = 'fill-slider'></div>
-			<div id = 'block' class = 'off user_slider' style = 'position: absolute; top: -8px; left: -10px'>
-				<div class = "slider_icon">
-					<img id = 'slider_icon' src = 'assets/logos/white.png' height = "100%" />
-					<div id = 'user_pic' class = 'hide user_after_submission'>
-						<img src="https://graph.facebook.com/<%= user.get('uid') %>/picture" width="100%" />
+	<div class = "slider_container">
+		<% if (current_user.get('id') !== challenger.get('id')) { %>
+			<div id = 'slider' class = "user_slider_bar">
+				<div id = 'half_slider' class = 'fill-slider'></div>
+				<div id = 'block' class = 'off user_slider' style = 'position: absolute; top: -8px; left: -10px'>
+					<div class = "slider_icon">
+						<img id = 'slider_icon' src = 'assets/logos/white.png' height = "100%" />
+						<div id = 'user_pic' class = 'hide user_after_submission'>
+							<img src="https://graph.facebook.com/<%= user.get('uid') %>/picture" width="100%" />
+						</div>
 					</div>
 				</div>
 			</div>
-		</div>
-		<div id = 'correct' class = 'hide' style = 'position: absolute; top: -8px; left: -10px; width: 25px'>
-			<div class = 'correct_slider'>
-				<div class = "correct_checkmark">&#x2713;</div>
-			<div class = 'correct_slider_text'><%= correct %></div>
-		</div>
-		<div id = 'challenger_answer' class = 'hide challenger_slider' style = 'position: absolute; top: -8px; left: -10px'>
-			<div id = 'challenger_pic' class = 'challenger_after_submission'>
-				<img src="https://graph.facebook.com/<%= challenger.get('uid') %>/picture" width="100%" />
-			</div>
-		</div>
-	<% } else { %>
-		<div id = 'slider' class = "user_slider_bar">
-			<div id = 'half_slider' class = 'fill-slider'></div>
-			<div id = 'block' class = 'off user_slider' style = 'position: absolute; top: -8px; left: -10px'>
-				<div class = "slider_icon">
-					<img id = 'slider_icon' src = 'assets/logos/white.png' height = "100%" />
-					<div id = 'user_pic' class = 'hide user_after_submission'>
+			<div id = 'correct' class = 'hide' style = 'position: absolute; top: -8px; left: -10px; width: 25px'>
+				<div class = 'correct_slider'>
+					<div class = "correct_checkmark">&#x2713;</div>
+					<div class = 'correct_slider_text'><%= correct %></div>
+				</div>
+				<div id = 'challenger_answer' class = 'hide challenger_slider' style = 'position: absolute; top: -8px; left: -10px'>
+					<div id = 'challenger_pic' class = 'challenger_after_submission'>
 						<img src="https://graph.facebook.com/<%= challenger.get('uid') %>/picture" width="100%" />
 					</div>
 				</div>
 			</div>
-		</div>
-		<div id = 'correct' class = 'hide' style = 'position: absolute; top: -8px; left: -10px; width: 25px'>
-			<div class = 'correct_slider'>
-				<div class = "correct_checkmark">&#x2713;</div>
+		<% } else { %>
+			<div id = 'slider' class = "user_slider_bar">
+				<div id = 'half_slider' class = 'fill-slider'></div>
+				<div id = 'block' class = 'off user_slider' style = 'position: absolute; top: -8px; left: -10px'>
+					<div class = "slider_icon">
+						<img id = 'slider_icon' src = 'assets/logos/white.png' height = "100%" />
+						<div id = 'user_pic' class = 'hide user_after_submission'>
+							<img src="https://graph.facebook.com/<%= challenger.get('uid') %>/picture" width="100%" />
+						</div>
+					</div>
+				</div>
 			</div>
-			<div class = 'correct_slider_text'><%= correct %></div>
-		</div>
-		<div id = 'challenger_answer' class = 'hide' style = 'position: absolute; top: -8px; left: -10px; height: 20px; width: 20px; opacity: 0.5; background: #0ff'></div>
-	<% } %>
-	
-</div></br>
-
+			<div id = 'correct' class = 'hide' style = 'position: absolute; top: -8px; left: -10px; width: 25px'>
+				<div class = 'correct_slider'>
+					<div class = "correct_checkmark">&#x2713;</div>
+				</div>
+				<div class = 'correct_slider_text'><%= correct %></div>
+			</div>
+			<div id = 'challenger_answer' class = 'hide' style = 'position: absolute; top: -8px; left: -10px; height: 20px; width: 20px; opacity: 0.5; background: #0ff'></div>
+		<% } %>
+	</div></br>
 	<div class = "triangles_container">
 		<div class = "slider_triangle left"></div>
 		<div class = "slider_triangle right"></div>
@@ -73,7 +72,6 @@
 		</div>
 	</div>
 	</br>
-
 	<div class = "answer_form_submit">
 		<form id = 'answer' class = "answer_units">
 			<% if (question.get('units').indexOf('/') === 0) { %>
@@ -82,19 +80,14 @@
 				<input type = 'submit' value = 'Submit!' class = "submit_button"/>
 			<% } %>
 		</form>
+	</div>	
+	<div id = 'url' class = 'hide source_next_container'>
+		<div id = 'source_url' class = "source_button">
+			View Source
+		</div>
+		<div id = 'next' class = "next_button">
+			Next
+		</div>
 	</div>
-	
+	<div id = 'rage_comic'></div>
 </div>
-
-<div id = 'url' class = 'hide source_next_container'>
-	<div id = 'source_url' class = "source_button">
-		View Source
-	</div>
-	<div id = 'next' class = "next_button">
-		Next
-	</div>
-</div>
-
-
-
-<div id = 'rage_comic'></div>
