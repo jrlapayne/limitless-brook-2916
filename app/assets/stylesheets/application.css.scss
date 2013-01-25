@@ -27,16 +27,8 @@
 	}
 }
 
-.mission_image {
-	margin: 20px 0 0 7%;
-	overflow: hidden;
-	width: 86%;
-	height: 140px;
-	@include border-radius(10px);
-}
-
 .signin_container {
-	margin: 15px 0 0 0;
+	margin: 25px 0 0 0;
 	
 	.signin_facebook_button {
 		@include border-radius(8px);

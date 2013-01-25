@@ -2,10 +2,27 @@
 	width: 30px;
 	height: 30px;
 	overflow: hidden;
-	margin-left: 3px;
+	margin-left: 5px;
 	@include border-radius(5px);
 	float: left;
-	@include single-box-shadow(rgba(#000, 0.35), 1px, 1px, 1px, 0);
+	@include single-box-shadow(rgba(#000, 0.3), 1px, 1px, 1px, 0);
+	
+	.winner_checkmark {
+		position: absolute;
+		font-size: 32px;
+		color: rgb(98,230,0);
+		text-align: center;
+		margin-top: -3px;
+		width: 30px;
+	}
+	.loser_mark {
+		position: absolute;
+		font-size: 32px;
+		color: rgb(255,71,88);
+		text-align: center;
+		margin-top: -3px;
+		width: 30px;
+	}
 }
 
 .challenge_container {
@@ -74,6 +91,10 @@
 		margin: 11px 0 0 5px;
 		color: darken($bluegreen,20%);
 	}
+}
+
+.question_score {
+	display: none;
 }
 
 .friends-list {
