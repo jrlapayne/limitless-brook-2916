@@ -32,10 +32,10 @@
 					<div class = "correct_checkmark">&#x2713;</div>
 					<div class = 'correct_slider_text'><%= correct %></div>
 				</div>
-				<div id = 'challenger_answer' class = 'hide challenger_slider' style = 'position: absolute; top: -8px; left: -10px'>
-					<div id = 'challenger_pic' class = 'challenger_after_submission'>
-						<img src="https://graph.facebook.com/<%= challenger.get('uid') %>/picture" width="100%" />
-					</div>
+			</div>
+			<div id = 'challenger_answer' class = 'hide challenger_slider' style = 'position: absolute; top: -8px; left: -10px'>
+				<div id = 'challenger_pic' class = 'challenger_after_submission'>
+					<img src="https://graph.facebook.com/<%= challenger.get('uid') %>/picture" width="100%" />
 				</div>
 			</div>
 		<% } else { %>
