@@ -11,7 +11,7 @@ QuizPop.Views.QuestionsResult = Backbone.View.extend({
 		this.challenge = options.challenge;
 		this.question = options.question;
 		this.current_user = this.attr.users.where({id: this.attr.current_user.get('id')})[0];
-
+		this.question_winner = null;
 		this.setChallengerUser();
 	},
 	
@@ -36,7 +36,8 @@ QuizPop.Views.QuestionsResult = Backbone.View.extend({
 		var view = new QuizPop.Views.UsersResult({
 			attr: this.attr,
 			task: this.getTask(user),
-			user: user
+			user: user,
+			winner: this.question_winner
 		});
 		if (is_challenger) {
 			$(this.el).find('#challenger_info').html(view.render().el);
@@ -54,6 +55,7 @@ QuizPop.Views.QuestionsResult = Backbone.View.extend({
 			this.challenger = this.attr.users.where({id: this.challenge.get('challenger_id')})[0];
 			this.user = this.current_user;
 			this.is_complete = true;
+			this.findQuestionWinner(this.user, this.challenger);
 		}
 		
 		if (this.is_complete) {
@@ -73,5 +75,16 @@ QuizPop.Views.QuestionsResult = Backbone.View.extend({
 			challenge_id: this.challenge.get('id'), 
 			question_id: this.question.get('id')
 		})[0];
+	},
+	
+	findQuestionWinner: function(user1, user2) {
+		var task1 = this.getTask(user1),
+			task2 = this.getTask(user2);
+			
+		if (task1.get('score') < task2.get('score')) {
+			this.question_winner = user1;
+		} else {
+			this.question_winner = user2;
+		}
 	}
 });
