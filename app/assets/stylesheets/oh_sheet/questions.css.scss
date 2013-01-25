@@ -256,6 +256,8 @@
 .source_next_container {
 	width: 96%;
 	margin: 25px 0 0 2%;
+	padding: 0 0 2px 0;
+	overflow: auto;
 
 	.source_button {
 		cursor: pointer;
