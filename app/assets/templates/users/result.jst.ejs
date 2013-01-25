@@ -1,11 +1,12 @@
-<div class = "user_picture_container">
-	<% if (winner) { %>
+<% if (winner) { %>
+	<div class = "user_picture_container">
 		<% if (is_winner) { %>
 			<div class = "winner_checkmark">&#x2713;</div>
 		<% } else { %>
 			<div class = "loser_mark">&#x2717;</div>
 		<% } %>
-	<% } %>
-	<img src="https://graph.facebook.com/<%= user.get('uid') %>/picture" height="100%" />
-</div>
-<div class = "question_score"><%= correct %></div>
+		<img src="https://graph.facebook.com/<%= user.get('uid') %>/picture" height="100%" />
+	</div>
+<% } else { %>
+	<div class = "question_score"><%= correct %></div>
+<% } %>
