@@ -1,4 +1,6 @@
 QuizPop::Application.routes.draw do
+  resources :answers
+
   resources :tasks
   resources :issues
   resources :challenges

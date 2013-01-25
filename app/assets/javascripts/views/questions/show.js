@@ -4,6 +4,8 @@ QuizPop.Views.QuestionsShow = Backbone.View.extend({
 	
 	events: {
 		'submit #answer' : 'submitAnswer',
+		'click #next' : 'nextQuestion',
+		
 		'mousedown #block' : 'mouseDown',
 		'mouseup' : 'mouseUp',
 		'focus #number' : 'bindKeyPress',
@@ -79,7 +81,8 @@ QuizPop.Views.QuestionsShow = Backbone.View.extend({
 			max: this.question.get('max'),
 			min: this.question.get('min'),
 			length: parseInt($('#slider').css('width')), //length of slider bar
-			width: 30 //width of slider button
+			width: 30, //width of slider button
+			margin: parseInt($('.slider_container').css('margin-left')) //shit ton of margin and padding, thanks andy!
 		};
 	},
 	
@@ -104,10 +107,9 @@ QuizPop.Views.QuestionsShow = Backbone.View.extend({
 		this.slider_disabled = true;
 		var self = this;
 		var question_ids = this.challenge.get('question_ids').split('/');
-		var next_question = null;
+		this.next_question = null;
 		
 		$('#number').attr('disabled', 'true');
-		$('#url').removeClass('hide');
 		$('#user_pic').removeClass('hide');
 		$('#slider_icon').addClass('hide');
 		this.revealCorrectAnswer();
@@ -120,10 +122,10 @@ QuizPop.Views.QuestionsShow = Backbone.View.extend({
 	
 		switch(question_ids.indexOf(String(this.question.get('id')))) {
 			case 0:
-				next_question = this.attr.questions.where({id: parseInt(question_ids[1])})[0];
+				this.next_question = this.attr.questions.where({id: parseInt(question_ids[1])})[0];
 				break;
 			case 1:
-				next_question = this.attr.questions.where({id: parseInt(question_ids[2])})[0];
+				this.next_question = this.attr.questions.where({id: parseInt(question_ids[2])})[0];
 				break;
 			case 2:
 				if (this.current_user.get('id') === this.challenge.get('challenger_id')) {
@@ -141,22 +143,24 @@ QuizPop.Views.QuestionsShow = Backbone.View.extend({
 					});
 				}
 				this.challenge.save();
-				next_question = null;
+				this.next_question = null;
 				break;
 		};
 		
-		setTimeout(function() {
-			if (next_question) {
-				Backbone.history.navigate('challenge' + self.challenge.get('id') + '/question' + next_question.get('id'), true);
-			} else {
-				Backbone.history.navigate('challenge' + self.challenge.get('id'), true);
-			}
-		}, 2667);
+		$('#url').removeClass('hide');
+	},
+	
+	nextQuestion: function() {
+		if (this.next_question) {
+			Backbone.history.navigate('challenge' + this.challenge.get('id') + '/question' + this.next_question.get('id'), true);
+		} else {
+			Backbone.history.navigate('challenge' + this.challenge.get('id'), true);
+		}
 	},
 	
 	createTask: function() {
 		var score;
-		if (!isNaN(this.removeCommas($('#number').val())) && this.removeCommas($('#number').val()) < this.values.min) {
+		if (!isNaN(this.removeCommas($('#number').val())) && this.removeCommas($('#number').val()) > this.values.min) {
 			score = this.getScoreFromInput(this.removeCommas($('#number').val()));
 			this.answer = this.removeCommas($('#number').val());
 		} else {
@@ -231,7 +235,7 @@ QuizPop.Views.QuestionsShow = Backbone.View.extend({
 	},
 	
 	adjustSliderPosition: function(event) {
-		$('#block').css('left', (event.pageX - this.values.width) + 'px');
+		$('#block').css('left', Math.round((event.pageX - this.values.margin) - (1 * this.values.width)) + 'px');
 		this.fillWidth();
 	},
 	
@@ -302,12 +306,12 @@ QuizPop.Views.QuestionsShow = Backbone.View.extend({
 		var slider_pos;
 		if (expo) {
 			if (this.values.min === 0) {
-				slider_pos = Math.pow(Math.pow(this.values.max, (1 / 3)), (3 * ((event.pageX - (0.5 * this.values.width)) / this.values.length)));
+				slider_pos = Math.pow(Math.pow(this.values.max, (1 / 3)), (3 * (((event.pageX - this.values.margin) - (0.5 * this.values.width)) / this.values.length)));
 			} else {
-				slider_pos = this.values.min * Math.pow(Math.pow((this.values.max / this.values.min), (1 / 3)), (3 * ((event.pageX - (0.5 * this.values.width)) / this.values.length)));
+				slider_pos = this.values.min * Math.pow(Math.pow((this.values.max / this.values.min), (1 / 3)), (3 * (((event.pageX - this.values.margin) - (0.5 * this.values.width)) / this.values.length)));
 			}
 		} else {
-			slider_pos = ((event.pageX - (0.5 * this.values.width)) * ((this.values.max - this.values.min) / this.values.length)) + this.values.min;
+			slider_pos = (((event.pageX - this.values.margin) - (0.5 * this.values.width)) * ((this.values.max - this.values.min) / this.values.length)) + this.values.min;
 		}
 		return slider_pos;
 	},
@@ -378,7 +382,6 @@ QuizPop.Views.QuestionsShow = Backbone.View.extend({
 			} else {
 				return Math.floor(val * 100) / 100;
 			}
-			return 
 		} else {
 			return this.addCommas(Math.round(val));
 		}

@@ -1,4 +1,5 @@
 <div class = "user_picture_container">
 	<img src="https://graph.facebook.com/<%= user.get('uid') %>/picture" height="100%" />
 </div>
-<div class = "question_score"><%= task.get('score') %></div>
+<div class = "question_score"><%= correct %></div>
+<div class = "question_score"><%= task.get('answer') %></div>

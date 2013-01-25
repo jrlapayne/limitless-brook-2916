@@ -125,9 +125,9 @@ QuizPop.Views.ChallengesCreate = Backbone.View.extend({
 	nextLetter: function(letter) {
 		var alph = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'];
 		
-		for (i = 0; i < alph.length; i++) {
-			if (letter === alph[i]) {
-				letter = alph[i - 1];
+		for (l = 0; l < alph.length; l++) {
+			if (letter === alph[l]) {
+				letter = alph[l - 1];
 				break;
 			}
 		}

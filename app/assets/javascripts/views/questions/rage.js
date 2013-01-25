@@ -9,9 +9,9 @@ QuizPop.Views.QuestionsRage = Backbone.View.extend({
 	initialize: function(options) {
 		this.is_win = options.is_win;
 		if (this.is_win) {
-			this.img_num = Math.floor(Math.random() * 16);
+			this.img_num = 1 + Math.floor(Math.random() * 16);
 		} else {
-			this.img_num = Math.floor(Math.random() * 23);
+			this.img_num = 1 +Math.floor(Math.random() * 23);
 		}
 	},
 	

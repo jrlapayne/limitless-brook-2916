@@ -43,7 +43,7 @@
 				<div class = "slider_icon">
 					<img id = 'slider_icon' src = 'assets/logos/white.png' height = "100%" />
 					<div id = 'user_pic' class = 'hide user_after_submission'>
-						<img src="https://graph.facebook.com/<%= user.get('uid') %>/picture" width="100%" />
+						<img src="https://graph.facebook.com/<%= challenger.get('uid') %>/picture" width="100%" />
 					</div>
 				</div>
 			</div>
@@ -85,5 +85,6 @@
 
 <div id = 'url' class = 'hide source_url'>
 	<a href = "<%= question.get('url') %>" target = '_blank'>View Source</a>
+	<div id = 'next'>Next</div>
 </div>
 <div id = 'rage_comic'></div>
