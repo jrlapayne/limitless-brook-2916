@@ -5,7 +5,9 @@
 		<% } else { %>
 			<div class = "loser_mark">&#x2717;</div>
 		<% } %>
+		<img src="https://graph.facebook.com/<%= user.get('uid') %>/picture" height="100%" />
 	<% } %>
-	<img src="https://graph.facebook.com/<%= user.get('uid') %>/picture" height="100%" />
 </div>
-<div class = "question_score"><%= correct %></div>
+<% if (!winner) { %>
+	<div class = "question_score"><%= correct %></div>
+<% } %>
