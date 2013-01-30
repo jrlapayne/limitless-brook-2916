@@ -16,21 +16,68 @@
 }
 
 .header {
-	position: relative;
-	height: 35px;
-	text-align: center;
+	height: 40px;
 	margin: 0 -5px 10px -5px;
 	@include linear-gradient(lighten($bluegreen,1%), darken($bluegreen,16%));
 	@include single-box-shadow(rgba(#000, 0.25), 0px, 1px, 1px, 0);
+	.profile_container {
+		float: right;
+		width: 40%;
+		height: 40px;
+		text-align: right;
+		.profile_pic_container {
+			width: 30px;
+			height: 30px;
+			overflow: hidden;
+			margin: 5px 9px 0 9px;
+			@include border-radius(5px);
+			float: right;
+			@include single-box-shadow(rgba(#000, 0.3), 1px, 1px, 1px, 0);
+		}
+
+		.profile_name_container {
+			float: right;
+			width: 60%;
+			height: 12px;
+			overflow: hidden;
+			font-size: 10px;
+			margin: 8px 0 0 5px;
+			font-weight: bold;
+			color: #ffffff;
+			@include text-shadow(0px 1px 0 rgba(#000, 0.3));
+		}
+		.global_rank_container {
+			float: right;
+			width: 60%;
+			margin: 1px 0 0 5px;
+			height: 10px;
+			color: #ffffff;
+			@include text-shadow(0px 1px 0 rgba(#000, 0.3));
+			.global_rank_big_icon {
+				float: right;
+				margin-left: 1px;
+				font-size: 9px;
+			}
+			.global_rank_small_icon {
+				float: right;
+				margin: 2px 2px 0 2px;
+				font-size: 6px;
+			}
+		}
+	}
 	.logo_container {
-		padding-top: 5px;
+		padding-top: 7px;
 		height: 25px;
+		float: left;
+		margin-left: 40%;
+		width: 20%;
+		text-align: center;
 	}
 }
 
 .signin_container {
 	margin: 25px 0 0 0;
-	
+
 	.signin_facebook_button {
 		@include border-radius(8px);
 		@include linear-gradient(lighten($facebookblue,5%), darken($facebookblue,5%));
@@ -64,56 +111,4 @@
 
 .hide {
 	display: none;
-}
-
-.global-rank-container {
-	position: absolute;
-	top: 0;
-	left: 0;
-	height: 35px;
-	width: 45%;
-	
-	.user-pic {
-		margin: 5px 0 0 5px;
-		@include border-radius(5px);
-		width: 25px;
-		height: 25px;
-		overflow: hidden;
-	}
-	
-	.logo-container {
-		position: absolute;
-		width: 21px;
-		height: 21px;
-		top: 7px;
-		
-		&.one {
-			left: 35px;
-		}
-		
-		&.two {
-			left: 58px;
-		}
-		
-		&.three {
-			left: 81px;
-		}
-		
-		&.four {
-			left: 104px;
-		}
-		
-		&.five {
-			left: 127px;
-		}
-		
-		.logo {
-			position: absolute;
-			top: 3px;
-			left: 4px;
-			width: 12px;
-			height: 12px;
-			
-		}
-	}
 }
