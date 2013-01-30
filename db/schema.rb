@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130125014816) do
+ActiveRecord::Schema.define(:version => 20130129174430) do
 
   create_table "answers", :force => true do |t|
     t.integer  "question_id"
@@ -46,16 +46,21 @@ ActiveRecord::Schema.define(:version => 20130125014816) do
   create_table "questions", :force => true do |t|
     t.integer  "issue_id"
     t.string   "title"
+    t.text     "url"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+    t.boolean  "is_slider"
+  end
+
+  create_table "sliders", :force => true do |t|
+    t.integer  "question_id"
     t.boolean  "is_exponential"
     t.float    "min"
-    t.float    "max"
     t.float    "correct"
+    t.float    "max"
     t.string   "units"
-    t.text     "url"
     t.datetime "created_at",     :null => false
     t.datetime "updated_at",     :null => false
-    t.boolean  "is_decimal"
-    t.boolean  "is_slider"
   end
 
   create_table "tasks", :force => true do |t|
@@ -68,6 +73,7 @@ ActiveRecord::Schema.define(:version => 20130125014816) do
     t.integer  "score"
     t.datetime "created_at",   :null => false
     t.datetime "updated_at",   :null => false
+    t.integer  "answer_id"
   end
 
   create_table "users", :force => true do |t|
