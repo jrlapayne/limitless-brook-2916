@@ -1,10 +1,17 @@
+.left_side {
+	float: left;
+}
+.right_side {
+	float: right;
+	text-align: right;
+}
+
 .user_picture_container {
 	width: 30px;
 	height: 30px;
 	overflow: hidden;
 	margin-left: 5px;
 	@include border-radius(5px);
-	float: left;
 	@include single-box-shadow(rgba(#000, 0.3), 1px, 1px, 1px, 0);
 	
 	.winner_checkmark {
@@ -25,46 +32,77 @@
 	}
 }
 
-.challenge_container {
-	padding: 6px 0 6px 0;
-	border-top: 1px solid;
-	border-color: rgba($bluegreen,0.4);
-	min-height: 30px;
-	overflow: hidden;
+.challenge_container_even {
+	@include linear-gradient(lighten($bluegreen,30%), lighten($bluegreen,20%));	
+}
 
-	.user_name {
-		font-size: 10px;
-		float: left;
-		margin: 9px 0 0 5px;
-		font-weight: bold;
-		color: #555555;
-		@include text-shadow(0px 1px 0 rgba(lighten($bluegreen,25%),0.99));
+.challenge_container {
+	padding: 4px 3px 2px 0;
+	border-top: 1px solid;
+	border-right: 1px solid;
+	border-left: 1px solid;
+	border-color: rgba($bluegreen,0.6);
+	min-height: 45px;
+	overflow: hidden;
+	
+	.challenge_profile_container {
+		width: 40%;
+		height: 30px;
+		.user_name {
+			font-size: 10px;
+			width: 62%;
+			margin: 4px 0 0 6px;
+			font-weight: bold;
+			color: #555555;
+			@include text-shadow(0px 1px 0 rgba(lighten($bluegreen,25%),0.99));
+		}
+		.issue_rank_container {
+			width: 62%;
+			margin: 1px 0 0 6px;
+			height: 10px;
+			color: $bluegreen;
+			.issue_rank_big_icon {
+				font-size: 9px;
+			}
+			.issue_rank_small_icon {
+				margin: 2px 2px 0 1px;
+				font-size: 6px;
+			}
+		}
 	}
 	
 	.user_issue_container {
-		@include linear-gradient(lighten($bluegreen,20%), lighten($bluegreen,10%));
-		overflow: auto;
-		@include border-radius(5px);
-		float: right;
-		width:200px;
-		padding-left: 6px;
-		margin-right: 3px;
-		@include single-box-shadow(rgba(#000, 0.35), 1px, 1px, 1px, 0);
+		/*@include linear-gradient(lighten($bluegreen,25%), lighten($bluegreen,15%));
+		@include single-box-shadow(rgba(#000, 0.25), 1px, 1px, 1px, 0);
+		@include border-radius(5px);*/
+		overflow: hidden;
+		float: left;
+		margin: 2px 0 0 20%;
+		width: 60%;
+		height: 11px;
+		padding: 2px 0 1px 0;		
 		
 		.user_issue_title {
-			font-size: 11px;
-			margin: 9px 5px 0 0;
+			font-size: 10px;
 			font-weight: bold;
 			text-align: center;
-			color: #222222;
+			color: #666666;
+			@include text-shadow(0px 1px 0 rgba(#000,0.1));
 		}
-	
+	}
+	.user_issue_image_container {
+		width: 20%;
+		height: 30px;
+		float: left;
+		text-align: center;
+		
 		.user_issue_image {
 			width: 30px;
 			height: 30px;
 			overflow: hidden;
 			@include border-radius(5px);
-			float: right;
+			margin: 0 auto;
+			@include single-box-shadow(rgba(#000, 0.3), 1px, 1px, 1px, 0);
 		}
 	}
 }
@@ -75,21 +113,51 @@
 	margin: 5px 0 5px 0;
 	
 	.friend_picture {
-		height: 35px;
-		width: 35px;
+		height: 30px;
+		width: 30px;
 		overflow: hidden;
 		@include border-radius(5px);
 		float: left;
 		@include single-box-shadow(rgba(#000, 0.35), 1px, 1px, 1px, 0);
 	}
-
-	.friend_name {
-		width: 200px;
-		font-weight: bold;
-		font-size: 11px;
+	
+	.friend_challenge_text_container {
+		margin: 0px 0 0 5px;
+		height: 30px;
+		width: 35%;
 		float: left;
-		margin: 11px 0 0 5px;
-		color: darken($bluegreen,20%);
+		@include linear-gradient(lighten($bluegreen,1%), darken($bluegreen,16%));
+		@include single-box-shadow(rgba(#000, 0.25), 0px, 1px, 1px, 0);
+		@include border-radius(5px);
+	
+		.friend_name {
+			font-weight: bold;
+			font-size: 10px;
+			float: left;
+			margin: 2px 0 0 5px;
+			color: #ffffff;
+			width: 80%;
+			height: 12px;
+			overflow: hidden;
+			@include text-shadow(0px 1px 0 rgba(#000, 0.3));
+		}
+		.friend_challenge_rank_container {
+			float: left;
+			width: 80%;
+			margin: 2px 0 0 5px;
+			height: 10px;
+			color: #ffffff;
+			.friend_global_rank_big_icon {
+				float: left;
+				margin-left: 1px;
+				font-size: 9px;
+			}
+			.friend_global_rank_small_icon {
+				float: left;
+				margin: 2px 2px 0 2px;
+				font-size: 6px;
+			}
+		}
 	}
 }
 
