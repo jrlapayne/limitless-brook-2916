@@ -1,34 +1,43 @@
+<div class = "challenge_versus_text">
+	vs.
+</div>
+
 <div class = "challenge_versus_container">
 	<div class = "challenge_profile_container float_left">
 		<div class = "challenge_user_image float_left">
-			<img src="https://graph.facebook.com/<%= user.get('uid') %>/picture"/ height="100%">
+			<img src="https://graph.facebook.com/517826414/picture"/ height="100%">
 		</div>
 		<div class = "challenge_user_name_container float_left">
-			<% if (user.get('name').split(' ').length > 1) { %>
-			    <%= user.get('name').split(' ')[0] +  " " + user.get('name').split(' ')[user.get('name').split(' ').length - 1].charAt(0) %>.
-			<% } else { %>
-			    <%= user.get('name').split(' ')[0] %>.
-			<% } %>
+			Challenger
 		</div>
-		<div id = 'question_left_stars' class = "challenge_user_rank_container float_left"></div>
-	</div>
-
-	<div class = "challenge_versus_text">
-		vs.
+		<div class = "challenge_user_rank_container float_left">
+			<span class = "challenge_user_rank_big_icon">
+				&#9733;
+			</span>
+			<span class = "challenge_user_rank_big_icon">
+				&#9733;
+			</span>
+			<span class = "challenge_user_rank_small_icon">
+				&#9733;
+			</span>
+		</div>
 	</div>
 
 	<div class = "challenge_profile_container float_right">
 		<div class = "challenge_user_image float_right">
-			<img src="https://graph.facebook.com/<%= challenger.get('uid') %>/picture"/ height="100%">
+			<img src="https://graph.facebook.com/517826414/picture"/ height="100%">
 		</div>
 		<div class = "challenge_user_name_container float_right">
-			<% if (challenger.get('name').split(' ').length > 1) { %>
-			    <%= challenger.get('name').split(' ')[0] +  " " + challenger.get('name').split(' ')[challenger.get('name').split(' ').length - 1].charAt(0) %>.
-			<% } else { %>
-			    <%= challenger.get('name').split(' ')[0] %>.
-			<% } %>
+			Nassim
 		</div>
-		<div id = 'question_right_stars' class = "challenge_user_rank_container float_right"></div>
+		<div class = "challenge_user_rank_container float_right">
+			<span class = "challenge_user_rank_big_icon">
+				&#9733;
+			</span>
+			<span class = "challenge_user_rank_small_icon">
+				&#9733;
+			</span>
+		</div>
 	</div>
 </div>
 

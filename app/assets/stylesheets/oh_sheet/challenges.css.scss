@@ -10,7 +10,7 @@
 	height: 21px;
 	padding-top: 9px;
 	width: 42%;
-	margin: 12px 0 0 29%;
+	margin: 20px 0 0 29%;
 	
 	color: #ffffff;
 	font-size: 12px;
@@ -33,9 +33,18 @@
 	font-weight: bold;
 	font-size: 12px;
 	margin: 2px 0 0 0;
-	color: darken($bluegreen, 55%);
+	color: #ffffff;
 	.your_challenges_text{
-		margin: 0 0 3px 3px;
+		font-weight: bold;
+		font-size: 11px;
+		padding: 1px 0 1px 0;
+		text-align: center;
+		border: 1px solid;
+		@include border-top-radius(9px);
+		border-bottom: none;
+		border-color: rgba($bluegreen,0.6);
+		@include linear-gradient(lighten($bluegreen,5%), darken($bluegreen,11%));
+		@include text-shadow(0px 1px 0 rgba(#000, 0.3));
 	}
 }
 
@@ -44,26 +53,39 @@
 	float: left;
 	width: 100%;
 	margin: 20px 0 0 0;
-	color: darken($bluegreen, 65%);
+	color: #ffffff;
 	.sent_challenges_text {
 		font-weight: bold;
 		font-size: 11px;
-		padding: 2px 0 2px 0;
+		padding: 1px 0 1px 0;
 		text-align: center;
 		border: 1px solid;
-		@include border-top-radius(7px);
+		@include border-top-radius(9px);
 		border-bottom: none;
 		border-color: rgba($bluegreen,0.6);
-		background: rgba($bluegreen, 0.6);
-		@include text-shadow(0px 1px 0 rgba($bluegreen,0.45));
+		@include linear-gradient(lighten($bluegreen,5%), darken($bluegreen,11%));
+		@include text-shadow(0px 1px 0 rgba(#000, 0.3));
 	}
 }
+.challenges_bottom_container {
+	float: left;
+	height: 10px;
+	width: 99.7%;
+	padding: 2px 0 1px 0;
+	border: 1px solid;
+	@include border-bottom-radius(9px);
+	border-top: none;
+	border-color: rgba($bluegreen,0.6);
+	@include linear-gradient(lighten($bluegreen,5%), darken($bluegreen,11%));
+	@include single-box-shadow(rgba(#000, 0.15), 0px, 1px, 1px, 0);
+}
+
 
 .results_container {
 	padding-bottom: 8px;
 	@include border-radius(12px);
 	padding: 15px 4px 15px 4px;
-	margin: 15px 2px 0 2px;
+	margin: 0px 2px 0 2px;
 	box-shadow: 2px 2px 1px rgba(darken($bluegreen,5%), 0.40);
 	background: rgba(#000000, 0.05);
 	
@@ -71,7 +93,7 @@
 		/*border-bottom: 1px solid desaturate(darken($bluegreen, 15%),15%);*/
 		text-align: center;
 		font-weight: bold;
-		color: darken($bluegreen,8%);
+		color: darken($bluegreen,10%);
 		font-size: 14px;
 		margin: 0 0 15px 0;
 		@include text-shadow(0px 1px 0 rgba(darken($bluegreen,33%),0.15));	
