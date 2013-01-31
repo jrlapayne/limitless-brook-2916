@@ -12,8 +12,10 @@
 //
 //= require jquery
 //= require jquery_ujs
+//= require jquery.knob
 //= require underscore
 //= require backbone
+//= require slider
 //= require quiz_pop
 //= require_tree ../templates
 //= require_tree ./models

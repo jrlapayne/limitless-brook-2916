@@ -1,5 +1,6 @@
 <% if !signed_in? %>
 	<div class = 'header'>
+		<div class = 'global-rank-container'></div>
 		<div class = 'logo_container'>
 			<img src = 'assets/logos/white.png' height = "100%" />
 		</div>
@@ -10,13 +11,36 @@
 			We NEVER post for you...we hate spam!
 		</div>
 		<div class = "signin_facebook_button">
-		<%= link_to("Facebook Login", "/auth/facebook", "type" => "button", "class" => "dark button radius large", "style" => "width: 50%") %>
+			<%= link_to("Facebook Login", "/auth/facebook", "type" => "button", "class" => "", "style" => "width: 50%") %>
 		</div>
+		<input type="text" class="dial" data-width="30"
+	    data-fgColor="#880000"
+	    data-skin="tron"
+	    data-thickness=".40"
+		data-readOnly = true
+		data-displayInput = false />
 
+		<script>
+		var val = 0;
+		$(function() {
+		    $(".dial").knob();
+		});
+		
+		setInterval(function() {
+			if (val > 100) {
+				val = 0;
+			}
+			$('.dial')
+			    .val(val)
+			    .trigger('change');
+			val = val + 1;
+		}, 50);
+		</script>
 	</div>
 <% else %>
 	<div class = "loading_container inactive" id = "loading"></div>
 	<div class = 'header'>
+		<div class = 'global-rank-container'></div>
 		<div class = 'logo_container'>
 			<img src = 'assets/logos/white.png' height = "100%" />
 		</div>
@@ -50,6 +74,8 @@
 			"users" : <%= User.all.to_json %>,
 			"issues" : <%= Issue.all.to_json %>,
 			"questions" : <%= Question.all.to_json %>,
+			"answers" : <%= Answer.all.to_json %>,
+			"sliders" : <%= Slider.all.to_json %>,
 			"challenges" : <%= Challenge.all.to_json %>,
 			"tasks" : <%= Task.all.to_json %>
 		}

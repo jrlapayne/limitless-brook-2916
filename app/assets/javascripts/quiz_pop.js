@@ -6,7 +6,9 @@ window.QuizPop = {
 	initialize: function(data) {
 		this.current_user = new QuizPop.Models.User(data.current_user);
 		this.issues = new QuizPop.Collections.Issues(data.issues);
-		this.questions = new QuizPop.Collections.Issues(data.questions);
+		this.questions = new QuizPop.Collections.Questions(data.questions);
+		this.answers = new QuizPop.Collections.Answers(data.answers);
+		this.sliders = new QuizPop.Collections.Sliders(data.sliders);
 		this.challenges = new QuizPop.Collections.Challenges(data.challenges);
 		this.tasks = new QuizPop.Collections.Tasks(data.tasks);
 		this.users = new QuizPop.Collections.Users(data.users);
@@ -16,6 +18,8 @@ window.QuizPop = {
 			users: this.users,
 			issues: this.issues,
 			questions: this.questions,
+			answers: this.answers,
+			sliders: this.sliders,
 			challenges: this.challenges,
 			tasks: this.tasks
 		});

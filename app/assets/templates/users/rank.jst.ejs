@@ -1,0 +1,11 @@
+<div class = 'user-pic'>
+	<img src = 'https://graph.facebook.com/<%= user.get('uid') %>/picture' height = "100%" />
+</div>
+<div class = 'user-name'>
+	<% if (user.get('name').split(' ').length > 1) { %>
+	    <%= user.get('name').split(' ')[0] +  " " + user.get('name').split(' ')[user.get('name').split(' ').length - 1].charAt(0) %>.
+	<% } else { %>
+	    <%= user.get('name').split(' ')[0] %>.
+	<% } %>
+</div>
+<div id = 'bubbles'></div>

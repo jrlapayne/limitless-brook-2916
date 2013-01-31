@@ -14,6 +14,8 @@ QuizPop.Routers.Router = Backbone.Router.extend({
 		this.users = options.users;
 		this.issues = options.issues;
 		this.questions = options.questions;
+		this.answers = options.answers;
+		this.sliders = options.sliders;
 		this.challenges = options.challenges;
 		this.tasks = options.tasks;
 		
@@ -22,9 +24,13 @@ QuizPop.Routers.Router = Backbone.Router.extend({
 			users: this.users,
 			issues: this.issues,
 			questions: this.questions,
+			sliders: this.sliders,
+			answers: this.answers,
 			challenges: this.challenges,
 			tasks: this.tasks
 		};
+		
+		this.renderGlobalRank();
 	},
 	
 	setCurrentView: function(view) {
@@ -46,6 +52,14 @@ QuizPop.Routers.Router = Backbone.Router.extend({
 		FB.api('/me/friends?access_token=' + this.current_user.get("token"), function(response) {
 			self.challengeCreate(response["data"]);
 		});
+	},
+	
+	renderGlobalRank: function() {
+		var view = new QuizPop.Views.UsersRank({
+			attr: this.attr,
+			user: this.attr.users.where({id: this.current_user.get('id')})[0]
+		});
+		$('.global-rank-container').html(view.render().el);
 	},
 	
 	challengeIndex: function() {
@@ -77,13 +91,19 @@ QuizPop.Routers.Router = Backbone.Router.extend({
 	},
 	
 	questionShow: function(id, q_id) {
-		var view = new QuizPop.Views.QuestionsShow({
-			attr: this.attr,
-			challenge: this.challenges.where({id: parseInt(id)})[0],
-			question: this.questions.where({id: parseInt(q_id)})[0]
-		});
+		var question = this.questions.where({id: parseInt(q_id)})[0],
+			challenge = this.challenges.where({id: parseInt(id)})[0],
+			view = new QuizPop.Views.QuestionsShow({
+				attr: this.attr,
+				challenge: challenge,
+				question: question
+			});
 		this.setCurrentView(view);
-		$('#page').html(view.render().el);
+		if (question.get('is_slider')) {
+			$('#page').html(view.renderSlider().el);	
+		} else {
+			$('#page').html(view.renderMultipleChoice().el);
+		}
 	},
 	
 	challengeResults: function(id) {
