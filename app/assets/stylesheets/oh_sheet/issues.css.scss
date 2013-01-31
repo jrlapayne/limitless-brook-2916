@@ -24,14 +24,15 @@
 }
 
 .choose_issue_text {
-	text-align: center;
-	font-size: 14px;
+	color: #ffffff;
 	font-weight: bold;
-	border: 1px solid;
+	font-size: 14px;
 	padding: 4px 0 4px 0;
-	@include border-top-radius(7px);
+	text-align: center;
+	border: 1px solid;
+	@include border-top-radius(9px);
 	border-bottom: none;
 	border-color: rgba($bluegreen,0.6);
-	background: rgba($bluegreen, 0.6);
-	@include text-shadow(0px 1px 0 rgba(darken($bluegreen,30%),0.4));	
+	@include linear-gradient(lighten($bluegreen,5%), darken($bluegreen,11%));
+	@include text-shadow(0px 1px 0 rgba(#000, 0.3));
 }

@@ -1,5 +1,5 @@
 <% if (winner) { %>
-	<div class = "user_picture_container">
+	<div class = "user_picture_container left_side">
 		<% if (is_winner) { %>
 			<div class = "winner_checkmark">&#x2713;</div>
 		<% } else { %>
@@ -8,5 +8,18 @@
 		<img src="https://graph.facebook.com/<%= user.get('uid') %>/picture" height="100%" />
 	</div>
 <% } else { %>
-	<div class = "question_score"><%= correct %></div>
+	
+	
+	<div class = "result_answer_send_challenge">
+		<%= correct %></br>
+		10000
+	</div>
+	<div class = "result_answer_send_challenge checkmark_image_container">
+		<div class = "green_checkmark">&#x2713;</div>
+		<div class = "result_user_image_container">
+			<img src="https://graph.facebook.com/<%= user.get('uid') %>/picture" height="100%"/>
+		</div>
+	</div>
+	
+
 <% } %>

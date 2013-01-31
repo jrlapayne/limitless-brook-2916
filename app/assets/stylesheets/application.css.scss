@@ -22,7 +22,7 @@
 	@include single-box-shadow(rgba(#000, 0.25), 0px, 1px, 1px, 0);
 	.profile_container {
 		float: right;
-		width: 40%;
+		width: 39%;
 		height: 40px;
 		text-align: right;
 		.profile_pic_container {
@@ -37,7 +37,7 @@
 		
 		.profile_name_container {
 			float: right;
-			width: 60%;
+			width: 50%;
 			height: 12px;
 			overflow: hidden;
 			font-size: 10px;
@@ -48,7 +48,7 @@
 		}
 		.global_rank_container {
 			float: right;
-			width: 60%;
+			width: 50%;
 			margin: 1px 0 0 5px;
 			height: 10px;
 			color: #ffffff;

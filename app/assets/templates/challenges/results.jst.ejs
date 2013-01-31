@@ -1,17 +1,65 @@
+<div class = "challenge_versus_text">
+	vs.
+</div>
+
+<div class = "challenge_versus_container">
+	<div class = "challenge_profile_container float_left">
+		<div class = "challenge_user_image float_left">
+			<img src="https://graph.facebook.com/517826414/picture"/ height="100%">
+		</div>
+		<div class = "challenge_user_name_container float_left">
+			Challenger
+		</div>
+		<div class = "challenge_user_rank_container float_left">
+			<span class = "challenge_user_rank_big_icon">
+				&#9733;
+			</span>
+			<span class = "challenge_user_rank_big_icon">
+				&#9733;
+			</span>
+			<span class = "challenge_user_rank_small_icon">
+				&#9733;
+			</span>
+		</div>
+	</div>
+
+	<div class = "challenge_profile_container float_right">
+		<div class = "challenge_user_image float_right">
+			<img src="https://graph.facebook.com/517826414/picture"/ height="100%">
+		</div>
+		<div class = "challenge_user_name_container float_right">
+			Nassim
+		</div>
+		<div class = "challenge_user_rank_container float_right">
+			<span class = "challenge_user_rank_big_icon">
+				&#9733;
+			</span>
+			<span class = "challenge_user_rank_small_icon">
+				&#9733;
+			</span>
+		</div>
+	</div>
+</div>
+
+<div class = "challenge_issue_title">
+	Climate Change
+</div>
+
 
 <div class = "results_container" id = 'results'>
 	<div>
 		<% if (winner) { %>
 			<% if (user.get('id') === winner.get('id')) { %>
-				<div class = "finished_text">Way to go champ!</div>
+				<div class = "finished_text">You won!</div>
 			<% } else { %>
-				<div class = "finished_text">You really screwed that one up...</div>
+				<div class = "finished_text">You lost...</div>
 			<% } %>
 		<% } else { %>
-			<div class = "finished_text">Finished!</div>
+			<div class = "finished_text">Challenger's Turn!</div>
 		<% } %>
 	</div>
 </div>
+
 
 <div id = 'send_challenge' class = "create_challenge_button">
 	<% if (challenge.get('is_finished')) { %>
