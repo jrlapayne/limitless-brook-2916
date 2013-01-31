@@ -234,9 +234,9 @@ QuizPop.Views.SlidersShow = Backbone.View.extend({
 			}
 		
 			if (input === this.correct) {
-				score = 0;
+				score = 100;
 			} else {
-				score = getScore($('#block'));
+				score = 100 - getScore($('#block'));
 			}
 			$('#url').removeClass('hide');
 			
@@ -280,7 +280,7 @@ QuizPop.Views.SlidersShow = Backbone.View.extend({
 					this.challenge.set({is_sent: true});
 				} else {
 					var winner_id;
-					if  (this.challenge.get('challenger_score') < this.challenge.get('user_score')) {
+					if  (this.challenge.get('challenger_score') > this.challenge.get('user_score')) {
 						winner_id = this.challenge.get('challenger_id');
 					} else {
 						winner_id = this.challenge.get('user_id');

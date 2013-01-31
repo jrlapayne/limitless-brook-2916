@@ -70,9 +70,9 @@ QuizPop.Views.AnswersIndex = Backbone.View.extend({
 			$('#slider_or_multiple_choice').find('#' + event.target.closest('.answer').attr('id')).addClass('user_answer');
 			answer = this.attr.answers.where({id: parseInt($(event.target).closest('.answer').attr('id'))})[0];
 			if (answer.get('is_correct')) {
-				score = 0;
+				score = 33;
 			} else {
-				score = 10;
+				score = 0;
 			}
 			$('#url').removeClass('hide');
 		

@@ -3,7 +3,8 @@ QuizPop.Views.QuestionsShow = Backbone.View.extend({
 	template: JST['questions/show'],
 	
 	events: {
-		'click #next' : 'nextQuestion'
+		'click #next' : 'nextQuestion',
+		'click #source_url' : 'goToSource'
 	},
 	
 	initialize: function(options) {
@@ -21,10 +22,14 @@ QuizPop.Views.QuestionsShow = Backbone.View.extend({
 	renderSlider: function() {
 		var self = this;
 		$(this.el).html(this.template({
-			question: this.question
+			question: this.question,
+			user: this.attr.users.where({id: this.challenge.get('user_id')})[0],
+			challenger: this.attr.users.where({id: this.challenge.get('challenger_id')})[0]
 		}));
 		setTimeout(function() {
 			self.slidersShow();
+			self.renderLeftStars();
+			self.renderRightStars();
 		}, 0);
 		return this;
 	},
@@ -36,6 +41,8 @@ QuizPop.Views.QuestionsShow = Backbone.View.extend({
 		}));
 		setTimeout(function() {
 			self.answersIndex();
+			self.renderLeftStars();
+			self.renderRightStars();
 		}, 0);
 		return this;
 	},
@@ -58,6 +65,24 @@ QuizPop.Views.QuestionsShow = Backbone.View.extend({
 		$('#slider_or_multiple_choice').html(view.render().el);
 	},
 	
+	renderLeftStars: function() {
+		var view = new QuizPop.Views.UsersQuestionStarsLeft({
+			attr: this.attr,
+			issue: this.attr.issues.where({id: this.question.get('issue_id')})[0],
+			user: this.attr.users.where({id: this.challenge.get('user_id')})[0]
+		});
+		$(this.el).find('#question_left_stars').html(view.render().el);
+	},
+	
+	renderRightStars: function() {
+		var view = new QuizPop.Views.UsersQuestionStarsRight({
+			attr: this.attr,
+			issue: this.attr.issues.where({id: this.question.get('issue_id')})[0],
+			user: this.attr.users.where({id: this.challenge.get('challenger_id')})[0]
+		});
+		$(this.el).find('#question_right_stars').html(view.render().el);
+	},
+	
 	nextQuestion: function() {
 		if (window.next_question) {
 			Backbone.history.navigate('challenge' + this.challenge.get('id') + '/question' + window.next_question.get('id'), true);
@@ -65,4 +90,8 @@ QuizPop.Views.QuestionsShow = Backbone.View.extend({
 			Backbone.history.navigate('challenge' + this.challenge.get('id'), true);
 		}
 	},
+	
+	goToSource: function() {
+		window.open(this.question.get('url'), '_blank');
+	}
 });

@@ -59,7 +59,7 @@ QuizPop.Routers.Router = Backbone.Router.extend({
 			attr: this.attr,
 			user: this.attr.users.where({id: this.current_user.get('id')})[0]
 		});
-		$('.global-rank-container').html(view.render().el);
+		$('.profile_container').html(view.render().el);
 	},
 	
 	challengeIndex: function() {

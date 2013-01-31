@@ -18,7 +18,7 @@ QuizPop.Views.UsersRank = Backbone.View.extend({
 			user: this.user
 		}));
 		setTimeout(function() {
-			//self.renderBubbles();
+			self.renderBubbles();
 		}, 0);
 		return this;
 	},

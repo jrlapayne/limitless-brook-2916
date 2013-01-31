@@ -14,16 +14,19 @@ QuizPop.Views.ChallengesIndex = Backbone.View.extend({
 	},
 	
 	render: function() {
+		var counter = 0;
 		var self = this;
 		$(this.el).html(this.template({
 			challenges: this.attr.challenges.where({user_id: this.current_user.get('id'), is_sent: true, is_finished: false}).length
 		}));
 		setTimeout(function() {
 			_.each(self.attr.challenges.where({user_id: self.current_user.get('id'), is_sent: true, is_finished: false}), function(c) {
-				self.renderChallenge(c);
+				self.renderChallenge(c, counter);
+				counter = counter + 1;
 			});
 			_.each(self.attr.challenges.where({challenger_id: self.current_user.get('id'), is_sent: true, is_finished: false}), function(c) {
-				self.renderChallenged(c);
+				self.renderChallenged(c, counter);
+				counter = counter + 1;
 			});
 		}, 0);
 		setTimeout(function() {
@@ -32,21 +35,23 @@ QuizPop.Views.ChallengesIndex = Backbone.View.extend({
 		return this;
 	},
 	
-	renderChallenge: function(challenge) {
+	renderChallenge: function(challenge, counter) {
 		var view = new QuizPop.Views.ChallengesShow({
 			attr: this.attr,
 			challenge: challenge,
-			is_user_challenger: false
+			is_user_challenger: false,
+			counter: counter
 		});
 		this.subviews.push(view);
 		$('#available_challenges').append(view.render().el);
 	},
 	
-	renderChallenged: function(challenge) {
+	renderChallenged: function(challenge, counter) {
 		var view = new QuizPop.Views.ChallengesShow({
 			attr: this.attr,
 			challenge: challenge,
-			is_user_challenger: true
+			is_user_challenger: true,
+			counter: counter
 		});
 		this.subviews.push(view);
 		$('#unanswered_challenges').append(view.render().el);

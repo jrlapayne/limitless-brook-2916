@@ -1,4 +1,4 @@
-<div class = "friend_challenge_container">	
+<div class = "friend_challenge_container" style = 'overflow: hidden'>	
 	<div class = "friend_picture">
 		<img src="https://graph.facebook.com/<%= friend['id'] %>/picture" height="100%" width="100%" />
 	</div>
@@ -6,19 +6,6 @@
 		<div class = "friend_name">
 			<%= friend['name'] %>
 		</div>
-		<div class = "friend_challenge_rank_container">
-			<div class = "friend_global_rank_big_icon">
-				&#9733;
-			</div>
-			<div class = "friend_global_rank_big_icon">
-				&#9733;
-			</div>
-			<div class = "friend_global_rank_big_icon">
-				&#9733;
-			</div>
-			<div class = "friend_global_rank_small_icon">
-				&#9733;
-			</div>
-		</div>
+		<div id = 'left_global_stars' class = "friend_challenge_rank_container"></div>
 	</div>
 </div>

@@ -1,63 +1,38 @@
-<div class = "challenge_container challenge_container_even">
-	<div class = "challenge_profile_container left_side">
-		<div class = "user_picture_container left_side">
-			<img src="https://graph.facebook.com/<%= user.get('uid') %>/picture"/ height="100%">
-		</div>
-		<div class = "user_name left_side">
-			<% if (user.get('name').split(' ').length > 1) { %>
-			    <%= user.get('name').split(' ')[0] +  " " + user.get('name').split(' ')[user.get('name').split(' ').length - 1].charAt(0) %>.
-			<% } else { %>
-			    <%= user.get('name').split(' ')[0] %>.
-			<% } %>
-		</div>
-		<div class = "issue_rank_container left_side">
-			<div class = "issue_rank_big_icon left_side">
-				&#9733;
-			</div>
-			<div class = "issue_rank_big_icon left_side">
-				&#9733;
-			</div>
-			<div class = "issue_rank_big_icon left_side">
-				&#9733;
-			</div>
-			<div class = "issue_rank_small_icon left_side">
-				&#9733;
-			</div>
-		</div>
+<div class = "challenge_profile_container left_side">
+	<div class = "user_picture_container left_side">
+		<img src="https://graph.facebook.com/<%= user.get('uid') %>/picture"/ height="100%">
 	</div>
-	<div class = "user_issue_image_container">
-		<div class = "user_issue_image">
-			<img src = 'assets/issues/<%= issue.get('thumbnail') %>.png' height = "100%" />
-		</div>
+	<div class = "user_name left_side">
+		<% if (user.get('name').split(' ').length > 1) { %>
+		    <%= user.get('name').split(' ')[0] +  " " + user.get('name').split(' ')[user.get('name').split(' ').length - 1].charAt(0) %>.
+		<% } else { %>
+		    <%= user.get('name').split(' ')[0] %>.
+		<% } %>
 	</div>
+	<div id = 'left_stars' class = "issue_rank_container left_side"></div>
+</div>
+<div class = "user_issue_image_container">
+	<div class = "user_issue_image">
+		<img src = 'assets/issues/<%= issue.get('thumbnail') %>.png' height = "100%" />
+	</div>
+</div>
 
-	<div class = "challenge_profile_container right_side">
-		<div class = "user_picture_container right_side">
-			<img src="https://graph.facebook.com/517826414/picture"/ height="100%">
-		</div>
-		<div class = "user_name right_side">
-			<% if (user.get('name').split(' ').length > 1) { %>
-			    <%= user.get('name').split(' ')[0] +  " " + user.get('name').split(' ')[user.get('name').split(' ').length - 1].charAt(0) %>.
-			<% } else { %>
-			    <%= user.get('name').split(' ')[0] %>.
-			<% } %>
-		</div>
-		<div class = "issue_rank_container right_side">
-			<div class = "issue_rank_small_icon right_side">
-				&#9733;
-			</div>
-			<div class = "issue_rank_big_icon right_side">
-				&#9733;
-			</div>
-			<div class = "issue_rank_big_icon right_side">
-				&#9733;
-			</div>
-		</div>
+<div class = "challenge_profile_container right_side">
+	<div class = "user_picture_container right_side">
+		<img src="https://graph.facebook.com/<%= challenger.get('uid') %>/picture"/ height="100%">
 	</div>
-	
-	<div class = "user_issue_container">
-		<div class = "user_issue_title">
-			<%= issue.get('title') %>
-		</div>
+	<div class = "user_name right_side">
+		<% if (challenger.get('name').split(' ').length > 1) { %>
+		    <%= challenger.get('name').split(' ')[0] +  " " + challenger.get('name').split(' ')[challenger.get('name').split(' ').length - 1].charAt(0) %>.
+		<% } else { %>
+		    <%= challenger.get('name').split(' ')[0] %>.
+		<% } %>
+	</div>
+	<div id = 'right_stars' class = "issue_rank_container right_side"></div>
+</div>
+
+<div class = "user_issue_container">
+	<div class = "user_issue_title">
+		<%= issue.get('title') %>
 	</div>
 </div>

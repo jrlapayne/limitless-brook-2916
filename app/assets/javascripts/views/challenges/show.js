@@ -11,6 +11,7 @@ QuizPop.Views.ChallengesShow = Backbone.View.extend({
 		this.challenge = options.challenge;
 		this.current_user = this.attr.users.where({id: this.attr.current_user.get('id')})[0];
 		this.is_user_challenger = options.is_user_challenger;
+		this.counter = options.counter;
 		this.can_drag = false;
 		this.subviews = [];
 	},
@@ -43,7 +44,8 @@ QuizPop.Views.ChallengesShow = Backbone.View.extend({
 		var view = new QuizPop.Views.UsersChallenge({
 			attr: this.attr,
 			user: user,
-			challenge: this.challenge
+			challenge: this.challenge,
+			counter: this.counter
 		});
 		this.subviews.push(view);
 		$(this.el).find('#user_info').html(view.render().el);

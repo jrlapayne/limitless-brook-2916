@@ -21,9 +21,11 @@ QuizPop.Views.IssuesIndex = Backbone.View.extend({
 			
 		}));
 		setTimeout(function() {
+			var counter = 0;
 			self.attr.issues.each(function(i) {
 				if (self.attr.questions.where({issue_id: i.get('id')}).length > 2) {
-					self.renderIssue(i);
+					self.renderIssue(i, counter);
+					counter = counter + 1;
 				}
 			});
 		}, 0);
@@ -33,10 +35,12 @@ QuizPop.Views.IssuesIndex = Backbone.View.extend({
 		return this;
 	},
 	
-	renderIssue: function(issue) {
+	renderIssue: function(issue, counter) {
 		var view = new QuizPop.Views.IssuesShow({
 			attr: this.attr,
-			issue: issue
+			issue: issue,
+			challenge: this.challenge,
+			counter: counter
 		});
 		this.subviews.push(view);
 		$('#issues').append(view.render().el);

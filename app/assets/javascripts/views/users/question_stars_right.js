@@ -1,6 +1,6 @@
-QuizPop.Views.UsersBubbles = Backbone.View.extend({
+QuizPop.Views.UsersQuestionStarsRight = Backbone.View.extend({
 	
-	template: JST['users/bubbles'],
+	template: JST['users/question_stars_right'],
 	
 	events: {
 		
@@ -8,9 +8,14 @@ QuizPop.Views.UsersBubbles = Backbone.View.extend({
 	
 	initialize: function(options) {
 		this.attr = options.attr;
+		this.issue = options.issue;
 		this.user = options.user;
-		this.tasks = this.attr.tasks.where({user_id: this.user.get('id')});
-				
+		if (this.issue) {
+			this.tasks = this.attr.tasks.where({user_id: this.user.get('id'), issue_id: this.issue.get('id')});
+		} else {
+			this.tasks = this.attr.tasks.where({user_id: this.user.get('id')});
+		}
+		
 		this.attr.tasks.on('add', this.increaseSmallStar, this);
 	},
 	
@@ -20,7 +25,7 @@ QuizPop.Views.UsersBubbles = Backbone.View.extend({
 			
 		}));
 		setTimeout(function() {
-			$(self.el).find(".global-dial").knob();
+			$(self.el).find(".right-question").knob();
 			self.renderBigStars();
 		}, 0);
 		return this;
@@ -43,25 +48,25 @@ QuizPop.Views.UsersBubbles = Backbone.View.extend({
 	
 		if (big_stars >= 5) {
 			big_stars = 5;
-			$(this.el).find('.global-dial').parent().parent().parent().addClass('hide');
+			$(this.el).find('.right-question').parent().parent().parent().addClass('hide');
 		}
 		if (big_stars === 0) {
 			this.fillSmallStar(remainder);
 		} else {
 			this.fillSmallStar(remainder);
 			for (i = 0; i < big_stars; i++) {
-				$(this.el).find('#static_stars').append(JST['users/global_star']);
+				$(this.el).find('#static_stars').append(JST['users/question_star_right']);
 			}
 		}
 	},
 	
 	fillSmallStar: function(num) {
-		$(this.el).find('.global-dial').val(num).trigger('change');
+		$(this.el).find('.right-question').val(num).trigger('change');
 	},
 	
 	increaseSmallStar: function(model) {
 		var score = model.get('score'),
-			value = parseInt($(this.el).find('.global-dial').val()),
+			value = parseInt($('.right-question').val()),
 			self = this,
 			inter;
 		
@@ -71,7 +76,7 @@ QuizPop.Views.UsersBubbles = Backbone.View.extend({
 					clearInterval(inter);
 					self.createNewBigStar(score);
 				}
-				$(this.el).find('.global-dial').val(value).trigger('change');
+				$(this.el).find('.right-question').val(value).trigger('change');
 				value = value + 1;
 				score = score - 1;
 			}, 50);
@@ -83,24 +88,18 @@ QuizPop.Views.UsersBubbles = Backbone.View.extend({
 			value = 0;
 			
 		if ($(this.el).find('#static_stars').children().length > 4) {
-			$(this.el).find('.global-dial').parent().parent().parent().addClass('hide');
+			$(this.el).find('.right-question').parent().parent().parent().addClass('hide');
 		} else {
-			$(this.el).find('#static_stars').append(JST['users/global_star']);
+			$(this.el).find('#static_stars').append(JST['users/question_star_right']);
 			
 			inter = setInterval(function() {
 				if (num < 0) {
 					clearInterval(inter);
 				}
-				$(this.el).find('.global-dial').val(value).trigger('change');
+				$(this.el).find('.right-question').val(value).trigger('change');
 				value = value + 1;
 				num = num - 1;
 			}, 50);
-		}
-	},
-	
-	hideSmallStar: function() {
-		if ($(this.el).find('#static_stars').children().length > 4) {
-			$(this.el).find('.global-dial').parent().addClass('hide');
 		}
 	}
 });
