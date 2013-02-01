@@ -34,7 +34,6 @@ QuizPop.Views.UsersResult = Backbone.View.extend({
 	},
 	
 	render: function() {
-		alert(this.correct + '    ' + this.user_answer);
 		$(this.el).html(this.template({
 			user: this.user,
 			correct: this.correct,

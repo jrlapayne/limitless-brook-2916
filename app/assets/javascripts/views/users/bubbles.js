@@ -102,11 +102,5 @@ QuizPop.Views.UsersBubbles = Backbone.View.extend({
 				num = num - 1;
 			}, 50);
 		}
-	},
-	
-	hideSmallStar: function() {
-		if ($(this.el).find('#static_stars').children().length > 4) {
-			$(this.el).find('.global-dial').parent().parent().parent().addClass('hide');
-		}
 	}
 });
