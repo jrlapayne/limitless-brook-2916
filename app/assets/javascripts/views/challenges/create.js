@@ -234,7 +234,6 @@ QuizPop.Views.ChallengesCreate = Backbone.View.extend({
 		$(document).on('touchmove', function(event) {
 			event.preventDefault();
 			element = document.elementFromPoint(event.originalEvent.touches[0].clientX, event.originalEvent.touches[0].clientY);
-			alert($(element).closest('.letter').attr('id'));
 			if ($(self.current_location !== parseInt($(element).closest('.letter').attr('id')))) {
 				$('.alphabet').children().removeClass('active');
 				$(element).closest('.letter').addClass('active');
