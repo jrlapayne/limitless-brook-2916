@@ -175,7 +175,7 @@ QuizPop.Views.SlidersShow = Backbone.View.extend({
 			if (!this.draggable) {
 				event.preventDefault();
 				this.draggable = true;
-				bindSliderEvent('touchmove');
+				bindSliderEvent('touchmove', $('#block'));
 			}
 		}
 	},
