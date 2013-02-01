@@ -41,6 +41,7 @@ QuizPop.Views.ChallengesResults = Backbone.View.extend({
 	},
 	
 	sendChallenge: function(event) {
+		$('#versus').empty();
 		if (this.current_user.get('id') === this.challenge.get('user_id')) {
 			this.createChallenge(this.attr.users.where({id: this.challenge.get('challenger_id')})[0]);
 		} else {

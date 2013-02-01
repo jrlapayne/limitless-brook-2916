@@ -13,19 +13,19 @@
 	<div class = "result_answers_container">
 		<div class = "result_correct_answer_container">
 			<div class = "result_checkmark_container">&#x2713;</div> 
-			52,000
+			<%= correct %>
 		</div>
 		<div class = "result_user_answer_container">
 			<div class = "result_user_image_container">
 				<img src="https://graph.facebook.com/<%= user.get('uid') %>/picture" height="100%"/>
 			</div>
-			45,000
+			<%= user_answer %>
 		</div>
 	</div>
 	
 	<div class = "result_answer_send_challenge">
 		<%= correct %></br>
-		10000
+		<%= user_answer %>
 	</div>
 	<div class = "result_answer_send_challenge checkmark_image_container">
 		<div class = "green_checkmark">&#x2713;</div>

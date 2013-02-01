@@ -67,7 +67,7 @@ QuizPop.Routers.Router = Backbone.Router.extend({
 			attr: this.attr
 		});
 		this.setCurrentView(view);
-		$('#page').html(view.render().el);
+		$('#everything_else').html(view.render().el);
 	},
 	
 	challengeCreate: function(friends) {
@@ -78,7 +78,7 @@ QuizPop.Routers.Router = Backbone.Router.extend({
 			friends: this.friends
 		});
 		this.setCurrentView(view);
-		$('#page').html(view.render().el);
+		$('#everything_else').html(view.render().el);
 	},
 	
 	issueSelect: function(id) {
@@ -87,7 +87,7 @@ QuizPop.Routers.Router = Backbone.Router.extend({
 			challenge: this.challenges.where({id: parseInt(id)})[0]
 		});
 		this.setCurrentView(view);
-		$('#page').html(view.render().el);
+		$('#everything_else').html(view.render().el);
 	},
 	
 	questionShow: function(id, q_id) {
@@ -99,11 +99,22 @@ QuizPop.Routers.Router = Backbone.Router.extend({
 				question: question
 			});
 		this.setCurrentView(view);
-		if (question.get('is_slider')) {
-			$('#page').html(view.renderSlider().el);	
-		} else {
-			$('#page').html(view.renderMultipleChoice().el);
+		if ($('#versus').children().length === 0) {
+			this.renderVersus(challenge);
 		}
+		if (question.get('is_slider')) {
+			$('#question_show').html(view.renderSlider().el);	
+		} else {
+			$('#question_show').html(view.renderMultipleChoice().el);
+		}
+	},
+	
+	renderVersus: function(challenge) {
+		var view = new QuizPop.Views.UsersVersus({
+			attr: this.attr,
+			challenge: challenge
+		});
+		$('#versus').html(view.render().el);
 	},
 	
 	challengeResults: function(id) {
@@ -112,6 +123,9 @@ QuizPop.Routers.Router = Backbone.Router.extend({
 			challenge: this.challenges.where({id: parseInt(id)})[0]
 		});
 		this.setCurrentView(view);
-		$('#page').html(view.render().el);
+		if ($('#versus').children().length === 0) {
+			this.renderVersus(this.challenges.where({id: parseInt(id)})[0]);
+		}
+		$('#everything_else').html(view.render().el);
 	}
 });

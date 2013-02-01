@@ -10,6 +10,8 @@ QuizPop.Views.ChallengesIndex = Backbone.View.extend({
 	initialize: function(options) {
 		this.attr = options.attr;
 		this.current_user = this.attr.users.where({id: this.attr.current_user.get('id')})[0];
+		this.recieved_challenges = this.attr.challenges.where({user_id: this.current_user.get('id'), is_sent: true, is_finished: false});
+		this.sent_challenges = this.attr.challenges.where({challenger_id: this.current_user.get('id'), is_sent: true, is_finished: false});
 		this.subviews = [];
 	},
 	
@@ -17,17 +19,24 @@ QuizPop.Views.ChallengesIndex = Backbone.View.extend({
 		var counter = 0;
 		var self = this;
 		$(this.el).html(this.template({
-			challenges: this.attr.challenges.where({user_id: this.current_user.get('id'), is_sent: true, is_finished: false}).length
+			challenges: this.recieved_challenges.length
 		}));
 		setTimeout(function() {
-			_.each(self.attr.challenges.where({user_id: self.current_user.get('id'), is_sent: true, is_finished: false}), function(c) {
+			_.each(self.recieved_challenges, function(c) {
 				self.renderChallenge(c, counter);
 				counter = counter + 1;
 			});
-			_.each(self.attr.challenges.where({challenger_id: self.current_user.get('id'), is_sent: true, is_finished: false}), function(c) {
+			_.each(self.sent_challenges, function(c) {
 				self.renderChallenged(c, counter);
 				counter = counter + 1;
 			});
+			if (self.recieved_challenges.length === 0) {
+				$('#hide_if_empty').addClass('hide');
+			}
+			if (self.sent_challenges.length === 0) {
+				$('#unanswered_challenges').addClass('hide');
+				$('.challenges_bottom_container').addClass('hide');
+			}
 		}, 0);
 		setTimeout(function() {
 			window.scrollTo(0, 1);
