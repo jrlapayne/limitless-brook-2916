@@ -48,6 +48,7 @@ QuizPop.Views.UsersStarsRight = Backbone.View.extend({
 	
 		if (big_stars >= 5) {
 			big_stars = 5;
+			$(this.el).find('#static_stars').css('margin', '0 0 0 0');
 			$(this.el).find('.right-dial').parent().parent().parent().addClass('hide');
 		}
 		if (big_stars === 0) {
@@ -72,11 +73,14 @@ QuizPop.Views.UsersStarsRight = Backbone.View.extend({
 		
 		if (this.user && model.get('user_id') === this.user.get('id')) {
 			inter = setInterval(function() {
-				if (value > 100 || score < 0) {
+				if (score <= 0) {
+					clearInterval(inter);
+				}
+				if (value >= 100) {
 					clearInterval(inter);
 					self.createNewBigStar(score);
 				}
-				$(this.el).find('.right-dial').val(value).trigger('change');
+				$(self.el).find('.right-dial').val(value).trigger('change');
 				value = value + 1;
 				score = score - 1;
 			}, 50);
@@ -85,9 +89,11 @@ QuizPop.Views.UsersStarsRight = Backbone.View.extend({
 	
 	createNewBigStar: function(num) {
 		var inter,
-			value = 0;
+			value = 0,
+			self = this;
 			
 		if ($(this.el).find('#static_stars').children().length > 4) {
+			$(this.el).find('#static_stars').css('margin', '0 0 0 0');
 			$(this.el).find('.right-dial').parent().parent().parent().addClass('hide');
 		} else {
 			$(this.el).find('#static_stars').append(JST['users/right_big_star']);
@@ -96,7 +102,7 @@ QuizPop.Views.UsersStarsRight = Backbone.View.extend({
 				if (num < 0) {
 					clearInterval(inter);
 				}
-				$(this.el).find('.right-dial').val(value).trigger('change');
+				$(self.el).find('.right-dial').val(value).trigger('change');
 				value = value + 1;
 				num = num - 1;
 			}, 50);

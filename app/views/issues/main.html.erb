@@ -10,9 +10,7 @@
 		<div class = "signin_text">
 			We NEVER post for you...we hate spam!
 		</div>
-		<div class = "signin_facebook_button">
-			<%= link_to("Facebook Login", "/auth/facebook", "type" => "button", "class" => "", "style" => "width: 50%") %>
-		</div>
+		<%= button_to("Facebook Login", "/auth/facebook", "type" => "button", "class" => "signin_facebook_button", "style" => "width: 50%") %>
 	</div>
 <% else %>
 	<div class = "loading_container inactive" id = "loading"></div>
@@ -22,7 +20,11 @@
 		</div>
 		<div class = "profile_container"></div>
 	</div>
-	<div id = 'page'>Loading...</div>
+	<div id = 'page'>
+		<div id = 'versus'></div>
+		<div id = 'question_show'></div>
+		<div id = 'everything_else'></div>
+	</div>
 	<script type = 'text/json' id = 'json'>
 		{
 			"current_user": <%= current_user.to_json %>,

@@ -13,6 +13,15 @@ QuizPop.Views.UsersResult = Backbone.View.extend({
 		this.question = this.attr.questions.where({id: this.task.get('question_id')})[0];
 		this.winner = options.winner;
 		
+		if (this.question.get('is_slider')) {
+			this.slider = this.attr.sliders.where({question_id: this.question.get('id')})[0];
+			this.correct = this.roundIntOrDecimal(this.slider.get('correct'));
+			this.user_answer = this.roundIntOrDecimal(this.task.get('answer'));
+		} else {
+			this.answer = this.attr.answers.where({question_id: this.question.get('id'), is_correct: true})[0];
+			this.correct = this.answer.get('content');
+			this.user_answer = this.attr.answers.where({id: this.task.get('answer_id')})[0].get('content');
+		}
 		if (this.winner) {
 			if (this.winner.get('id') === this.user.get('id')) {
 				this.is_winner = true;
@@ -27,8 +36,8 @@ QuizPop.Views.UsersResult = Backbone.View.extend({
 	render: function() {
 		$(this.el).html(this.template({
 			user: this.user,
-			task: this.task,
-			correct: this.roundIntOrDecimal(this.question.get('correct')),
+			correct: this.correct,
+			user_answer: this.user_answer,
 			is_winner: this.is_winner,
 			winner: this.winner
 		}));
@@ -36,7 +45,7 @@ QuizPop.Views.UsersResult = Backbone.View.extend({
 	},
 	
 	roundIntOrDecimal: function(val) {
-		if (this.question.get('is_decimal')) {
+		if (this.slider.get('correct') % 1 !== 0 || this.slider.get('min') % 1 !== 0) {
 			if (((this.correct % 1) * 10) % 1 === 0) {
 				return Math.floor(val * 10) / 10;
 			} else {

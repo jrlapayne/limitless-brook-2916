@@ -4,16 +4,23 @@ QuizPop.Views.ChallengesCreate = Backbone.View.extend({
 	
 	events: {
 		'click .friend' : 'checkUser',
-		'click .letter' : 'scrollToLetter'
+		'click .letter' : 'scrollToLetter',
+		
+		'mousedown .letter' : 'mouseDown',
+		'mouseup' : 'mouseUp',
+		
+		'touchstart .letter' : 'touchDown',
+		'touchend' : 'touchUp'
 	},
 	
 	initialize: function(options) {
 		this.attr = options.attr;
 		this.current_user = this.attr.users.where({id: this.attr.current_user.get('id')})[0];
 		this.friends = this.filterAndAlphabetize(options.friends);
-		this.user_height = 46;
+		this.user_height = 41;
 		this.obj = this.getLetterLocationObject();
-		
+		this.current_location = null;
+		this.scrollable = false;
 		this.subviews = [];
 	},
 	
@@ -139,6 +146,7 @@ QuizPop.Views.ChallengesCreate = Backbone.View.extend({
 		$('.alphabet').children().removeClass('active');
 		$(event.target).closest('.letter').addClass('active');
 		window.scrollTo(0, this.obj[parseInt($(event.target).closest('.letter').attr('id'))].location);
+		this.current_location = parseInt($(event.target).closest('.letter').attr('id')); 
 	},
 	
 	checkUser: function(event) {
@@ -181,6 +189,56 @@ QuizPop.Views.ChallengesCreate = Backbone.View.extend({
 		$('#loading').removeClass('active');
 		$('#loading').addClass('inactive');
 		$('#loading').children().remove();
+	},
+	
+	mouseDown: function(event) {
+		if (!this.scrollable) {
+			event.preventDefault();
+			this.scrollable = true;
+			this.bindMouseMove();
+		}
+	},
+	
+	mouseUp: function() {
+		if (this.scrollable) {
+			this.scrollable = false;
+			$(document).off('mousemove');
+		}
+	},
+	
+	touchDown: function(event) {
+		if (!this.scrollable) {
+			event.preventDefault();
+			this.scrollable = true;
+			this.bindTouchMove();
+		}
+	},
+	
+	touchUp: function() {
+		if (this.scrollable) {
+			this.scrollable = false;
+			$(document).off('touchmove');
+		}
+	},
+	
+	bindMouseMove: function() {
+		var self = this;
+		$(document).on('mousemove', function(event) {
+			self.scrollAlphabet(event);
+		});
+	},
+	
+	bindTouchMove: function() {
+		var self = this;
+		$(document).on('touchmove', function(event) {
+			self.scrollAlphabet(event.originalEvent.touches[0]);
+		});
+	},
+	
+	scrollAlphabet: function(event) {
+		if (this.current_location !== parseInt($(event.target).closest('.letter').attr('id'))) {
+			this.scrollToLetter(event);
+		}
 	},
 	
 	onClose: function() {
