@@ -231,8 +231,7 @@ QuizPop.Views.ChallengesCreate = Backbone.View.extend({
 	bindTouchMove: function() {
 		var self = this;
 		$(document).on('touchmove', function(event) {
-			alert($(event.originalEvent.target).attr('id'));
-			self.scrollAlphabet(event.originalEvent.touches[0]);
+			self.scrollAlphabet(event.originalEvent);
 		});
 	},
 	
