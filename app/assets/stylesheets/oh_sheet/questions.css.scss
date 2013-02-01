@@ -6,7 +6,7 @@
 }
 
 .challenge_versus_container {
-	margin: 15px 10% 0 10%;
+	margin: 12px 10% 0 10%;
 	overflow: auto;
 	padding-bottom: 1px;
 	
@@ -76,7 +76,7 @@
 	height: 15px;
 	font-weight: bold;
 	padding: 3px 0 1px 0;
-	margin: 15px 40px 0 40px;
+	margin: 10px 40px 0 40px;
 	text-align: center;
 	color: #ffffff;
 	@include border-top-radius(10px);

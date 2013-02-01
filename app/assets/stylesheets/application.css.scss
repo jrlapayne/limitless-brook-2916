@@ -22,20 +22,21 @@
 	@include single-box-shadow(rgba(#000, 0.25), 0px, 1px, 1px, 0);
 	.profile_container {
 		float: right;
-		width: 30%;
+		width: 26%;
 		height: 30px;
 		text-align: right;
 		border: 1px solid rgba(#000,0.35);
-		margin: 3px 5px 0 0;
+		margin: 4px 5px 0 0;
 		@include border-radius(5px);
+		@include linear-gradient(darken($bluegreen,3%), darken($bluegreen,22%));
 		.profile_pic_container {
-			width: 25px;
-			height: 25px;
+			width: 23px;
+			height: 23px;
 			overflow: hidden;
-			margin: 5px 4px 0 9px;
+			margin: 3px 4px 0 5px;
 			@include border-radius(5px);
 			float: right;
-			@include single-box-shadow(rgba(#000, 0.3), 1px, 1px, 1px, 0);
+			@include single-box-shadow(rgba(#000, 0.25), 1px, 1px, 1px, 0);
 		}
 
 		.profile_name_container {
@@ -44,7 +45,7 @@
 			height: 12px;
 			overflow: hidden;
 			font-size: 10px;
-			margin: 8px 0 0 5px;
+			margin: 2px 0 0 5px;
 			font-weight: bold;
 			color: #ffffff;
 			@include text-shadow(0px 1px 0 rgba(#000, 0.3));
