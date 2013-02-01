@@ -22,14 +22,17 @@
 	@include single-box-shadow(rgba(#000, 0.25), 0px, 1px, 1px, 0);
 	.profile_container {
 		float: right;
-		width: 39%;
-		height: 40px;
+		width: 30%;
+		height: 30px;
 		text-align: right;
+		border: 1px solid rgba(#000,0.35);
+		margin: 3px 5px 0 0;
+		@include border-radius(5px);
 		.profile_pic_container {
-			width: 30px;
-			height: 30px;
+			width: 25px;
+			height: 25px;
 			overflow: hidden;
-			margin: 5px 9px 0 9px;
+			margin: 5px 4px 0 9px;
 			@include border-radius(5px);
 			float: right;
 			@include single-box-shadow(rgba(#000, 0.3), 1px, 1px, 1px, 0);
