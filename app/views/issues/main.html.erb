@@ -6,11 +6,14 @@
 		</div>
 	</div>
 	
+	<div class = "mission_text_container">
+		Challenge your friends with political <span class="green_mission_text">facts</span>--not political opinions
+	</div>
 	<div class = "signin_container">
+		<%= button_to("Facebook Login", "/auth/facebook", "type" => "button", "class" => "signin_facebook_button", "style" => "width: 50%") %>
 		<div class = "signin_text">
 			We NEVER post for you...we hate spam!
 		</div>
-		<%= button_to("Facebook Login", "/auth/facebook", "type" => "button", "class" => "signin_facebook_button", "style" => "width: 50%") %>
 	</div>
 <% else %>
 	<div class = "loading_container inactive" id = "loading"></div>
