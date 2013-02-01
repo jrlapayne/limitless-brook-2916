@@ -7,7 +7,7 @@
 				<div class = "finished_text">You lost...</div>
 			<% } %>
 		<% } else { %>
-			<div class = "finished_text">Challenger's Turn!</div>
+			<div class = "finished_text"><%= next_player.get('name').split(' ')[0] %>'s Turn!</div>
 		<% } %>
 	</div>
 </div>

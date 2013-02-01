@@ -11,6 +11,7 @@ QuizPop.Views.ChallengesResults = Backbone.View.extend({
 		this.challenge = options.challenge;
 		this.current_user = this.attr.users.where({id: this.attr.current_user.get('id')})[0];
 		this.winner = this.attr.users.where({id: this.challenge.get('winner_id')})[0];
+		this.next_player = this.attr.users.where({id: this.challenge.get('user_id')})[0];
 	},
 	
 	render: function() {
@@ -18,7 +19,8 @@ QuizPop.Views.ChallengesResults = Backbone.View.extend({
 		$(this.el).html(this.template({
 			challenge: this.challenge,
 			user: this.current_user,
-			winner: this.winner
+			winner: this.winner,
+			next_player: this.next_player
 		}));
 		setTimeout(function() {
 			for (i = 0; i < 3; i++) {

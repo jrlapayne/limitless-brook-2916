@@ -229,9 +229,16 @@ QuizPop.Views.ChallengesCreate = Backbone.View.extend({
 	},
 	
 	bindTouchMove: function() {
-		var self = this;
+		var self = this,
+			element;
 		$(document).on('touchmove', function(event) {
-			self.scrollAlphabet(event.originalEvent.touches[0]);
+			element = $(document.elementFromPoint(event.originalEvent.touches[0].pageX, event.originalEvent.touches[0].pageY));
+			if (self.current_location !== parseInt($(element).closest('.letter').attr('id'))) {
+				$('.alphabet').children().removeClass('active');
+				$(event.target).closest('.letter').addClass('active');
+				window.scrollTo(0, this.obj[parseInt($(element).closest('.letter').attr('id'))].location);
+				this.current_location = parseInt($(element).closest('.letter').attr('id'));
+			}
 		});
 	},
 	
