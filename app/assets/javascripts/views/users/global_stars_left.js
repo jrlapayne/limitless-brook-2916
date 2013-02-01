@@ -26,6 +26,7 @@ QuizPop.Views.UsersGlobalStarsLeft = Backbone.View.extend({
 		}));
 		setTimeout(function() {
 			$(self.el).find(".friend-dial").knob();
+			$(self.el).find('.friend-dial').removeClass('hide');
 			self.renderBigStars();
 		}, 0);
 		return this;

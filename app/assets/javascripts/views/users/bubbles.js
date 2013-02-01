@@ -21,6 +21,7 @@ QuizPop.Views.UsersBubbles = Backbone.View.extend({
 		}));
 		setTimeout(function() {
 			$(self.el).find(".global-dial").knob();
+			$(self.el).find('.global-dial').removeClass('hide');
 			self.renderBigStars();
 		}, 0);
 		return this;

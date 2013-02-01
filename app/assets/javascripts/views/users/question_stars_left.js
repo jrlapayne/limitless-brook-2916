@@ -27,6 +27,7 @@ QuizPop.Views.UsersQuestionStarsLeft = Backbone.View.extend({
 		}));
 		setTimeout(function() {
 			$(self.el).find(".left-question").knob();
+			$(self.el).find('.left-question').removeClass('hide');
 			self.renderBigStars();
 		}, 0);
 		return this;

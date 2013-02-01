@@ -26,6 +26,7 @@ QuizPop.Views.UsersStarsRight = Backbone.View.extend({
 		}));
 		setTimeout(function() {
 			$(self.el).find(".right-dial").knob();
+			$(self.el).find('.right-dial').removeClass('hide');
 			self.renderBigStars();
 		}, 0);
 		return this;
