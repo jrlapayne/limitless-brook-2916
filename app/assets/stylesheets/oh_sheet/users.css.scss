@@ -161,7 +161,50 @@
 	}
 }
 
+.result_answers_container {
+	width: 26%;
+	height: 30px;
+	padding-right: 5px;
+	float: right;
+	.result_correct_answer_container {
+		height: 12px;
+		padding: 0 0px 1px 1px;
+		border-bottom: 1px solid;
+		border-left: 1px solid;
+		font-size: 10px;
+		font-weight: bold;
+		overflow: hidden;
+		color: rgb(87,205,0);
+		border-color:rgba(darken($bluegreen, 25%),0.3);
+		.result_checkmark_container {
+			float: left;
+			width: 15px;
+			margin-right: 2px;
+			text-align: center;
+		}
+	}
+	.result_user_answer_container {
+		height: 15px;
+		padding: 1px 0px 1px 1px;
+		border-left: 1px solid;
+		font-size: 10px;
+		font-weight: bold;
+		overflow: hidden;
+		color: darken($bluegreen, 25%);
+		border-color:rgba(darken($bluegreen, 25%),0.3);
+		.result_user_image_container {
+			float: left;
+			height: 15px;
+			width: 15px;
+			overflow: hidden;
+			margin-right: 2px;
+			@include border-radius (3px);
+		}
+	}
+}
+
 .result_answer_send_challenge {
+	display: none;
 	float: right;
 	font-weight: bold;
 	font-size: 10px;

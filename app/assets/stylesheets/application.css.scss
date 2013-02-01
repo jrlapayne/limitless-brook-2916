@@ -75,13 +75,31 @@
 	}
 }
 
+.mission_text_container {
+	margin: 35px 15px 0 15px;
+	padding: 3px 3px 35px 3px;
+	font-size: 15px;
+	line-height: 19px;
+	color: #444444;
+	border-bottom: 1px solid #cccccc;
+	text-align: center;
+	@include text-shadow(0px 1px 0 rgba(lighten($bluegreen,25%),0.99));
+	.green_mission_text {
+		color: darken($bluegreen, 5%);
+		font-weight: bold;
+	}
+}
+
 .signin_container {
-	margin: 25px 0 0 0;
+	margin: 2px 15px 0 15px;
+	padding: 33px 0 0 0;
+	border-top: 1px solid #dddddd;
 
 	.signin_facebook_button {
 		@include border-radius(8px);
 		@include linear-gradient(lighten($facebookblue,5%), darken($facebookblue,5%));
 		@include single-box-shadow(rgba(#000, 0.45), 0px, 1px, 1px, 0);
+		@include text-shadow(0px 1px 0 rgba(#000, 0.2));
 		@include fonts;
 		font-size: 13px;
 		font-weight: bold;
