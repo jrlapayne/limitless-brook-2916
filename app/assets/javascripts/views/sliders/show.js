@@ -239,7 +239,7 @@ QuizPop.Views.SlidersShow = Backbone.View.extend({
 				score = 100 - getScore($('#block'));
 			}
 			$('#url').removeClass('hide');
-			
+			$('.submit_button').addClass('hide');
 			this.attr.tasks.create({
 				challenge_id: this.challenge.get('id'),
 				user_id: this.user.get('id'),

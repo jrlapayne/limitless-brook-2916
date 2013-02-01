@@ -44,8 +44,8 @@ QuizPop.Views.UsersGlobalStarsLeft = Backbone.View.extend({
 	
 	renderBigStars: function() {
 		var score = this.getScoreFromTasks(),
-			big_stars = parseInt(score / 100),
-			remainder = score % 100;
+			big_stars = parseInt(score / 1000),
+			remainder = score % 1000;
 			
 		if (big_stars >= 5) {
 			big_stars = 5;
@@ -53,9 +53,9 @@ QuizPop.Views.UsersGlobalStarsLeft = Backbone.View.extend({
 			$(this.el).find('.friend-dial').parent().parent().parent().addClass('hide');
 		}
 		if (big_stars === 0) {
-			this.fillSmallStar(remainder);
+			this.fillSmallStar(Math.round(remainder / 10));
 		} else {
-			this.fillSmallStar(remainder);
+			this.fillSmallStar(Math.round(remainder / 10));
 			for (i = 0; i < big_stars; i++) {
 				$(this.el).find('#static_stars').append(JST['users/global_star_left']);
 			}
@@ -67,7 +67,7 @@ QuizPop.Views.UsersGlobalStarsLeft = Backbone.View.extend({
 	},
 	
 	increaseSmallStar: function(model) {
-		var score = model.get('score'),
+		var score = Math.round(model.get('score') / 10),
 			value = parseInt($(this.el).find('.friend-dial').val()),
 			self = this,
 			inter;

@@ -45,17 +45,17 @@ QuizPop.Views.UsersQuestionStarsLeft = Backbone.View.extend({
 	
 	renderBigStars: function() {
 		var score = this.getScoreFromTasks(),
-			big_stars = parseInt(score / 100),
-			remainder = score % 100;
+			big_stars = parseInt(score / 500),
+			remainder = score % 500;
 		if (big_stars >= 5) {
 			big_stars = 5;
 			$(this.el).find('#static_stars').css('margin', '0 0 0 0');
 			$(this.el).find('.left-question').parent().parent().parent().addClass('hide');
 		}
 		if (big_stars === 0) {
-			this.fillSmallStar(remainder);
+			this.fillSmallStar(Math.round(remainder / 5));
 		} else {
-			this.fillSmallStar(remainder);
+			this.fillSmallStar(Math.round(remainder / 5));
 			for (i = 0; i < big_stars; i++) {
 				$(this.el).find('#static_stars').append(JST['users/question_star_left']);
 			}
@@ -67,7 +67,7 @@ QuizPop.Views.UsersQuestionStarsLeft = Backbone.View.extend({
 	},
 	
 	increaseSmallStar: function(model) {
-		var score = model.get('score'),
+		var score = Math.round(model.get('score') / 5),
 			value = parseInt($(this.el).find('.left-question').val()),
 			self = this,
 			inter;

@@ -75,7 +75,8 @@ QuizPop.Views.AnswersIndex = Backbone.View.extend({
 				score = 0;
 			}
 			$('#url').removeClass('hide');
-		
+			$('.submit_button').addClass('hide');
+			
 			this.attr.tasks.create({
 				challenge_id: this.challenge.get('id'),
 				user_id: this.user.get('id'),
