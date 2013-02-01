@@ -13,13 +13,13 @@
 	<div class = "result_answers_container">
 		<div class = "result_correct_answer_container">
 			<div class = "result_checkmark_container">&#x2713;</div> 
-			52,000
+			<%= correct %>
 		</div>
 		<div class = "result_user_answer_container">
 			<div class = "result_user_image_container">
 				<img src="https://graph.facebook.com/<%= user.get('uid') %>/picture" height="100%"/>
 			</div>
-			45,000
+			<%= user_answer %>
 		</div>
 	</div>
 	
