@@ -238,7 +238,7 @@
 .alphabet {
 	cursor: pointer;
 	position: fixed;
-	top: 0;
+	top: 40px;
 	right: 0;
 	width: 40px;
 	
@@ -250,8 +250,8 @@
 		text-align: center;
 		width: 100%;
 		font-size: 12px;
-		height: 14px;
-		line-height: 14px;
+		height: 13px;
+		line-height: 13px;
 		
 		&.active {
 			color: #fff;
