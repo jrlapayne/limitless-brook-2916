@@ -186,6 +186,3 @@ function addCommas(val){
 function removeCommas(val) {
 	return parseInt(String(val).replace(/\,/g,''));
 }
-
-
-
